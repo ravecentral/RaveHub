@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rave Central – The Psychedelic Heart of Rave Culture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050509;
+      --neon-pink: #ff2fd0;
+      --neon-blue: #3af3ff;
+      --neon-green: #7bff3a;
+      --text-main: #f5f5f5;
+      --text-muted: #b3b3c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1a1a2e 0, #050509 45%, #000000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    /* HERO SECTION */
+
+    .hero {
+      position: relative;
+      padding: 80px 16px 60px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 24px;
+      background: radial-gradient(circle at 10% 0%, rgba(255, 47, 208, 0.25) 0, transparent 40%),
+                  radial-gradient(circle at 90% 0%, rgba(58, 243, 255, 0.25) 0, transparent 40%),
+                  linear-gradient(145deg, #050509 0, #0b0b16 40%, #050509 100%);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      top: -20%;
+      left: -20%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0, transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.4;
+      animation: floatGlow 18s linear infinite;
+    }
+
+    .hero::after {
+      animation-duration: 26s;
+      animation-direction: reverse;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(10px, -10px, 0) scale(1.05); }
+      100% { transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-text {
+      font-size: 3rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      text-shadow:
+        0 0 12px rgba(255, 47, 208, 0.9),
+        0 0 24px rgba(58, 243, 255, 0.7);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      color: var(--text-muted);
+    }
+
+    .hero-highlight {
+      color: var(--neon-pink);
+      font-weight: 600;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      background: rgba(5, 5, 9, 0.8);
+      color: var(--text-main);
+      transition: all 0.18s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+      box-shadow:
+        0 0 12px rgba(255, 47, 208, 0.8),
+        0 0 24px rgba(58, 243, 255, 0.7);
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(5, 5, 9, 0.9);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(58, 243, 255, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .sound-toggle {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .sound-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      box-shadow: 0 0 10px rgba(123, 255, 58, 0.9);
+      animation: pulseDot 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* FESTIVAL MAP */
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--neon-blue);
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .festival-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .stage-card {
+      position: relative;
+      padding: 18px 16px 18px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, rgba(255, 47, 208, 0.12) 0, rgba(5, 5, 9, 0.95) 40%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.16s ease-out, box-shadow 0.16s ease-out, border-color 0.16s ease-out;
+    }
+
+    .stage-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(255, 47, 208, 0.7), rgba(58, 243, 255, 0.7));
+      opacity: 0;
+      mix-blend-mode: screen;
+      transition: opacity 0.2s ease-out;
+      pointer-events: none;
+    }
+
+    .stage-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 22px rgba(255, 47, 208, 0.4);
+      border-color: rgba(255, 47, 208, 0.6);
+    }
+
+    .stage-card:hover::after {
+      opacity: 0.35;
+    }
+
+    .stage-icon {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .stage-name {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .stage-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .stage-link {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--neon-green);
+    }
+
+    /* FEATURED GEAR */
+
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .gear-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #050509, #0b0b16);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .gear-image {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 0%, rgba(255, 47, 208, 0.4) 0, #050509 45%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .gear-name {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .gear-desc {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .gear-meta {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--neon-blue);
+    }
+
+    .gear-btn {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255, 47, 208, 0.7);
+    }
+
+    /* SOUNDWAVE STRIP */
+
+    .sound-strip {
+      margin-top: 40px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(255, 47, 208, 0.15), rgba(58, 243, 255, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .wave {
+      flex: 1 1 160px;
+      height: 40px;
+      border-radius: 999px;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0,
+        rgba(255, 255, 255, 0.05) 4px,
+        rgba(255, 255, 255, 0.18) 4px,
+        rgba(255, 255, 255, 0.18) 6px
+      );
+      mask-image: radial-gradient(circle at center, black 0, transparent 70%);
+      animation: waveMove 2.4s linear infinite;
+    }
+
+    @keyframes waveMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 80px 0; }
+    }
+
+    .sound-info {
+      flex: 2 1 220px;
+      font-size: 0.9rem;
+    }
+
+    .sound-title {
+      font-weight: 600;
+    }
+
+    .sound-meta {
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .sound-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      background: rgba(5, 5, 9, 0.9);
+    }
+
+    /* BLOG TEASERS */
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .blog-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #050509, #0b0b16);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .blog-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .blog-excerpt {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .blog-link {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--neon-green);
+    }
+
+    /* NEWSLETTER */
+
+    .newsletter {
+      margin-top: 40px;
+      padding: 18px 16px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, rgba(58, 243, 255, 0.18) 0, #050509 50%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      text-align: center;
+    }
+
+    .newsletter-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      color: var(--neon-blue);
+    }
+
+    .newsletter-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(5, 5, 9, 0.9);
+      color: var(--text-main);
+      min-width: 220px;
+      font-size: 0.9rem;
+    }
+
+    .newsletter-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255, 47, 208, 0.7);
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-link {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-disclaimer {
+      max-width: 420px;
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        padding-top: 60px;
+      }
+      .logo-text {
+        font-size: 2.2rem;
+        letter-spacing: 0.12em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HERO / NEON GATEWAY -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="logo-text">RAVE CENTRAL</div>
+        <p class="hero-tagline">
+          The <span class="hero-highlight">psychedelic heart</span> of rave culture — a digital festival of
+          sound, light, gear, fashion and pure energy.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="document.getElementById('festival-map').scrollIntoView({behavior:'smooth'})">
+            Enter the Festival
+          </button>
+          <a href="#gear" class="btn btn-outline">Shop Rave Gear</a>
+          <a href="#rave-radio" class="btn btn-outline">Listen Now</a>
+        </div>
+
+        <div class="sound-toggle">
+          <div class="sound-dot"></div>
+          <span>Turn on the bass (coming soon)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FESTIVAL MAP / STAGES -->
+    <section id="festival-map" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Festival Map</h2>
+        <p class="section-subtitle">Choose your stage — sound, light, gear, fashion and culture.</p>
+      </div>
+
+      <div class="festival-grid">
+        <a class="stage-card" id="rave-radio">
+          <div class="stage-icon">💥</div>
+          <div class="stage-name">Main Stage – Rave Radio</div>
+          <p class="stage-desc">
+            Live mixes, playlists and DJ sets to keep the rave alive 24/7.
+          </p>
+          <div class="stage-link">Coming soon</div>
+        </a>
+
+        <a class="stage-card">
+          <div class="stage-icon">🎧</div>
+          <div class="stage-name">Tech Tent – Gear & DJ Equipment</div>
+          <p class="stage-desc">
+            Decks, controllers, speakers and headphones — curated for ravers and DJs.
+          </p>
+          <div class="stage-link">Shop gear (soon)</div>
+        </a>
+
+        <a class="stage-card">
+          <div class="stage-icon">🌈</div>
+          <div class="stage-name">Neon Bazaar – Rave Fashion</div>
+          <p class="stage-desc">
+            Clothing, masks, UV paint and accessories to light up the dancefloor.
+          </p>
+          <div class="stage-link">Dress up (soon)</div>
+        </a>
+
+        <a class="stage-card">
+          <div class="stage-icon">🔥</div>
+          <div class="stage-name">Bass Lab – Sound & Lighting</div>
+          <p class="stage-desc">
+            Lasers, strobes, smoke and LED — build your own home rave.
+          </p>
+          <div class="stage-link">Build your rig (soon)</div>
+        </a>
+
+        <a class="stage-card">
+          <div class="stage-icon">🌀</div>
+          <div class="stage-name">Psychedelic Forest – Culture & Events</div>
+          <p class="stage-desc">
+            Rave history, guides and upcoming events for old‑school and new‑school ravers.
+          </p>
+          <div class="stage-link">Explore the story (soon)</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURED GEAR / AFFILIATE STARTER -->
+    <section id="gear" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Featured Rave Gear</h2>
+        <p class="section-subtitle">Hand‑picked gear to power your next rave — affiliate links coming soon.</p>
+      </div>
+
+      <div class="gear-grid">
+        <div class="gear-card">
+          <div class="gear-image">DJ Controller</div>
+          <div class="gear-name">Entry‑Level DJ Controller</div>
+          <p class="gear-desc">
+            Perfect for learning to mix at home — compact, responsive and rave‑ready.
+          </p>
+          <div class="gear-meta">Amazon affiliate link goes here.</div>
+          <button class="gear-btn">Buy on Amazon</button>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-image">LED Rave Mask</div>
+          <div class="gear-name">Programmable LED Rave Mask</div>
+          <p class="gear-desc">
+            Light up the crowd with animated patterns and colours synced to the beat.
+          </p>
+          <div class="gear-meta">Amazon affiliate link goes here.</div>
+          <button class="gear-btn">Buy on Amazon</button>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-image">UV Paint</div>
+          <div class="gear-name">UV Body & Face Paint Set</div>
+          <p class="gear-desc">
+            Glow under blacklight and turn yourself into living rave artwork.
+          </p>
+          <div class="gear-meta">Amazon affiliate link goes here.</div>
+          <button class="gear-btn">Buy on Amazon</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOUNDWAVE STRIP -->
+    <section class="sound-strip">
+      <div class="wave"></div>
+      <div class="sound-info">
+        <div class="sound-title">Now Playing (soon): Rave Central Radio</div>
+        <div class="sound-meta">Live mixes, classic anthems and underground gems for ravers old and new.</div>
+      </div>
+      <button class="sound-btn">Open Rave Radio (soon)</button>
+    </section>
+
+    <!-- BLOG TEASERS -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Latest Rave Stories</h2>
+        <p class="section-subtitle">Culture, gear tips and guides to keep the rave spirit alive.</p>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card">
+          <h3 class="blog-title">The Birth of UK Rave Culture</h3>
+          <p class="blog-excerpt">
+            From fields and warehouses to global festivals — how the UK rave scene exploded.
+          </p>
+          <span class="blog-link">Read more (soon)</span>
+        </article>
+
+        <article class="blog-card">
+          <h3 class="blog-title">Top 10 DJ Decks for Beginners</h3>
+          <p class="blog-excerpt">
+            A simple guide to choosing your first decks without blowing your budget.
+          </p>
+          <span class="blog-link">Read more (soon)</span>
+        </article>
+
+        <article class="blog-card">
+          <h3 class="blog-title">Build Your Home Rave Setup</h3>
+          <p class="blog-excerpt">
+            Lights, sound and layout ideas to turn any room into a mini‑festival.
+          </p>
+          <span class="blog-link">Read more (soon)</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+      <div class="newsletter-title">Join the Tribe</div>
+      <p class="newsletter-text">
+        Get mixes, gear drops, rave news and exclusive deals straight to your inbox.
+      </p>
+      <form class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Your email address" />
+        <button class="newsletter-btn" type="button">Sign Up (soon)</button>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-links">
+          <span class="footer-link">Home</span>
+          <span class="footer-link">Rave Radio</span>
+          <span class="footer-link">Gear</span>
+          <span class="footer-link">Fashion</span>
+          <span class="footer-link">Events</span>
+          <span class="footer-link">Blog</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-disclaimer">
+          Rave Central may use affiliate links (e.g. Amazon) which can generate commission at no extra cost to you.
+        </div>
+        <div>© Rave Central – The Psychedelic Heart of Rave Culture</div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
