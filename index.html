@@ -6,60 +6,88 @@
     <title>Rave Repository</title>
 
     <style>
-        body {
-            margin: 0;
-            font-family: 'Orbitron', sans-serif;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 70%);
-            color: #e0e0ff;
-            text-align: center;
-        }
 
-        .hero {
-            padding: 140px 20px;
-        }
+      /* Tagline */
+.rave-tagline {
+  text-align: center;
+  margin-top: 10px;
+}
 
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #ffffff;
-            text-shadow: 
-                0 0 15px #00ffff,
-                0 0 25px #ff00ff,
-                0 0 40px #00ffff;
-        }
+.rave-tagline p {
+  font-size: 1.4rem;
+  color: #ccccff;
+  text-shadow: 0 0 15px #00ffff;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
 
-        p {
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #ccccff;
-            text-shadow: 0 0 10px #000;
-        }
+/* Navigation Bar */
+.rave-nav {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            margin: 10px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            color: #ffffff;
-            border: 2px solid #00ffff;
-            transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0,255,255,0.4);
-        }
+.rave-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+  font-family: 'Orbitron', sans-serif;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
 
-        .btn:hover {
-            background: #00ffff;
-            color: #000000;
-            box-shadow: 0 0 30px #00ffff;
-        }
+.rave-nav a:hover {
+  border-color: #00ffff;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+        /* Logo */
+.rave-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.rave-logo {
+  width: 80%;
+  max-width: 600px;
+  filter: drop-shadow(0 0 25px #00ffff)
+          drop-shadow(0 0 40px #ff00ff);
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%   { filter: drop-shadow(0 0 20px #00ffff)
+                 drop-shadow(0 0 30px #ff00ff); }
+  50%  { filter: drop-shadow(0 0 40px #00ffff)
+                 drop-shadow(0 0 60px #ff00ff); }
+  100% { filter: drop-shadow(0 0 20px #00ffff)
+                 drop-shadow(0 0 30px #ff00ff); }
+}
+
     </style>
 </head>
 
 <body>
+  <header class="rave-header">
+    <div class="rave-tagline">
+  <p>Step into the cosmic underground</p>
+</div>
+
+<nav class="rave-nav">
+  <a href="index.html">Home</a>
+  <a href="rave-radio.html">Rave Radio</a>
+  <a href="#">Flyer Gallery</a>
+  <a href="#">Gear & Tech</a>
+  <a href="#">Culture</a>
+</nav>
+
+  <img src="rave repository logo.png" alt="Rave Repository Logo" class="rave-logo">
+</header>
+
 
     <div class="hero">
         <h1>Rave Repository</h1>
