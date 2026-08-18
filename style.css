@@ -206,3 +206,70 @@ body {
     margin: 24px 12px;
   }
 }
+
+/* FANTAZIA-STYLE SUBTLE GRID */
+.grid-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45vh;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(255,0,0,0.15), transparent),
+    repeating-linear-gradient(
+      to right,
+      rgba(255,80,80,0.15) 0px,
+      rgba(255,80,80,0.15) 2px,
+      transparent 2px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      to top,
+      rgba(255,80,80,0.15) 0px,
+      rgba(255,80,80,0.15) 2px,
+      transparent 2px,
+      transparent 40px
+    );
+  transform: perspective(600px) rotateX(65deg);
+  z-index: -2;
+  opacity: 0.35;
+}
+
+/* FAINT COSMIC PLANETS */
+.planet {
+  position: fixed;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), rgba(0,0,0,0));
+  filter: blur(4px);
+  opacity: 0.25;
+  animation: drift 40s linear infinite;
+  z-index: -3;
+}
+
+.planet.p1 {
+  width: 180px;
+  height: 180px;
+  top: 12%;
+  left: 8%;
+}
+
+.planet.p2 {
+  width: 260px;
+  height: 260px;
+  top: 55%;
+  right: 12%;
+}
+
+.planet.p3 {
+  width: 140px;
+  height: 140px;
+  bottom: 10%;
+  left: 40%;
+}
+
+@keyframes drift {
+  0% { transform: translateY(0); opacity: 0.25; }
+  50% { transform: translateY(-30px); opacity: 0.35; }
+  100% { transform: translateY(0); opacity: 0.25; }
+}
