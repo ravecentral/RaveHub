@@ -331,3 +331,41 @@ body {
     opacity: 0.2;
   }
 }
+@media (max-width: 768px) {
+  .book-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .book-cover {
+    width: 220px;
+    margin: 0 auto;
+  }
+}
+/* BOOK COVER + CARD LAYOUT */
+.book-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 32px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  box-shadow: 0 0 20px rgba(0,255,255,0.15);
+}
+
+.book-cover {
+  width: 160px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255,0,255,0.35);
+  transition: 0.3s;
+}
+
+.book-cover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px #ff00ff, 0 0 55px #00ffff;
+}
+
+.book-info {
+  flex: 1;
+}
