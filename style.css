@@ -402,3 +402,15 @@ body {
   transform: scale(1.08);
   filter: drop-shadow(0 0 12px #00aaff);
 }
+.home-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.home-icon {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+}
