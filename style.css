@@ -414,3 +414,27 @@ body {
     height: auto;
     border-radius: 10px;
 }
+.home-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.home-icon {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Mobile enhancement */
+@media (max-width: 600px) {
+    .home-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-icon {
+        margin-bottom: 15px;
+    }
+}
