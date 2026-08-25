@@ -7,6 +7,35 @@
 </head>
 
 <body>
+<!-- 🔥 All Tings Rave Header Banner -->
+<header class="rave-header">
+  <div class="rave-banner">
+    <img src="images/all-tings-rave-logo.png" alt="All Tings Rave Logo">
+  </div>
+</header>
+
+<style>
+  .rave-header {
+    width: 100%;
+    background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+    border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+    box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .rave-banner img {
+    width: 320px;
+    max-width: 90%;
+    filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .rave-banner img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 18px #4df3ff) drop-shadow(0 0 36px #ff00ff);
+  }
+</style>
 
   <!-- Cosmic background elements -->
   <div class="grid-overlay"></div>
