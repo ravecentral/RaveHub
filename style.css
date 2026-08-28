@@ -412,6 +412,117 @@ body {
     height: auto;
     border-radius: 10px;
 }
+
+/* DJ TECH DIRECTORY */
+.gear-hero,
+.sub-hero {
+  min-height: 42vh;
+}
+
+.intro-block {
+  text-align: center;
+}
+
+.gear-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.gear-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 260px;
+  padding: 20px 16px;
+  color: #e0e0ff;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid rgba(0,255,255,0.25);
+  border-radius: 16px;
+  background: rgba(10,10,30,0.85);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.gear-card:hover {
+  transform: translateY(-5px);
+  border-color: #ff00ff;
+  box-shadow: 0 0 22px rgba(0,255,255,0.3);
+}
+
+.gear-card img {
+  width: 105px;
+  height: 105px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.gear-card h2 {
+  margin: 12px 0 4px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.gear-card p {
+  margin: 4px 0 14px;
+  font-size: 0.9rem;
+}
+
+.gear-card span,
+.buy-link {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(255,165,0,0.6);
+  border-radius: 999px;
+  background: rgba(20,10,0,0.9);
+}
+
+.product-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.product-image {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 25px rgba(255,0,255,0.25);
+}
+
+.product-card h2 {
+  margin-bottom: 12px;
+}
+
+.buy-link {
+  margin-top: 4px;
+}
+
+.category-heading,
+.safety-note {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.category-heading {
+  color: #fff;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.safety-note {
+  color: #ffd580;
+  text-align: center;
+}
 .home-card {
     display: flex;
     align-items: center;
@@ -434,5 +545,20 @@ body {
 
     .home-icon {
         margin-bottom: 10px;
+    }
+
+    .gear-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .product-image {
+      width: 220px;
+      height: 180px;
+      margin: 0 auto;
     }
 }

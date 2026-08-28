@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
+  <title id="title">Product image placeholder</title>
+  <desc id="desc">Replace this placeholder with a product photograph.</desc>
+  <rect width="600" height="400" rx="24" fill="#10102a"/>
+  <path d="M70 310h460M115 270l80-100 65 65 70-90 155 125" fill="none" stroke="#00ffff" stroke-width="8" opacity=".7"/>
+  <circle cx="430" cy="115" r="35" fill="none" stroke="#ff00ff" stroke-width="8" opacity=".8"/>
+  <text x="300" y="355" fill="#e0e0ff" font-family="Arial,sans-serif" font-size="24" text-anchor="middle">ADD PRODUCT IMAGE</text>
+</svg>
