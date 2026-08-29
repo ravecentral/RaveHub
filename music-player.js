@@ -1,6 +1,18 @@
 (() => {
-  const trackPath = 'music/03 Everything Will Be Okay.mp3';
-  const trackTitle = '03 Everything Will Be Okay';
+  const tracks = [
+    {
+      path: 'music/03 Everything Will Be Okay.mp3',
+      title: '03 Everything Will Be Okay'
+    },
+    {
+      path: 'music/4am Kru - Hurt Me No More (Extended Mix).mp3',
+      title: '4am Kru - Hurt Me No More (Extended Mix)'
+    },
+    {
+      path: 'music/Zero B - Lock Up (2019 Remaster).wav',
+      title: 'Zero B - Lock Up (2019 Remaster)'
+    }
+  ];
 
   document.addEventListener('DOMContentLoaded', () => {
     let footer = document.querySelector('footer');
@@ -29,15 +41,23 @@
     }
 
     button.textContent = 'Fill My Ears With Rave';
+    let currentTrackIndex = Math.floor(Math.random() * tracks.length);
 
     const setStoppedState = () => {
       button.classList.remove('playing');
       title.textContent = '--';
     };
 
-    const setPlayingState = () => {
+    const setPlayingState = (track) => {
       button.classList.add('playing');
-      title.textContent = trackTitle;
+      title.textContent = track.title;
+    };
+
+    const playCurrentTrack = () => {
+      const track = tracks[currentTrackIndex];
+
+      audio.src = track.path;
+      audio.play().then(() => setPlayingState(track)).catch(setStoppedState);
     };
 
     document.addEventListener('click', (event) => {
@@ -49,8 +69,7 @@
       event.stopPropagation();
 
       if (audio.paused) {
-        audio.src = trackPath;
-        audio.play().then(setPlayingState).catch(setStoppedState);
+        playCurrentTrack();
       } else {
         audio.pause();
         setStoppedState();
@@ -63,8 +82,8 @@
       }
 
       event.stopPropagation();
-      audio.src = trackPath;
-      audio.play().then(setPlayingState).catch(setStoppedState);
+      currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+      playCurrentTrack();
     }, true);
 
     document.addEventListener('error', (event) => {
