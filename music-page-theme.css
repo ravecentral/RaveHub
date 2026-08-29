@@ -8,6 +8,12 @@
   --border-glow: 0 0 12px rgba(77, 243, 255, 0.6);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -254,9 +260,57 @@ main {
 }
 
 @media (max-width: 600px) {
+  .nav-band {
+    gap: 4px;
+    padding: 10px 8px;
+  }
+
+  .nav-band a {
+    padding: 7px 10px;
+    font-size: 0.82rem;
+  }
+
   .site-title,
   .page-title {
     font-size: 1.8rem !important;
+  }
+
+  .hero,
+  .page-header {
+    margin-bottom: 24px !important;
+    padding: 24px 12px 0 !important;
+  }
+
+  .page,
+  main {
+    padding: 0 12px 32px !important;
+  }
+
+  .store-grid,
+  .artist-grid,
+  .gear-grid,
+  .icon-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  #music-player-container {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .fill-ears-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .now-playing {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .promo-message {
+    padding: 10px 12px;
   }
 
   .book-card {
