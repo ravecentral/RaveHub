@@ -1,0 +1,270 @@
+:root {
+  --bg: #050814;
+  --card-bg: #0b1024;
+  --accent: #4df3ff;
+  --accent-soft: rgba(77, 243, 255, 0.35);
+  --text-main: #f5f7ff;
+  --text-muted: #a7b0d9;
+  --border-glow: 0 0 12px rgba(77, 243, 255, 0.6);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #151c3a 0, #050814 45%, #02030a 100%) !important;
+  color: var(--text-main) !important;
+}
+
+.grid-overlay,
+.planet,
+.laser-layer,
+.cosmic-orbit,
+.tribal-backdrop {
+  display: none !important;
+}
+
+.rave-header {
+  width: 100%;
+  padding: 20px 0 !important;
+  text-align: center;
+  background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%) !important;
+  border-bottom: 2px solid rgba(77, 243, 255, 0.4) !important;
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.6) !important;
+}
+
+.rave-banner img {
+  width: min(720px, 94vw) !important;
+  filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+}
+
+.hero,
+.page-header {
+  max-width: 1200px;
+  min-height: 0 !important;
+  margin: 0 auto 32px !important;
+  padding: 32px 16px 0 !important;
+  text-align: center;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.hero-inner,
+.logo-block {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-title,
+.page-title {
+  margin: 0 !important;
+  color: var(--accent) !important;
+  font-size: 2.4rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  text-shadow: none !important;
+}
+
+.tagline,
+.page-subtitle {
+  max-width: 640px;
+  margin: 8px auto 0 !important;
+  color: var(--text-muted) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.4;
+}
+
+.page,
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 48px !important;
+}
+
+.store-grid,
+.artist-grid,
+.gear-grid,
+.icon-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 20px !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.store-card,
+.artist-card,
+.gear-card,
+.product-card,
+.home-card,
+.book-card,
+.section-block {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  background: linear-gradient(145deg, #050814 0%, #0b1024 40%, #050814 100%) !important;
+  border: 1px solid var(--accent-soft) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--border-glow) !important;
+}
+
+.store-card,
+.artist-card,
+.product-card,
+.home-card,
+.gear-card {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.store-image,
+.artist-image,
+.product-image,
+.home-card > img,
+.gear-card > img,
+.home-icon {
+  width: 100% !important;
+  height: 160px !important;
+  margin: 0 !important;
+  object-fit: cover;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: radial-gradient(circle at center, #4df3ff 0, #151c3a 40%, #050814 100%);
+  box-shadow: none !important;
+}
+
+.store-body,
+.artist-body,
+.section-info,
+.book-info,
+.product-card > :not(.product-image) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px !important;
+}
+
+.book-card {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.book-cover {
+  width: 160px !important;
+  min-height: 160px;
+  margin: 0 !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.store-name,
+.artist-name,
+.section-block h2,
+.gear-card h2,
+.product-card h2,
+.home-card h2 {
+  margin: 0 !important;
+  color: var(--text-main) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase;
+}
+
+.store-tagline,
+.artist-tagline,
+.category-heading {
+  margin: 0 !important;
+  color: var(--accent) !important;
+  font-size: 0.85rem !important;
+}
+
+.store-bio,
+.artist-bio,
+.section-block p,
+.gear-card p,
+.product-card p,
+.home-card p {
+  margin: 0 !important;
+  color: var(--text-muted) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4;
+}
+
+.store-links,
+.artist-links,
+.section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto !important;
+  padding-top: 8px;
+  justify-content: flex-start !important;
+}
+
+.store-link,
+.artist-link,
+.section-links a,
+.buy-link,
+.gear-card span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px !important;
+  color: var(--accent) !important;
+  font-size: 0.8rem !important;
+  text-decoration: none;
+  background: rgba(5, 8, 20, 0.8) !important;
+  border: 1px solid var(--accent-soft) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.store-link:hover,
+.artist-link:hover,
+.section-links a:hover,
+.buy-link:hover,
+.gear-card:hover span {
+  background: rgba(77, 243, 255, 0.12) !important;
+  box-shadow: 0 0 10px rgba(77, 243, 255, 0.6) !important;
+}
+
+#music-player-container {
+  margin-top: 0 !important;
+}
+
+.promo-message {
+  margin-bottom: 0 !important;
+}
+
+.footer {
+  padding: 20px;
+  color: var(--text-muted) !important;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .site-title,
+  .page-title {
+    font-size: 1.8rem !important;
+  }
+
+  .book-card {
+    flex-direction: column !important;
+  }
+
+  .book-cover {
+    width: 100% !important;
+    height: 160px;
+  }
+}
