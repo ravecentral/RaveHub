@@ -3,6 +3,23 @@
   const trackTitle = '03 Everything Will Be Okay';
 
   document.addEventListener('DOMContentLoaded', () => {
+    let footer = document.querySelector('footer');
+
+    if (!footer) {
+      footer = document.createElement('footer');
+      document.body.append(footer);
+    }
+
+    footer.classList.add('atr-footer');
+
+    if (!footer.querySelector('.atr-footer-logo')) {
+      const logo = document.createElement('img');
+      logo.className = 'atr-footer-logo';
+      logo.src = 'images/index/ATR Footer Logo.png';
+      logo.alt = 'All Tings Rave';
+      footer.prepend(logo);
+    }
+
     const audio = document.getElementById('rave-audio');
     const button = document.getElementById('fill-ears-btn');
     const title = document.getElementById('track-title');

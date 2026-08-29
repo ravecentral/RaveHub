@@ -259,6 +259,28 @@ main {
   text-align: center;
 }
 
+.atr-footer {
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px 16px;
+  text-align: center;
+  background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+  border-top: 2px solid rgba(77, 243, 255, 0.4);
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.25);
+}
+
+.atr-footer-logo {
+  display: block;
+  width: min(360px, 88vw);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 8px #4df3ff) drop-shadow(0 0 16px #ff00ff);
+}
+
+.atr-footer p {
+  margin: 12px 0 0;
+}
+
 @media (max-width: 600px) {
   .nav-band {
     gap: 4px;
