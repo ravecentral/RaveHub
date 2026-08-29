@@ -94,7 +94,8 @@ main {
 .store-grid,
 .artist-grid,
 .gear-grid,
-.icon-grid {
+.icon-grid,
+.home-card-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
   gap: 20px !important;
@@ -311,7 +312,8 @@ main {
   .store-grid,
   .artist-grid,
   .gear-grid,
-  .icon-grid {
+    .icon-grid,
+    .home-card-grid {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
   }
