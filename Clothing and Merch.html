@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,15 @@
     <title>Rave Repository</title>
 </head>
 <body>
-<nav class="rave-nav">
+<!-- ðŸ”¥ All Tings Rave Header Banner -->
+<header class="rave-header">
+  <div class="rave-banner">
+    <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+  </div>
+</header>
+
+<!-- Navigation Band -->
+<nav class="nav-band">
     <a href="index.html">Home</a>
     <a href="radio.html">Rave Radio</a>
     <a href="events tickets.html">Tickets</a>
@@ -23,11 +31,15 @@
     <div id="music-player-container">
       <audio id="rave-audio" preload="none"></audio>
       <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
-        🎵 Fill My Ears With Rave
+        ðŸŽµ Fill My Ears With Rave
       </button>
       <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
     </div>
 
+        <!-- Promo Message -->
+    <div class="promo-message">
+      <p>To have your tracks featured in the ATR Cosmos, send your promos to <a href="mailto:promo@atr.co.uk?subject=PROMO">ATR.co.uk</a> marking them <strong>'PROMO'</strong></p>
+    </div>
     <style>
     #music-player-container {
       width: 100%;
@@ -94,6 +106,60 @@
     #track-title {
       color: #ff00ff;
       font-weight: bold;
+    }
+
+    .rave-header {
+      width: 100%;
+      background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+      border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .rave-banner img {
+      width: min(720px, 94vw);
+      filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .rave-banner img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 18px #4df3ff) drop-shadow(0 0 36px #ff00ff);
+    }
+
+    .nav-band {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.05) 0%, rgba(255, 0, 255, 0.03) 50%, rgba(77, 243, 255, 0.05) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(77, 243, 255, 0.3);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-band a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(77, 243, 255, 0.5);
+      background: rgba(5, 8, 20, 0.6);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-band a:hover {
+      background: rgba(77, 243, 255, 0.15);
+      border-color: #4df3ff;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.6);
+      transform: translateY(-2px);
     }
     </style>
 
@@ -177,3 +243,5 @@
     </script>
 </body>
 </html>
+
+

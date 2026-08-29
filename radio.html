@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rave Radio · All Tings Rave</title>
+    <title>Rave Radio Â· All Tings Rave</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,39 +20,52 @@
         <div class="laser l3"></div>
     </div>
 
-    <!-- Page Header -->
-    <header class="hero">
-        <div class="hero-inner">
-            <div class="tribal-backdrop"></div>
-            <div class="logo-block">
-                <h1 class="site-title">RAVE RADIO</h1>
-                <p class="tagline">Live streams from the global underground</p>
-            </div>
-                <nav class="main-nav">
+   <!-- ðŸ”¥ All Tings Rave Header Banner -->
+   <header class="rave-header">
+     <div class="rave-banner">
+       <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+     </div>
+   </header>
+
+   <!-- Navigation Band -->
+   <nav class="nav-band">
       <a href="index.html">Home</a>
       <a href="radio.html">Rave Radio</a>
-      <a href="#tickets">Tickets</a>
-      <a href="#djtech">DJ & Rave Tech</a>
-      <a href="#merch">Clothing & Merch</a>
-      <a href="#flyers">Flyer Gallery</a>
-      <a href="#art">Rave Artists</a>
-      <a href="#books">Books</a>
-      <a href="#history">History</a>
-      <a href="https://chat.kniteforceradio.com" target="_blank" rel="noopener">
-  Chat
-</a>
-    </nav>
-  </header>
+     <a href="events tickets.html">Tickets</a>
+     <a href="DJ and Rave Tech.html">DJ & Rave Tech</a>
+     <a href="Clothing and Merch.html">Clothing & Merch</a>
+     <a href="Rave Flyers.html">Flyer Gallery</a>
+     <a href="Rave Art and Artists.html">Art & Artists</a>
+     <a href="Books.html">Books</a>
+     <a href="Rave History.html">History</a>
+     <a href="Chat Room and Games.html">Chat & Games</a>
+   </nav>
+
+   <!-- Page Header -->
+   <header class="hero">
+       <div class="hero-inner">
+           <div class="tribal-backdrop"></div>
+           <div class="logo-block">
+               <h1 class="site-title">RAVE RADIO</h1>
+               <p class="tagline">Live streams from the global underground</p>
+           </div>
+       </div>
+   </header>
 
    <!-- Music Player -->
    <div id="music-player-container">
      <audio id="rave-audio" preload="none"></audio>
      <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
-       🎵 Fill My Ears With Rave
+       ðŸŽµ Fill My Ears With Rave
      </button>
      <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
    </div>
-        
+
+   <!-- Promo Message -->
+   <div class="promo-message">
+     <p>To have your tracks featured in the ATR Cosmos, send your promos to <a href="mailto:promo@atr.co.uk?subject=PROMO">ATR.co.uk</a> marking them <strong>'PROMO'</strong></p>
+   </div>
+         
      <!-- RADIO STATION SECTIONS -->
 <section class="section-block home-card">
     <img src="images/radio/kniteforceradio.jpg" alt="Kniteforce Radio Icon" class="home-icon">
@@ -72,7 +85,7 @@
 
     <div class="section-info">
         <h2>Centreforce Radio</h2>
-        <p>Old‑skool, house, and rave classics from the original pirates.</p>
+        <p>Oldâ€‘skool, house, and rave classics from the original pirates.</p>
         <div class="section-links">
             <a href="https://centreforceradio.com" target="_blank">Website</a>
             <a href="https://centreforceradio.com/listen" target="_blank">Listen Live</a>
@@ -85,7 +98,7 @@
 
     <div class="section-info">
         <h2>Rinse FM</h2>
-        <p>Garage, jungle, grime, and cutting‑edge underground music.</p>
+        <p>Garage, jungle, grime, and cuttingâ€‘edge underground music.</p>
         <div class="section-links">
             <a href="https://rinse.fm" target="_blank">Website</a>
             <a href="https://rinse.fm/player" target="_blank">Listen Live</a>
@@ -98,7 +111,7 @@
 
     <div class="section-info">
         <h2>Raiders Radio</h2>
-        <p>Jungle, hardcore, and pirate‑style rave energy.</p>
+        <p>Jungle, hardcore, and pirateâ€‘style rave energy.</p>
         <div class="section-links">
             <a href="https://raidersradio.com" target="_blank">Website</a>
             <a href="https://raidersradio.com/listen" target="_blank">Listen Live</a>
@@ -109,7 +122,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>All Tings Rave · Cosmic Underground · Rave Radio Hub</p>
+        <p>All Tings Rave Â· Cosmic Underground Â· Rave Radio Hub</p>
     </footer>
 
     <style>
@@ -178,6 +191,59 @@
     #track-title {
       color: #ff00ff;
       font-weight: bold;
+    }
+    .rave-header {
+      width: 100%;
+      background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+      border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .rave-banner img {
+      width: min(720px, 94vw);
+      filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .rave-banner img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 18px #4df3ff) drop-shadow(0 0 36px #ff00ff);
+    }
+
+    .nav-band {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.05) 0%, rgba(255, 0, 255, 0.03) 50%, rgba(77, 243, 255, 0.05) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(77, 243, 255, 0.3);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-band a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(77, 243, 255, 0.5);
+      background: rgba(5, 8, 20, 0.6);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-band a:hover {
+      background: rgba(77, 243, 255, 0.15);
+      border-color: #4df3ff;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.6);
+      transform: translateY(-2px);
     }
     </style>
 
@@ -262,3 +328,5 @@
 
 </body>
 </html>
+
+

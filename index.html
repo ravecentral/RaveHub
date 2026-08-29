@@ -99,6 +99,11 @@
      <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
    </div>
 
+   <!-- Promo Message -->
+   <div class="promo-message">
+     <p>To have your tracks featured in the ATR Cosmos, send your promos to <a href="mailto:promo@atr.co.uk?subject=PROMO">ATR.co.uk</a> marking them <strong>'PROMO'</strong></p>
+   </div>
+
   <!-- SECTIONS -->
 
   <section id="books" class="section-block home-card">
@@ -244,6 +249,37 @@
     #track-title {
       color: #ff00ff;
       font-weight: bold;
+    }
+
+    .promo-message {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.08) 0%, rgba(255, 0, 255, 0.06) 50%, rgba(77, 243, 255, 0.08) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.2);
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .promo-message p {
+      margin: 0;
+      color: rgba(77, 243, 255, 0.9);
+    }
+
+    .promo-message a {
+      color: #4df3ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .promo-message a:hover {
+      color: #ff00ff;
+      text-decoration: underline;
+    }
+
+    .promo-message strong {
+      color: #ff00ff;
     }
   </style>
 
