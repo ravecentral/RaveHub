@@ -139,7 +139,7 @@ main {
   width: 100% !important;
   height: 160px !important;
   margin: 0 !important;
-  object-fit: cover;
+  object-fit: contain;
   border: 0 !important;
   border-radius: 0 !important;
   background: radial-gradient(circle at center, #4df3ff 0, #151c3a 40%, #050814 100%);
