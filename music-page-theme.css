@@ -365,6 +365,10 @@ button:active,
 
   .book-cover {
     width: 100% !important;
-    height: 160px;
+    height: min(110vw, 360px);
+    object-fit: contain;
+    object-position: center;
+    padding: 12px;
+    background: rgba(5, 8, 20, 0.35);
   }
 }
