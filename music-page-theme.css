@@ -218,6 +218,9 @@ main {
   justify-content: flex-start !important;
 }
 
+.nav-band a,
+.main-nav a,
+button,
 .store-link,
 .artist-link,
 .section-links a,
@@ -226,23 +229,42 @@ main {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  padding: 6px 10px !important;
-  color: var(--accent) !important;
-  font-size: 0.8rem !important;
+  justify-content: center;
+  padding: 12px 24px !important;
+  color: #050814 !important;
+  font-size: 0.95rem !important;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-decoration: none;
-  background: rgba(5, 8, 20, 0.8) !important;
-  border: 1px solid var(--accent-soft) !important;
-  border-radius: 999px !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%) !important;
+  border: 2px solid rgba(77, 243, 255, 0.8) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3) !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+.nav-band a:hover,
+.main-nav a:hover,
+button:hover,
 .store-link:hover,
 .artist-link:hover,
 .section-links a:hover,
 .buy-link:hover,
 .gear-card:hover span {
-  background: rgba(77, 243, 255, 0.12) !important;
-  box-shadow: 0 0 10px rgba(77, 243, 255, 0.6) !important;
+  background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%) !important;
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.5) !important;
+  transform: scale(1.05);
+}
+
+button:active,
+.store-link:active,
+.artist-link:active,
+.section-links a:active,
+.buy-link:active,
+.gear-card:active span {
+  transform: scale(0.98);
 }
 
 #music-player-container {
@@ -289,7 +311,7 @@ main {
   }
 
   .nav-band a {
-    padding: 7px 10px;
+    padding: 8px 12px !important;
     font-size: 0.82rem;
   }
 
