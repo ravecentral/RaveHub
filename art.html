@@ -1,0 +1,861 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Tings â€“ Artist Directory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #050814;
+      --card-bg: #0b1024;
+      --accent: #4df3ff;
+      --accent-soft: rgba(77, 243, 255, 0.35);
+      --text-main: #f5f7ff;
+      --text-muted: #a7b0d9;
+      --border-glow: 0 0 12px rgba(77, 243, 255, 0.6);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151c3a 0, #050814 45%, #02030a 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .page-title {
+      font-size: 2.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 8px auto 0;
+    }
+
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .artist-card {
+      background: linear-gradient(145deg, #050814 0%, #0b1024 40%, #050814 100%);
+      border-radius: 16px;
+      border: 1px solid var(--accent-soft);
+      box-shadow: var(--border-glow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .artist-image {
+      width: 100%;
+      height: 160px;
+      background: radial-gradient(circle at center, #4df3ff 0, #151c3a 40%, #050814 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .artist-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .artist-body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .artist-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .artist-tagline {
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .artist-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .artist-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .artist-link {
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: var(--accent);
+      border: 1px solid var(--accent-soft);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(5, 8, 20, 0.8);
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    }
+
+    .artist-link:hover {
+      background: rgba(77, 243, 255, 0.12);
+      box-shadow: 0 0 10px rgba(77, 243, 255, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .artist-link span {
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      .page-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    #music-player-container {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.1) 0%, rgba(255, 0, 255, 0.08) 50%, rgba(77, 243, 255, 0.1) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(77, 243, 255, 0.3);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 99;
+      margin: 0 -16px 0 -16px;
+    }
+
+    .fill-ears-btn {
+      background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%);
+      color: #050814;
+      border: 2px solid rgba(77, 243, 255, 0.8);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fill-ears-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.5);
+    }
+
+    .fill-ears-btn:active {
+      transform: scale(0.98);
+    }
+
+    .fill-ears-btn.playing {
+      background: linear-gradient(135deg, #ff00ff 0%, #4df3ff 100%);
+      animation: pulse-glow 1.5s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(77, 243, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.6);
+      }
+    }
+
+    .now-playing {
+      color: #4df3ff;
+      font-size: 0.85rem;
+      font-style: italic;
+      opacity: 0.8;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    #track-title {
+      color: #ff00ff;
+      font-weight: bold;
+    }
+
+    .promo-message {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.08) 0%, rgba(255, 0, 255, 0.06) 50%, rgba(77, 243, 255, 0.08) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.2);
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .promo-message p {
+      margin: 0;
+      color: rgba(77, 243, 255, 0.9);
+    }
+
+    .promo-message a {
+      color: #4df3ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .promo-message a:hover {
+      color: #ff00ff;
+      text-decoration: underline;
+    }
+
+    .promo-message strong {
+      color: #ff00ff;
+    }
+
+    .rave-header {
+      width: 100%;
+      background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+      border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .rave-banner img {
+      width: min(720px, 94vw);
+      filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .rave-banner img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 18px #4df3ff) drop-shadow(0 0 36px #ff00ff);
+    }
+
+    .nav-band {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.05) 0%, rgba(255, 0, 255, 0.03) 50%, rgba(77, 243, 255, 0.05) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(77, 243, 255, 0.3);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-band a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(77, 243, 255, 0.5);
+      background: rgba(5, 8, 20, 0.6);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-band a:hover {
+      background: rgba(77, 243, 255, 0.15);
+      border-color: #4df3ff;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.6);
+      transform: translateY(-2px);
+    }
+  </style>
+  <link rel="stylesheet" href="navigation.css">
+  <link rel="stylesheet" href="music-page-theme.css">
+  <script src="music-player.js" defer></script>
+</head>
+<body>
+  <!-- ðŸ”¥ All Tings Rave Header Banner -->
+  <header class="rave-header">
+    <div class="rave-banner">
+      <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+    </div>
+  </header>
+
+  <!-- Navigation Band -->
+  <nav class="nav-band">
+  <a href="index.html">Home</a>
+  <a href="radio.html">Rave Radio</a>
+  <a href="events.html">Events</a>
+  <a href="dj-tech.html">DJ &amp; Rave Tech</a>
+  <a href="Books.html">Books</a>
+  <a href="music.html">Music</a>
+  <a href="art.html">Art</a>
+  <a href="https://en.wikipedia.org/wiki/Rave#" target="_blank">History</a>
+  <a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chat &amp; Games</a>
+</nav>
+
+  <div class="page">
+    <!-- Music Player -->
+    <div id="music-player-container">
+      <audio id="rave-audio" preload="none"></audio>
+      <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
+        ðŸŽµ Fill My Ears With Rave
+      </button>
+      <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
+    </div>
+
+    <!-- Promo Message -->
+    <div class="promo-message">
+      <p>To have your tracks featured in the ATR Cosmos, send your promos to <a href="mailto:promo@alltingsrave.com?subject=PROMO">promo@alltingsrave.com</a> marking them <strong>'PROMO'</strong></p>
+    </div>
+
+    <header class="page-header">
+      <h1 class="page-title">Rave Central â€“ Artist Directory</h1>
+      <p class="page-subtitle">
+        A curated selection of classic and contemporary artists whose visuals shaped â€“ and still shape â€“ rave culture.
+      </p>
+    </header>
+
+    <section class="artist-grid">
+
+      <!-- PEZ -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <!-- Replace with actual artwork thumbnail -->
+          <span>PEZ â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Pez (Peter Thorpe)</h2>
+          <p class="artist-tagline">Cartoon rave characters Â· Fantazia Â· Neon chaos</p>
+          <p class="artist-bio">
+            Pez defined the look of early UK rave flyers with hyper-colour characters, playful chaos and iconic Fantazia artwork.
+            His style became the visual language of the early rave explosion.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.pezart.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Junior Tomlin -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Junior Tomlin â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Junior Tomlin</h2>
+          <p class="artist-tagline">Airbrushed sciâ€‘fi Â· Chrome futurism Â· Fantazia</p>
+          <p class="artist-bio">
+            Often called the â€œMichelangelo of rave flyersâ€, Junior Tomlinâ€™s airbrushed sciâ€‘fi landscapes and chrome futurism
+            gave Fantazia and other events their legendary cosmic identity.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.juniortomlin.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dan Pearce -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Dan Pearce â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Dan Pearce</h2>
+          <p class="artist-tagline">Modern popâ€‘art Â· Neon club energy</p>
+          <p class="artist-bio">
+            A leading contemporary popâ€‘artist whose work often channels club and rave energy. Collected by celebrities and
+            represented by major galleries, his visuals bridge street culture and fine art.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://danpearce-art.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+            <a class="artist-link" href="https://www.clarendonfineart.com" target="_blank" rel="noopener">
+              <span>Clarendon Fine Art</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Acer-One -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Acerâ€‘One â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Acerâ€‘One</h2>
+          <p class="artist-tagline">Graffitiâ€‘infused hardcore Â· Jungle flyers</p>
+          <p class="artist-bio">
+            Acerâ€‘Oneâ€™s graffitiâ€‘driven style brought raw street energy to hardcore and jungle flyers, becoming a cult favourite
+            among ravers and collectors of underground artwork.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/acer_one" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Goldie -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Goldie â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Goldie</h2>
+          <p class="artist-tagline">Graffiti origins Â· Metalheadz iconography</p>
+          <p class="artist-bio">
+            Before becoming a jungle legend, Goldie was a graffiti artist whose visuals helped shape the early look of the
+            scene. His Metalheadz iconography remains instantly recognisable worldwide.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.goldie.co.uk" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Jonny Martin -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Jonny Martin â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Jonny Martin</h2>
+          <p class="artist-tagline">Grassroots rave flyers Â· Underground visuals</p>
+          <p class="artist-bio">
+            Jonny Martin is known for authentic, underground rave artwork that captures the DIY spirit of the UK party scene,
+            from flyers to posters and bespoke illustrations.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/jonnymartinart" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Rebecca Try -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Rebecca Try â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Rebecca Try</h2>
+          <p class="artist-tagline">Neonâ€‘line illustration Â· Rave flyers</p>
+          <p class="artist-bio">
+            One of the few prominent female illustrators in the raveâ€‘flyer world, Rebecca Tryâ€™s neonâ€‘line style and bold
+            compositions stand out in the visual history of rave culture.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/rebeccatryart" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dave Little -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Dave Little â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Dave Little</h2>
+          <p class="artist-tagline">Acidâ€‘house pioneer Â· Spectrum Â· Shoom</p>
+          <p class="artist-bio">
+            A true pioneer of UK club graphics, Dave Littleâ€™s work for Spectrum, Shoom and other early acidâ€‘house nights
+            helped define the visual birth of the rave era.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.davelittle.co.uk" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Floating BSTRD -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Floating BSTRD â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Floating BSTRD</h2>
+          <p class="artist-tagline">Surreal modern raveâ€‘flyer illustration</p>
+          <p class="artist-bio">
+            Floating BSTRDâ€™s bold, surreal and psychedelic visuals have made him one of the most recognisable contemporary
+            raveâ€‘flyer artists, blending modern design with classic rave energy.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://floatingbstrd.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Alex Solman -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Alex Solman â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Alex Solman</h2>
+          <p class="artist-tagline">Minimalist lineâ€‘art Â· Golden Pudel Club</p>
+          <p class="artist-bio">
+            Known for his distinctive minimalist lineâ€‘art, Alex Solmanâ€™s work for Golden Pudel Club and beyond has earned
+            him a cult following in techno and experimental club circles.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://alexsolman.de" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Ryandesign_ -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Ryandesign_ â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Ryandesign_ (Ryan Marinello)</h2>
+          <p class="artist-tagline">Retroâ€‘futurist rave flyers Â· Scottish scene</p>
+          <p class="artist-bio">
+            Ryandesign_ keeps the classic rave aesthetic alive with modern tools, creating retroâ€‘futurist flyers and visuals
+            for the Scottish rave and club scene.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/ryandesign_" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Caterina Bianchini -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Caterina Bianchini â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Caterina Bianchini</h2>
+          <p class="artist-tagline">Bold clubâ€‘culture graphics Â· London</p>
+          <p class="artist-bio">
+            A leading Londonâ€‘based designer whose bold, expressive graphics have become a staple of modern nightlife and
+            electronicâ€‘music visual culture.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.caterinabianchini.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Courteney Frisby -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Courteney Frisby â€“ Photo Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Courteney Frisby</h2>
+          <p class="artist-tagline">Psychedelic nightlife photography</p>
+          <p class="artist-bio">
+            Courteney Frisby captures rave and nightlife with colourâ€‘rich, surreal imagery that feels as intense and
+            immersive as the dancefloor itself.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/courteneyfrisby" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Molly Macindoe -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Molly Macindoe â€“ Photo Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Molly Macindoe</h2>
+          <p class="artist-tagline">Freeâ€‘party documentary photography</p>
+          <p class="artist-bio">
+            Molly Macindoeâ€™s longâ€‘term documentation of the UK freeâ€‘party scene, including her book â€œOut of Orderâ€, makes
+            her one of the key visual historians of rave culture.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.mollymacindoe.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dave Swindells -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Dave Swindells â€“ Photo Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Dave Swindells</h2>
+          <p class="artist-tagline">Iconic 90s club and rave photography</p>
+          <p class="artist-bio">
+            As one of the main photographers documenting the birth of rave and club culture, Dave Swindellsâ€™ images are
+            essential to the visual memory of the scene.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.daveswindells.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Mark â€œChociâ€ Williams -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Mark â€œChociâ€ Williams â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Mark â€œChociâ€ Williams</h2>
+          <p class="artist-tagline">Rave artwork Â· Chociâ€™s Chewns</p>
+          <p class="artist-bio">
+            A cult figure whose artwork for Chociâ€™s Chewns and London parties helped define a particular slice of the
+            underground rave aesthetic in the 90s.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="#" target="_blank" rel="noopener">
+              <span>Collector releases</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- The Designers Republic -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>The Designers Republic â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">The Designers Republic</h2>
+          <p class="artist-tagline">Warp Records Â· Techno futurism</p>
+          <p class="artist-bio">
+            Not strictly rave, but hugely influential in electronicâ€‘music visual culture. Their cyberâ€‘graphic futurism for
+            Warp Records and beyond shaped how techno and club culture looks.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.thedesignersrepublic.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Joe Rush / Mutoid Waste -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Joe Rush â€“ Sculpture Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Joe Rush (Mutoid Waste Company)</h2>
+          <p class="artist-tagline">Industrial rave sculptures Â· Mutant vehicles</p>
+          <p class="artist-bio">
+            Joe Rush and Mutoid Waste Company brought largeâ€‘scale industrial sculpture and mutant vehicles to freeâ€‘parties
+            and festivals, defining the look of many outdoor rave environments.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.mutoidwaste.co.uk" target="_blank" rel="noopener">
+              <span>Mutoid Waste</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Banksy (early era) -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Banksy â€“ Artwork Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Banksy (early era)</h2>
+          <p class="artist-tagline">Stencil graffiti Â· Bristol freeâ€‘party roots</p>
+          <p class="artist-bio">
+            While now a global art phenomenon, Banksyâ€™s early stencil work is closely tied to Bristolâ€™s underground and
+            freeâ€‘party culture, making him culturally adjacent to rave visuals.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="#" target="_blank" rel="noopener">
+              <span>Pest Control listings</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Vinca Petersen -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Vinca Petersen â€“ Photo Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Vinca Petersen</h2>
+          <p class="artist-tagline">Travelling sound systems Â· No System</p>
+          <p class="artist-bio">
+            Vinca Petersenâ€™s book â€œNo Systemâ€ is one of the most important visual documents of travelling sound systems and
+            90s rave travellers, capturing the lifestyle around the music.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.vincapetersen.com" target="_blank" rel="noopener">
+              <span>Official site</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dave Nodz -->
+      <article class="artist-card">
+        <div class="artist-image">
+          <span>Dave Nodz â€“ Suburban Base Icon</span>
+        </div>
+        <div class="artist-body">
+          <h2 class="artist-name">Dave Nodz</h2>
+          <p class="artist-tagline">Suburban Base Records Â· Hardcore/jungle identity</p>
+          <p class="artist-bio">
+            Dave Nodz was the primary visual architect behind Suburban Base Records, one of the most influential labels in
+            early hardcore and jungle. His bold, comicâ€‘style characters, graffitiâ€‘infused layouts and explosive colour
+            schemes defined the labelâ€™s iconic look and became a cornerstone of raveâ€‘art history.
+          </p>
+          <div class="artist-links">
+            <a class="artist-link" href="https://www.instagram.com/davenodz" target="_blank" rel="noopener">
+              <span>Instagram</span>
+            </a>
+            <a class="artist-link" href="https://www.suburbanbaserecords.com" target="_blank" rel="noopener">
+              <span>Suburban Base Records</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <script>
+    const tracks = [
+      'music/DJ Sy & Micky Finn Amnesia House @ Quest 23_01_93.mp3',
+      'music/DJ Sy Live @ The Fruit Club 29th September 1995 Swindon Brunel Rooms.mp3',
+      'music/Micky Finn Dance Fest 1992.mp3',
+      'music/Dougal Live @ The Fruit Club Brunel Rooms Swindon 1st March 1996.mp3',
+      'music/RobO SN3 - KFR - 30th Sept 24.mp3',
+      'music/Vinylgroover Live @ The Fruit Club - Brunel Rooms - Swindon 1996 1st march.mp3'
+    ];
+
+    const trackNames = [
+      'DJ Sy & Micky Finn - Amnesia House (Quest 1993)',
+      'DJ Sy - The Fruit Club (September 1995)',
+      'Micky Finn - Dance Fest 1992',
+      'Dougal - The Fruit Club (March 1996)',
+      'RobO - SN3 KFR Mix (Sept 2024)',
+      'Vinylgroover - The Fruit Club (March 1996)'
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let shuffledTracks = [];
+
+    const audio = document.getElementById('rave-audio');
+    const btn = document.getElementById('fill-ears-btn');
+    const trackTitle = document.getElementById('track-title');
+
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function playNextTrack() {
+      if (shuffledTracks.length === 0) {
+        shuffledTracks = shuffleArray(tracks);
+        currentTrackIndex = 0;
+      }
+
+      const trackPath = shuffledTracks[currentTrackIndex];
+      const trackNameIndex = tracks.indexOf(trackPath);
+      
+      audio.src = trackPath;
+      audio.play();
+      trackTitle.textContent = trackNames[trackNameIndex];
+      isPlaying = true;
+      btn.classList.add('playing');
+    }
+
+    btn.addEventListener('click', () => {
+      if (isPlaying && audio.src) {
+        audio.pause();
+        isPlaying = false;
+        btn.classList.remove('playing');
+        trackTitle.textContent = '--';
+      } else {
+        playNextTrack();
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      currentTrackIndex++;
+      if (currentTrackIndex >= shuffledTracks.length) {
+        shuffledTracks = shuffleArray(tracks);
+        currentTrackIndex = 0;
+      }
+      playNextTrack();
+    });
+
+    audio.addEventListener('error', () => {
+      trackTitle.textContent = 'Error loading track';
+      currentTrackIndex++;
+      setTimeout(playNextTrack, 1000);
+    });
+  </script>
+</body>
+</html>

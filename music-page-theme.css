@@ -1,0 +1,415 @@
+:root {
+  --bg: #050814;
+  --card-bg: #0b1024;
+  --accent: #4df3ff;
+  --accent-soft: rgba(77, 243, 255, 0.38);
+  --accent-2: #ff38d8;
+  --text-main: #f5f7ff;
+  --text-muted: #b0b8df;
+  --border-glow: 0 0 12px rgba(77, 243, 255, 0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #181d3b 0%, #090d1d 32%, #050814 60%, #02050d 100%) !important;
+  color: var(--text-main) !important;
+}
+
+.grid-overlay,
+.planet,
+.laser-layer,
+.cosmic-orbit,
+.tribal-backdrop {
+  display: none !important;
+}
+
+.rave-header {
+  width: 100%;
+  padding: 20px 0 !important;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(11, 16, 36, 0.96) 0%, rgba(5, 8, 20, 0.98) 60%, rgba(2, 3, 10, 1) 100%) !important;
+  border-bottom: 2px solid rgba(77, 243, 255, 0.42) !important;
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.5), 0 0 28px rgba(255, 0, 255, 0.18) !important;
+}
+
+.rave-banner img {
+  width: min(720px, 94vw) !important;
+  filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+}
+
+.hero,
+.page-header {
+  max-width: 1200px;
+  min-height: 0 !important;
+  margin: 0 auto 32px !important;
+  padding: 32px 16px 0 !important;
+  text-align: center;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.hero-inner,
+.logo-block {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-title,
+.page-title {
+  margin: 0 !important;
+  color: var(--accent) !important;
+  font-size: 2.4rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  text-shadow: none !important;
+}
+
+.tagline,
+.page-subtitle {
+  max-width: 640px;
+  margin: 8px auto 0 !important;
+  color: var(--text-muted) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.4;
+}
+
+.page,
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 48px !important;
+}
+
+.store-grid,
+.artist-grid,
+.gear-grid,
+.icon-grid,
+.home-card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 16px !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.store-card,
+.artist-card,
+.gear-card,
+.product-card,
+.home-card,
+.book-card,
+.section-block {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(8, 12, 24, 0.98) 0%, rgba(12, 18, 34, 0.99) 42%, rgba(4, 8, 16, 1) 100%) !important;
+  border: 1px solid rgba(77, 243, 255, 0.52) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(77, 243, 255, 0.12), 0 0 22px rgba(77, 243, 255, 0.18), 0 0 34px rgba(255, 0, 255, 0.12) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.store-card,
+.artist-card,
+.product-card,
+.home-card,
+.gear-card {
+  display: flex !important;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+}
+
+.store-card::before,
+.artist-card::before,
+.product-card::before,
+.home-card::before,
+.gear-card::before,
+.book-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(77, 243, 255, 0.08), transparent 45%, rgba(255, 0, 255, 0.06));
+  pointer-events: none;
+}
+
+.store-image,
+.artist-image,
+.product-image,
+.home-card > img,
+.gear-card > img,
+.home-icon {
+  width: 100% !important;
+  height: 170px !important;
+  margin: 0 !important;
+  object-fit: contain;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: radial-gradient(circle at center, rgba(77, 243, 255, 0.18), rgba(21, 28, 58, 0.65) 42%, rgba(5, 8, 20, 1) 100%);
+  box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
+}
+
+.store-body,
+.artist-body,
+.section-info,
+.book-info,
+.product-card > :not(.product-image) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px 16px !important;
+  align-items: center;
+  text-align: center;
+}
+
+.book-card .book-info,
+.product-card > :not(.product-image),
+.gear-card {
+  align-items: center;
+  text-align: center;
+}
+
+.store-name,
+.artist-name,
+.section-block h2,
+.gear-card h2,
+.product-card h2,
+.home-card h2 {
+  line-height: 1.2;
+  margin-bottom: 3px !important;
+  letter-spacing: 0.08em !important;
+}
+
+.book-card {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.book-cover {
+  width: 160px !important;
+  min-height: 160px;
+  margin: 0 !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.store-name,
+.artist-name,
+.section-block h2,
+.gear-card h2,
+.product-card h2,
+.home-card h2 {
+  margin: 0 !important;
+  color: var(--text-main) !important;
+  font-size: 1.08rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+}
+
+.store-tagline,
+.artist-tagline,
+.category-heading {
+  margin: 0 !important;
+  color: var(--accent) !important;
+  font-size: 0.85rem !important;
+}
+
+.store-bio,
+.artist-bio,
+.section-block p,
+.gear-card p,
+.product-card p,
+.home-card p {
+  margin: 0 !important;
+  color: var(--text-muted) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5;
+}
+
+.store-links,
+.artist-links,
+.section-links,
+.book-card .section-links,
+.product-card .section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto !important;
+  padding-top: 10px;
+  justify-content: center !important;
+  text-align: center;
+  width: 100%;
+}
+
+.nav-band a,
+.main-nav a,
+button,
+.store-link,
+.artist-link,
+.section-links a,
+.buy-link,
+.gear-card span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  justify-content: center;
+  padding: 11px 22px !important;
+  color: #050814 !important;
+  font-size: 0.9rem !important;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #4df3ff 0%, #ff45d9 100%) !important;
+  border: 2px solid rgba(77, 243, 255, 0.92) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 14px rgba(77, 243, 255, 0.42), 0 0 18px rgba(255, 69, 217, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-band a:hover,
+.main-nav a:hover,
+button:hover,
+.store-link:hover,
+.artist-link:hover,
+.section-links a:hover,
+.buy-link:hover,
+.gear-card:hover span {
+  background: linear-gradient(135deg, #4df3ff 0%, #ff45d9 100%) !important;
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.9), 0 0 32px rgba(255, 69, 217, 0.6), 0 0 42px rgba(77, 243, 255, 0.28) !important;
+  transform: translateY(-1px) scale(1.035);
+}
+
+button:active,
+.store-link:active,
+.artist-link:active,
+.section-links a:active,
+.buy-link:active,
+.gear-card:active span {
+  transform: scale(0.98);
+}
+
+#music-player-container {
+  margin-top: 0 !important;
+}
+
+.promo-message {
+  margin-bottom: 0 !important;
+}
+
+.footer {
+  padding: 20px;
+  color: var(--text-muted) !important;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.atr-footer {
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px 16px;
+  text-align: center;
+  background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+  border-top: 2px solid rgba(77, 243, 255, 0.4);
+  box-shadow: 0 0 20px rgba(77, 243, 255, 0.25);
+}
+
+.atr-footer-logo {
+  display: block;
+  width: min(360px, 88vw);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 8px #4df3ff) drop-shadow(0 0 16px #ff00ff);
+}
+
+.atr-footer p {
+  margin: 12px 0 0;
+}
+
+@media (max-width: 600px) {
+  .nav-band {
+    gap: 4px;
+    padding: 10px 8px;
+  }
+
+  .nav-band a {
+    padding: 8px 12px !important;
+    font-size: 0.82rem;
+  }
+
+  .site-title,
+  .page-title {
+    font-size: 1.8rem !important;
+  }
+
+  .hero,
+  .page-header {
+    margin-bottom: 24px !important;
+    padding: 24px 12px 0 !important;
+  }
+
+  .page,
+  main {
+    padding: 0 12px 32px !important;
+  }
+
+  .store-grid,
+  .artist-grid,
+  .gear-grid,
+    .icon-grid,
+    .home-card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  #music-player-container {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .fill-ears-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .now-playing {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .promo-message {
+    padding: 10px 12px;
+  }
+
+  .book-card {
+    flex-direction: column !important;
+  }
+
+  .book-cover {
+    width: 100% !important;
+    height: min(110vw, 360px);
+    object-fit: contain;
+    object-position: center;
+    padding: 12px;
+    background: rgba(5, 8, 20, 0.35);
+  }
+}
