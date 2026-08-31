@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Tings Rave</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="navigation.css">
+  <link rel="stylesheet" href="music-page-theme.css">
+  <script src="music-player.js" defer></script>
+</head>
+
+<body>
+<!-- 🔥 All Tings Rave Header Banner -->
+<header class="rave-header">
+  <div class="rave-banner">
+    <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+  </div>
+</header>
+
+<style>
+  .rave-header {
+    width: 100%;
+    background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+    border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+    box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .rave-banner img {
+    width: min(720px, 94vw);
+    filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .rave-banner img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 18px #4df3ff) drop-shadow(0 0 36px #ff00ff);
+  }
+</style>
+
+  <!-- Cosmic background elements -->
+  <div class="grid-overlay"></div>
+  <div class="planet p1"></div>
+  <div class="planet p2"></div>
+  <div class="planet p3"></div>
+
+  <!-- Your laser layer (if added) -->
+  <div class="laser-layer">
+    <div class="laser l1"></div>
+    <div class="laser l2"></div>
+    <div class="laser l3"></div>
+  </div>
+
+  <!-- The rest of your site -->
+  <header class="hero" id="top">
+  <div class="grid-overlay"></div>
+
+<div class="planet p1"></div>
+<div class="planet p2"></div>
+<div class="planet p3"></div>
+
+  <div class="laser-layer">
+  <div class="laser l1"></div>
+  <div class="laser l2"></div>
+  <div class="laser l3"></div>
+</div>
+
+  <div class="grid-overlay"></div>
+
+  <div class="planet p1"></div>
+  <div class="planet p2"></div>
+  <div class="planet p3"></div>
+
+  <!-- COSMIC BACKDROP DECOR -->
+  <div class="cosmic-orbit orbit-1"></div>
+  <div class="cosmic-orbit orbit-2"></div>
+  <div class="cosmic-orbit orbit-3"></div>
+
+    <nav class="nav-band">
+      <a href="index.html">Home</a>
+      <a href="radio.html">Rave Radio</a>
+      <a href="events.html">Events</a>
+      <a href="dj-tech.html">DJ &amp; Rave Tech</a>
+      <a href="Books.html">Books</a>
+      <a href="music.html">Music</a>
+      <a href="art.html">Art</a>
+      <a href="https://en.wikipedia.org/wiki/Rave#" target="_blank">History</a>
+      <a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chat &amp; Games</a>
+    </nav>
+  </header>
+
+   <!-- Music Player -->
+   <div id="music-player-container">
+     <audio id="rave-audio" preload="none"></audio>
+     <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
+       🎵 Fill My Ears With Rave
+     </button>
+     <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
+   </div>
+
+   <!-- Promo Message -->
+   <div class="promo-message">
+     <p>To have your tracks featured in the ATR Cosmos, send your promos to <a href="mailto:promo@alltingsrave.com?subject=PROMO">promo@alltingsrave.com</a> marking them <strong>'PROMO'</strong></p>
+   </div>
+
+  <!-- SECTIONS -->
+
+  <main class="home-card-grid">
+  <section id="books" class="section-block home-card">
+    <img src="images/index/books.png" alt="Books Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>Books</h2>
+        <p>Explore rave culture through iconic books and deep history.</p>
+        <div class="section-links">
+            <a href="books.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+  <section id="music" class="section-block home-card">
+    <img src="images/index/music.png" alt="Music Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>Buy Music</h2>
+        <p>A Department Store ful of the finest rave labels.... getting virtual crate digging</p>
+        <div class="section-links">
+            <a href="music.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+<section id="radio" class="section-block home-card">
+    <img src="images/index/radio.png" alt="Radio Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>Radio</h2>
+        <p>Listen to rave stations, mixes, and underground broadcasts.</p>
+        <div class="section-links">
+            <a href="radio.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+<section id="events" class="section-block home-card">
+    <img src="images/index/events.png" alt="Events Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>Events</h2>
+        <p>Find upcoming raves, festivals, and underground nights.</p>
+        <div class="section-links">
+            <a href="events.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+<section id="djtech" class="section-block home-card">
+    <img src="images/index/dj-tech.png" alt="DJ Tech Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>DJ & Rave Tech</h2>
+        <p>Gear, decks, mixers, and rave technology.</p>
+        <div class="section-links">
+            <a href="dj-tech.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+<section id="art" class="section-block home-card">
+    <img src="images/index/art-smiley.png" alt="Art Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>Rave Artists</h2>
+        <p>Rave flyers, artwork, and visual culture.</p>
+        <div class="section-links">
+            <a href="art.html">Enter</a>
+        </div>
+    </div>
+</section>
+
+<section id="history" class="section-block home-card">
+    <img src="images/index/history-warehouse.png" alt="History Icon" class="home-icon">
+
+    <div class="section-info">
+        <h2>History</h2>
+        <p>The origins of rave culture — warehouses, sound systems, and legends.</p>
+        <div class="section-links">
+            <a href="history.html">Enter</a>
+        </div>
+    </div>
+</section>
+  </main>
+
+ <!-- FOOTER -->
+  <footer class="footer">
+    <p>All Tings Rave · Cosmic underground · Built with love by Rob & Nova</p>
+  </footer>
+
+  <style>
+    #music-player-container {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.1) 0%, rgba(255, 0, 255, 0.08) 50%, rgba(77, 243, 255, 0.1) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(77, 243, 255, 0.3);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 99;
+    }
+
+    .fill-ears-btn {
+      background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%);
+      color: #050814;
+      border: 2px solid rgba(77, 243, 255, 0.8);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fill-ears-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.5);
+    }
+
+    .fill-ears-btn:active {
+      transform: scale(0.98);
+    }
+
+    .fill-ears-btn.playing {
+      background: linear-gradient(135deg, #ff00ff 0%, #4df3ff 100%);
+      animation: pulse-glow 1.5s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(77, 243, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.6);
+      }
+    }
+
+    .now-playing {
+      color: #4df3ff;
+      font-size: 0.85rem;
+      font-style: italic;
+      opacity: 0.8;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    #track-title {
+      color: #ff00ff;
+      font-weight: bold;
+    }
+
+    .promo-message {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.08) 0%, rgba(255, 0, 255, 0.06) 50%, rgba(77, 243, 255, 0.08) 100%);
+      border-top: 1px solid rgba(77, 243, 255, 0.2);
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .promo-message p {
+      margin: 0;
+      color: rgba(77, 243, 255, 0.9);
+    }
+
+    .promo-message a {
+      color: #4df3ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .promo-message a:hover {
+      color: #ff00ff;
+      text-decoration: underline;
+    }
+
+    .promo-message strong {
+      color: #ff00ff;
+    }
+  </style>
+
+  <script>
+    const tracks = [
+      'music/03 Everything Will Be Okay.mp3'
+    ];
+
+    const trackNames = [
+      '03 Everything Will Be Okay'
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let shuffledTracks = [];
+
+    const audio = document.getElementById('rave-audio');
+    const btn = document.getElementById('fill-ears-btn');
+    const trackTitle = document.getElementById('track-title');
+
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function playNextTrack() {
+      if (shuffledTracks.length === 0) {
+        shuffledTracks = shuffleArray(tracks);
+        currentTrackIndex = 0;
+      }
+
+      const trackPath = shuffledTracks[currentTrackIndex];
+      const trackNameIndex = tracks.indexOf(trackPath);
+      
+      audio.src = trackPath;
+      audio.play();
+      trackTitle.textContent = trackNames[trackNameIndex];
+      isPlaying = true;
+      btn.classList.add('playing');
+    }
+
+    btn.addEventListener('click', () => {
+      if (isPlaying && audio.src) {
+        audio.pause();
+        isPlaying = false;
+        btn.classList.remove('playing');
+        trackTitle.textContent = '--';
+      } else {
+        playNextTrack();
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      currentTrackIndex++;
+      if (currentTrackIndex >= shuffledTracks.length) {
+        shuffledTracks = shuffleArray(tracks);
+        currentTrackIndex = 0;
+      }
+      playNextTrack();
+    });
+
+    audio.addEventListener('error', () => {
+      trackTitle.textContent = 'Error loading track';
+      currentTrackIndex++;
+      setTimeout(playNextTrack, 1000);
+    });
+  </script>
