@@ -14,8 +14,37 @@
     }
   ];
   const playerStateKey = 'atr-player-state';
+  const classicRaveSetsUrl = 'https://www.mixcloud.com/rickywalker167/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994/';
 
   document.addEventListener('DOMContentLoaded', () => {
+    const navigation = document.querySelector('.nav-band');
+    const standardHeader = document.querySelector('.rave-header');
+    const header = standardHeader || navigation?.closest('header');
+
+    if (header) {
+      header.classList.add('sticky-site-header');
+
+      if (navigation && navigation.previousElementSibling !== header) {
+        header.insertAdjacentElement('afterend', navigation);
+      }
+
+      if (!standardHeader && navigation) {
+        const setStickyHeaderHeight = () => {
+          navigation.style.top = `${header.getBoundingClientRect().height}px`;
+        };
+
+        setStickyHeaderHeight();
+        window.addEventListener('resize', () => {
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(setStickyHeaderHeight);
+          });
+        });
+
+        header.stickyHeaderResizeObserver = new ResizeObserver(setStickyHeaderHeight);
+        header.stickyHeaderResizeObserver.observe(header);
+      }
+    }
+
     let footer = document.querySelector('footer');
 
     if (!footer) {
@@ -38,6 +67,26 @@
     const title = document.getElementById('track-title');
 
     if (!audio || !button || !title) {
+      return;
+    }
+
+    const isMusicPage = window.location.pathname.toLowerCase().endsWith('/music.html');
+
+    if (!isMusicPage) {
+      button.textContent = 'Classic Rave Sets';
+      button.title = 'Open Classic Rave Sets on Mixcloud';
+      title.parentElement.hidden = true;
+
+      document.addEventListener('click', (event) => {
+        if (event.target !== button) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(classicRaveSetsUrl, '_blank', 'noopener,noreferrer');
+      }, true);
+
       return;
     }
 
