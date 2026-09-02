@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title desc">
+  <title id="title">Rave Diaries and Tower Block Tales cover</title>
+  <desc id="desc">Stylised cover for Rave Diaries and Tower Block Tales</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b131c"/>
+      <stop offset="50%" stop-color="#213d57"/>
+      <stop offset="100%" stop-color="#080d12"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <path d="M65 110 L335 110 L335 508 L65 508 Z" fill="none" stroke="#58d9ff" stroke-width="4" opacity="0.7"/>
+  <circle cx="200" cy="200" r="82" fill="#ff5ce4" opacity="0.15"/>
+  <text x="200" y="210" text-anchor="middle" fill="#f6fbff" font-size="22" font-family="Arial, sans-serif" font-weight="700" letter-spacing="2">RAVE DIARIES</text>
+  <text x="200" y="255" text-anchor="middle" fill="#f6fbff" font-size="22" font-family="Arial, sans-serif" font-weight="700" letter-spacing="2">AND</text>
+  <text x="200" y="300" text-anchor="middle" fill="#f6fbff" font-size="22" font-family="Arial, sans-serif" font-weight="700" letter-spacing="2">TOWER BLOCK</text>
+  <text x="200" y="342" text-anchor="middle" fill="#f6fbff" font-size="22" font-family="Arial, sans-serif" font-weight="700" letter-spacing="2">TALES</text>
+  <text x="200" y="420" text-anchor="middle" fill="#d9ebff" font-size="13" font-family="Arial, sans-serif" letter-spacing="2">UNCLE DUGS</text>
+  <text x="200" y="442" text-anchor="middle" fill="#d9ebff" font-size="13" font-family="Arial, sans-serif" letter-spacing="2">ANDREW WOODS</text>
+</svg>
