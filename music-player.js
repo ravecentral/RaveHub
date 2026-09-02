@@ -14,7 +14,22 @@
     }
   ];
   const playerStateKey = 'atr-player-state';
-  const classicRaveSetsUrl = 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=as5zct66&dl=1';
+  const classicRaveTracks = [
+    {
+      url: 'https://www.dropbox.com/scl/fi/v721ziglysfpjamec6pvg/RobO-SN3-Mid-Life-Krisis-Diversify-The-Vic-27.09.25.mp3?rlkey=5suymobqyc6hjhtr9dscafv50&st=6jdp5hm5&dl=1',
+      title: 'RobO SN3 · Mid Life Krisis · Diversify @ The Vic'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=3srgk88h&dl=1',
+      title: 'Vinylgroover · Live The Fruit Club, Brunel Rooms Swindon 1996'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=85bsh0of&dl=1',
+      title: 'DJ Swan-E with MC MC · World Dance 2nd April 1994'
+    }
+  ];
+  const classicRaveStateKey = 'atr-classic-rave-state';
+  const pickRandomClassicTrack = () => classicRaveTracks[Math.floor(Math.random() * classicRaveTracks.length)];
   const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -78,6 +93,140 @@
       button.title = 'Open Classic Rave Set';
       title.parentElement.hidden = true;
 
+      const getClassicRaveState = () => {
+        const savedState = sessionStorage.getItem(classicRaveStateKey);
+        return savedState ? JSON.parse(savedState) : null;
+      };
+
+      const saveClassicRaveState = (state) => {
+        sessionStorage.setItem(classicRaveStateKey, JSON.stringify(state));
+      };
+
+      const clearClassicRaveState = () => {
+        sessionStorage.removeItem(classicRaveStateKey);
+      };
+
+      const buildMobileInlinePlayer = (track, startTime = 0, autoPlay = true) => {
+        const existingInlinePlayer = document.querySelector('.classic-rave-mobile-player');
+        if (existingInlinePlayer) {
+          existingInlinePlayer.remove();
+        }
+
+        const inlinePlayer = document.createElement('div');
+        inlinePlayer.className = 'classic-rave-mobile-player';
+        inlinePlayer.innerHTML = `
+          <style>
+            .classic-rave-mobile-player {
+              position: fixed;
+              left: 12px;
+              right: 12px;
+              bottom: 12px;
+              z-index: 2000;
+              padding: 12px 12px 10px;
+              border-radius: 18px;
+              background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
+              border: 1px solid rgba(77, 243, 255, 0.7);
+              box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 20px rgba(77, 243, 255, 0.2), 0 0 28px rgba(255, 79, 216, 0.15);
+            }
+
+            .classic-rave-mobile-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 8px;
+              color: #4df3ff;
+              font-size: 0.7rem;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+            }
+
+            .classic-rave-mobile-title {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              padding-right: 8px;
+            }
+
+            .classic-rave-mobile-close {
+              appearance: none;
+              border: 1px solid rgba(77, 243, 255, 0.6);
+              background: rgba(77, 243, 255, 0.08);
+              color: #effdff;
+              border-radius: 50%;
+              width: 24px;
+              height: 24px;
+              font-size: 1.1rem;
+              line-height: 1;
+              padding: 0;
+              flex: 0 0 auto;
+            }
+
+            .classic-rave-mobile-player audio {
+              width: 100%;
+              max-height: 42px;
+              display: block;
+            }
+          </style>
+          <div class="classic-rave-mobile-header">
+            <span class="classic-rave-mobile-title">${track.title}</span>
+            <button class="classic-rave-mobile-close" type="button" aria-label="Close classic rave player">×</button>
+          </div>
+          <audio id="classicRaveMobileAudio" controls playsinline src="${track.url}"></audio>
+        `;
+
+        const closeButton = inlinePlayer.querySelector('.classic-rave-mobile-close');
+        closeButton.addEventListener('click', () => {
+          inlinePlayer.remove();
+          clearClassicRaveState();
+        });
+
+        document.body.appendChild(inlinePlayer);
+
+        const inlineAudio = inlinePlayer.querySelector('audio');
+
+        if (inlineAudio) {
+          if (startTime > 0) {
+            inlineAudio.addEventListener('loadedmetadata', () => {
+              inlineAudio.currentTime = Math.min(startTime, inlineAudio.duration || startTime);
+            }, { once: true });
+          }
+
+          const persistState = () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: inlineAudio.currentTime,
+              isPlaying: !inlineAudio.paused
+            });
+          };
+
+          inlineAudio.addEventListener('play', persistState);
+          inlineAudio.addEventListener('pause', persistState);
+          inlineAudio.addEventListener('timeupdate', persistState);
+          inlineAudio.addEventListener('ended', clearClassicRaveState);
+
+          if (autoPlay) {
+            inlineAudio.play().catch(() => {
+              inlineAudio.muted = true;
+              inlineAudio.play().catch(() => {});
+            });
+          }
+        }
+      };
+
+      if (isMobileDevice()) {
+        const resumeState = getClassicRaveState();
+
+        if (resumeState && resumeState.isPlaying) {
+          const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url) || {
+            url: resumeState.url,
+            title: resumeState.title
+          };
+
+          buildMobileInlinePlayer(resumeTrack, resumeState.currentTime || 0, true);
+        }
+      }
+
       document.addEventListener('click', (event) => {
         if (event.target !== button) {
           return;
@@ -86,86 +235,17 @@
         event.preventDefault();
         event.stopPropagation();
 
+        const track = pickRandomClassicTrack();
+
         if (isMobileDevice()) {
-          const existingInlinePlayer = document.querySelector('.classic-rave-mobile-player');
-          if (existingInlinePlayer) {
-            existingInlinePlayer.remove();
-          }
-
-          const inlinePlayer = document.createElement('div');
-          inlinePlayer.className = 'classic-rave-mobile-player';
-          inlinePlayer.innerHTML = `
-            <style>
-              .classic-rave-mobile-player {
-                position: fixed;
-                left: 12px;
-                right: 12px;
-                bottom: 12px;
-                z-index: 2000;
-                padding: 12px 12px 10px;
-                border-radius: 18px;
-                background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-                border: 1px solid rgba(77, 243, 255, 0.7);
-                box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 20px rgba(77, 243, 255, 0.2), 0 0 28px rgba(255, 79, 216, 0.15);
-              }
-
-              .classic-rave-mobile-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 8px;
-                color: #4df3ff;
-                font-size: 0.7rem;
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-              }
-
-              .classic-rave-mobile-close {
-                appearance: none;
-                border: 1px solid rgba(77, 243, 255, 0.6);
-                background: rgba(77, 243, 255, 0.08);
-                color: #effdff;
-                border-radius: 50%;
-                width: 24px;
-                height: 24px;
-                font-size: 1.1rem;
-                line-height: 1;
-                padding: 0;
-              }
-
-              .classic-rave-mobile-player audio {
-                width: 100%;
-                max-height: 42px;
-                display: block;
-              }
-            </style>
-            <div class="classic-rave-mobile-header">
-              <span>Classic Rave Set</span>
-              <button class="classic-rave-mobile-close" type="button" aria-label="Close classic rave player">×</button>
-            </div>
-            <audio controls autoplay playsinline src="${classicRaveSetsUrl}"></audio>
-          `;
-
-          const closeButton = inlinePlayer.querySelector('.classic-rave-mobile-close');
-          closeButton.addEventListener('click', () => inlinePlayer.remove());
-
-          document.body.appendChild(inlinePlayer);
-
-          const audio = inlinePlayer.querySelector('audio');
-          if (audio) {
-            audio.play().catch(() => {
-              audio.muted = true;
-              audio.play().catch(() => {});
-            });
-          }
-
+          buildMobileInlinePlayer(track, 0, true);
           return;
         }
 
         const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
 
         if (!popup) {
-          window.open(classicRaveSetsUrl, '_blank', 'noopener,noreferrer');
+          window.open(track.url, '_blank', 'noopener,noreferrer');
           return;
         }
 
@@ -301,6 +381,10 @@
                 font-size: 0.54rem;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                padding: 0 8px;
               }
 
               .vinyl {
@@ -372,7 +456,7 @@
                 <div class="deck-lights"><span></span><span></span></div>
               </div>
               <h1>Classic Rave Set</h1>
-              <p class="subtext">Vinylgroover · The Fruit Club</p>
+              <p class="subtext">${track.title}</p>
               <div class="vinyl" aria-hidden="true"></div>
               <div class="mixer-strip" aria-hidden="true">
                 <span class="knob"></span>
@@ -380,7 +464,7 @@
                 <span class="knob"></span>
               </div>
               <div class="level-bar" aria-hidden="true"></div>
-              <audio id="classicRaveAudio" controls playsinline src="${classicRaveSetsUrl}"></audio>
+              <audio id="classicRaveAudio" controls playsinline src="${track.url}"></audio>
             </div>
           </body>
           </html>`);
