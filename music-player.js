@@ -84,7 +84,61 @@
 
         event.preventDefault();
         event.stopPropagation();
-        window.open(classicRaveSetsUrl, '_blank', 'noopener,noreferrer');
+
+        const popup = window.open('', 'classicRavePlayer', 'width=440,height=220,resizable=yes,scrollbars=no');
+
+        if (!popup) {
+          window.open(classicRaveSetsUrl, '_blank', 'noopener,noreferrer');
+          return;
+        }
+
+        popup.document.title = 'Classic Rave Set';
+        popup.document.write(`<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <style>
+              body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: radial-gradient(circle at top, #141c35 0%, #050814 45%, #02030a 100%);
+                color: #f5f7ff;
+                display: grid;
+                place-items: center;
+                min-height: 100vh;
+              }
+              .player-wrap {
+                width: min(380px, 90vw);
+                padding: 20px 18px 18px;
+                border-radius: 16px;
+                border: 1px solid rgba(77, 243, 255, 0.5);
+                background: rgba(10, 16, 36, 0.92);
+                box-shadow: 0 0 18px rgba(77, 243, 255, 0.5), 0 0 28px rgba(255, 0, 255, 0.25);
+              }
+              h1 {
+                margin: 0 0 14px;
+                font-size: 1.1rem;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                color: #4df3ff;
+                text-align: center;
+              }
+              audio {
+                width: 100%;
+                margin-top: 8px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="player-wrap">
+              <h1>Classic Rave Set</h1>
+              <audio controls autoplay src="${classicRaveSetsUrl}"></audio>
+            </div>
+          </body>
+          </html>`);
+        popup.document.close();
+        popup.focus();
       }, true);
 
       return;
