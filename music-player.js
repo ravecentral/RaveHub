@@ -85,10 +85,15 @@
         event.preventDefault();
         event.stopPropagation();
 
-        const popup = window.open('', 'classicRavePlayer', 'width=440,height=220,resizable=yes,scrollbars=no');
+        const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
 
         if (!popup) {
           window.open(classicRaveSetsUrl, '_blank', 'noopener,noreferrer');
+          return;
+        }
+
+        if (popup.closed) {
+          window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
           return;
         }
 
@@ -101,109 +106,209 @@
             <style>
               :root {
                 --bg: #050814;
-                --panel: rgba(10, 16, 36, 0.92);
-                --line: rgba(77, 243, 255, 0.5);
+                --panel: rgba(12, 18, 36, 0.96);
+                --panel-2: rgba(20, 28, 52, 0.96);
+                --line: rgba(77, 243, 255, 0.65);
                 --cyan: #4df3ff;
-                --pink: #ff00ff;
+                --pink: #ff4fd8;
                 --text: #f5f7ff;
               }
 
               * { box-sizing: border-box; }
 
-              body {
+              html, body {
                 margin: 0;
-                min-height: 100vh;
-                display: grid;
-                place-items: center;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
                 font-family: Arial, sans-serif;
-                background:
-                  radial-gradient(circle at center, rgba(77, 243, 255, 0.08), transparent 40%),
-                  linear-gradient(135deg, #0b1024 0%, #050814 55%, #02030a 100%);
+                background: linear-gradient(135deg, #090d1c 0%, #03060e 100%);
                 color: var(--text);
               }
 
-              body::before {
-                content: "";
-                position: fixed;
-                inset: 0;
+              body {
+                display: grid;
+                place-items: center;
+                position: relative;
                 background:
-                  repeating-linear-gradient(
-                    to right,
-                    rgba(255, 80, 80, 0.08) 0,
-                    rgba(255, 80, 80, 0.08) 2px,
-                    transparent 2px,
-                    transparent 40px
-                  ),
-                  repeating-linear-gradient(
-                    to bottom,
-                    rgba(255, 80, 80, 0.08) 0,
-                    rgba(255, 80, 80, 0.08) 2px,
-                    transparent 2px,
-                    transparent 40px
-                  );
-                transform: perspective(600px) rotateX(66deg) translateY(120px);
-                opacity: 0.25;
-                pointer-events: none;
+                  radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%),
+                  radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%),
+                  #050814;
               }
 
               .player-wrap {
                 position: relative;
-                z-index: 1;
-                width: min(420px, 90vw);
-                padding: 22px 18px 18px;
+                width: 330px;
+                padding: 12px 12px 10px;
                 border-radius: 18px;
-                border: 1px solid var(--line);
-                background: var(--panel);
-                box-shadow: 0 0 18px rgba(77, 243, 255, 0.5), 0 0 28px rgba(255, 0, 255, 0.25);
+                border: 1px solid rgba(77, 243, 255, 0.65);
+                background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
+                box-shadow:
+                  inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                  inset 0 -8px 20px rgba(0, 0, 0, 0.35),
+                  0 0 0 1px rgba(77, 243, 255, 0.14),
+                  0 0 18px rgba(77, 243, 255, 0.22),
+                  0 0 24px rgba(255, 79, 216, 0.10);
               }
 
               .player-wrap::before {
                 content: "";
                 position: absolute;
-                inset: 10px;
+                inset: 8px;
                 border-radius: 12px;
-                border: 1px solid rgba(255, 0, 255, 0.28);
+                border: 1px solid rgba(255, 79, 216, 0.22);
                 pointer-events: none;
               }
 
-              h1 {
-                margin: 0 0 16px;
-                font-size: 1.1rem;
-                text-transform: uppercase;
+              .player-wrap::after {
+                content: "";
+                position: absolute;
+                left: 14px;
+                right: 14px;
+                top: 42px;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9), transparent);
+                box-shadow: 0 0 12px rgba(77, 243, 255, 0.4);
+              }
+
+              .deck-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 6px;
+                padding: 0 2px;
+              }
+
+              .badge {
+                font-size: 0.58rem;
                 letter-spacing: 0.18em;
+                color: var(--cyan);
+                text-transform: uppercase;
+                text-shadow: 0 0 10px rgba(77, 243, 255, 0.75);
+              }
+
+              .deck-lights {
+                display: flex;
+                gap: 6px;
+                align-items: center;
+              }
+
+              .deck-lights span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                display: block;
+                background: var(--cyan);
+                box-shadow: 0 0 10px rgba(77, 243, 255, 0.8);
+              }
+
+              .deck-lights span:nth-child(2) {
+                background: var(--pink);
+                box-shadow: 0 0 10px rgba(255, 79, 216, 0.8);
+              }
+
+              h1 {
+                margin: 0 0 6px;
+                font-size: 0.68rem;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
                 text-align: center;
                 color: var(--cyan);
-                text-shadow: 0 0 12px rgba(77, 243, 255, 0.8), 0 0 18px rgba(255, 0, 255, 0.35);
+                text-shadow: 0 0 12px rgba(77, 243, 255, 0.8);
               }
 
               .subtext {
-                margin: 0 0 12px;
+                margin: 0 0 8px;
                 text-align: center;
-                color: #c9d1ff;
-                font-size: 0.8rem;
-                letter-spacing: 0.08em;
+                color: #dbe6ff;
+                font-size: 0.54rem;
+                letter-spacing: 0.12em;
                 text-transform: uppercase;
+              }
+
+              .vinyl {
+                width: 78px;
+                height: 78px;
+                border-radius: 50%;
+                margin: 8px auto 10px;
+                background:
+                  radial-gradient(circle at center, #0f1629 0 18%, #050814 19% 28%, #0a0f1d 29% 38%, #060a12 39% 100%);
+                border: 2px solid rgba(77, 243, 255, 0.38);
+                box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.04), 0 0 18px rgba(77, 243, 255, 0.22);
+              }
+
+              .mixer-strip {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin: 2px 0 10px;
+                padding: 0 16px;
+              }
+
+              .knob {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: radial-gradient(circle at 35% 35%, #f4fbff 0%, #98a7d7 18%, #2e355f 58%, #0d1123 100%);
+                border: 1px solid rgba(77, 243, 255, 0.5);
+                box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 10px rgba(77, 243, 255, 0.22);
+              }
+
+              .level-bar {
+                position: relative;
+                height: 8px;
+                margin: 0 18px 10px;
+                border-radius: 10px;
+                background: linear-gradient(90deg, rgba(77, 243, 255, 0.15), rgba(255, 79, 216, 0.10));
+                border: 1px solid rgba(77, 243, 255, 0.18);
+                overflow: hidden;
+              }
+
+              .level-bar::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 60%;
+                border-radius: 10px;
+                background: linear-gradient(90deg, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9));
+                box-shadow: 0 0 12px rgba(77, 243, 255, 0.45);
               }
 
               audio {
                 width: 100%;
-                margin-top: 8px;
-                filter: drop-shadow(0 0 10px rgba(77, 243, 255, 0.35));
+                height: 34px;
+                margin-top: 2px;
+                filter: drop-shadow(0 0 9px rgba(77, 243, 255, 0.25));
               }
 
               audio::-webkit-media-controls-panel {
-                background: rgba(18, 22, 44, 0.9);
+                background: rgba(18, 24, 42, 0.94);
               }
             </style>
           </head>
           <body>
             <div class="player-wrap">
+              <div class="deck-top">
+                <span class="badge">Deck 1</span>
+                <div class="deck-lights"><span></span><span></span></div>
+              </div>
               <h1>Classic Rave Set</h1>
               <p class="subtext">Vinylgroover · The Fruit Club</p>
+              <div class="vinyl" aria-hidden="true"></div>
+              <div class="mixer-strip" aria-hidden="true">
+                <span class="knob"></span>
+                <span class="knob"></span>
+                <span class="knob"></span>
+              </div>
+              <div class="level-bar" aria-hidden="true"></div>
               <audio controls autoplay src="${classicRaveSetsUrl}"></audio>
             </div>
           </body>
           </html>`);
+        popup.resizeTo(360, 200);
+        popup.moveTo(24, 24);
         popup.document.close();
         popup.focus();
       }, true);
