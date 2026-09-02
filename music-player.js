@@ -99,40 +99,107 @@
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <style>
+              :root {
+                --bg: #050814;
+                --panel: rgba(10, 16, 36, 0.92);
+                --line: rgba(77, 243, 255, 0.5);
+                --cyan: #4df3ff;
+                --pink: #ff00ff;
+                --text: #f5f7ff;
+              }
+
+              * { box-sizing: border-box; }
+
               body {
                 margin: 0;
-                font-family: Arial, sans-serif;
-                background: radial-gradient(circle at top, #141c35 0%, #050814 45%, #02030a 100%);
-                color: #f5f7ff;
+                min-height: 100vh;
                 display: grid;
                 place-items: center;
-                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                background:
+                  radial-gradient(circle at center, rgba(77, 243, 255, 0.08), transparent 40%),
+                  linear-gradient(135deg, #0b1024 0%, #050814 55%, #02030a 100%);
+                color: var(--text);
               }
+
+              body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background:
+                  repeating-linear-gradient(
+                    to right,
+                    rgba(255, 80, 80, 0.08) 0,
+                    rgba(255, 80, 80, 0.08) 2px,
+                    transparent 2px,
+                    transparent 40px
+                  ),
+                  repeating-linear-gradient(
+                    to bottom,
+                    rgba(255, 80, 80, 0.08) 0,
+                    rgba(255, 80, 80, 0.08) 2px,
+                    transparent 2px,
+                    transparent 40px
+                  );
+                transform: perspective(600px) rotateX(66deg) translateY(120px);
+                opacity: 0.25;
+                pointer-events: none;
+              }
+
               .player-wrap {
-                width: min(380px, 90vw);
-                padding: 20px 18px 18px;
-                border-radius: 16px;
-                border: 1px solid rgba(77, 243, 255, 0.5);
-                background: rgba(10, 16, 36, 0.92);
+                position: relative;
+                z-index: 1;
+                width: min(420px, 90vw);
+                padding: 22px 18px 18px;
+                border-radius: 18px;
+                border: 1px solid var(--line);
+                background: var(--panel);
                 box-shadow: 0 0 18px rgba(77, 243, 255, 0.5), 0 0 28px rgba(255, 0, 255, 0.25);
               }
+
+              .player-wrap::before {
+                content: "";
+                position: absolute;
+                inset: 10px;
+                border-radius: 12px;
+                border: 1px solid rgba(255, 0, 255, 0.28);
+                pointer-events: none;
+              }
+
               h1 {
-                margin: 0 0 14px;
+                margin: 0 0 16px;
                 font-size: 1.1rem;
                 text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: #4df3ff;
+                letter-spacing: 0.18em;
                 text-align: center;
+                color: var(--cyan);
+                text-shadow: 0 0 12px rgba(77, 243, 255, 0.8), 0 0 18px rgba(255, 0, 255, 0.35);
               }
+
+              .subtext {
+                margin: 0 0 12px;
+                text-align: center;
+                color: #c9d1ff;
+                font-size: 0.8rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+              }
+
               audio {
                 width: 100%;
                 margin-top: 8px;
+                filter: drop-shadow(0 0 10px rgba(77, 243, 255, 0.35));
+              }
+
+              audio::-webkit-media-controls-panel {
+                background: rgba(18, 22, 44, 0.9);
               }
             </style>
           </head>
           <body>
             <div class="player-wrap">
               <h1>Classic Rave Set</h1>
+              <p class="subtext">Vinylgroover · The Fruit Club</p>
               <audio controls autoplay src="${classicRaveSetsUrl}"></audio>
             </div>
           </body>
