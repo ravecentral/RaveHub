@@ -303,13 +303,24 @@
                 <span class="knob"></span>
               </div>
               <div class="level-bar" aria-hidden="true"></div>
-              <audio controls autoplay src="${classicRaveSetsUrl}"></audio>
+              <audio id="classicRaveAudio" controls playsinline src="${classicRaveSetsUrl}"></audio>
             </div>
           </body>
           </html>`);
         popup.resizeTo(360, 200);
         popup.moveTo(24, 24);
         popup.document.close();
+
+        setTimeout(() => {
+          const popupAudio = popup.document.getElementById('classicRaveAudio');
+          if (popupAudio) {
+            popupAudio.play().catch(() => {
+              popupAudio.muted = true;
+              popupAudio.play().catch(() => {});
+            });
+          }
+        }, 250);
+
         popup.focus();
       }, true);
 
