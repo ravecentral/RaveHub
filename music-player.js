@@ -15,6 +15,7 @@
   ];
   const playerStateKey = 'atr-player-state';
   const classicRaveSetsUrl = 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=as5zct66&dl=1';
+  const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
     const navigation = document.querySelector('.nav-band');
@@ -84,6 +85,82 @@
 
         event.preventDefault();
         event.stopPropagation();
+
+        if (isMobileDevice()) {
+          const existingInlinePlayer = document.querySelector('.classic-rave-mobile-player');
+          if (existingInlinePlayer) {
+            existingInlinePlayer.remove();
+          }
+
+          const inlinePlayer = document.createElement('div');
+          inlinePlayer.className = 'classic-rave-mobile-player';
+          inlinePlayer.innerHTML = `
+            <style>
+              .classic-rave-mobile-player {
+                position: fixed;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                z-index: 2000;
+                padding: 12px 12px 10px;
+                border-radius: 18px;
+                background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
+                border: 1px solid rgba(77, 243, 255, 0.7);
+                box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 20px rgba(77, 243, 255, 0.2), 0 0 28px rgba(255, 79, 216, 0.15);
+              }
+
+              .classic-rave-mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                color: #4df3ff;
+                font-size: 0.7rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+              }
+
+              .classic-rave-mobile-close {
+                appearance: none;
+                border: 1px solid rgba(77, 243, 255, 0.6);
+                background: rgba(77, 243, 255, 0.08);
+                color: #effdff;
+                border-radius: 50%;
+                width: 24px;
+                height: 24px;
+                font-size: 1.1rem;
+                line-height: 1;
+                padding: 0;
+              }
+
+              .classic-rave-mobile-player audio {
+                width: 100%;
+                max-height: 42px;
+                display: block;
+              }
+            </style>
+            <div class="classic-rave-mobile-header">
+              <span>Classic Rave Set</span>
+              <button class="classic-rave-mobile-close" type="button" aria-label="Close classic rave player">×</button>
+            </div>
+            <audio controls autoplay playsinline src="${classicRaveSetsUrl}"></audio>
+          `;
+
+          const closeButton = inlinePlayer.querySelector('.classic-rave-mobile-close');
+          closeButton.addEventListener('click', () => inlinePlayer.remove());
+
+          document.body.appendChild(inlinePlayer);
+
+          const audio = inlinePlayer.querySelector('audio');
+          if (audio) {
+            audio.play().catch(() => {
+              audio.muted = true;
+              audio.play().catch(() => {});
+            });
+          }
+
+          return;
+        }
 
         const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
 
