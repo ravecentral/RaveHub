@@ -14,7 +14,7 @@
     }
   ];
   const playerStateKey = 'atr-player-state';
-  const classicRaveSetsUrl = 'https://www.mixcloud.com/rickywalker167/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994/';
+  const classicRaveSetsUrl = 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=as5zct66&dl=1';
 
   document.addEventListener('DOMContentLoaded', () => {
     const navigation = document.querySelector('.nav-band');
@@ -74,7 +74,7 @@
 
     if (!isMusicPage) {
       button.textContent = 'Classic Rave Sets';
-      button.title = 'Open Classic Rave Sets on Mixcloud';
+      button.title = 'Open Classic Rave Set';
       title.parentElement.hidden = true;
 
       document.addEventListener('click', (event) => {
