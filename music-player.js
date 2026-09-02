@@ -147,6 +147,15 @@
               padding-right: 8px;
             }
 
+            .classic-rave-mobile-now-playing {
+              margin: 0 0 6px;
+              color: #ff4fd8;
+              font-size: 0.58rem;
+              letter-spacing: 0.22em;
+              text-transform: uppercase;
+              text-shadow: 0 0 8px rgba(255, 79, 216, 0.6);
+            }
+
             .classic-rave-mobile-close {
               appearance: none;
               border: 1px solid rgba(77, 243, 255, 0.6);
@@ -167,6 +176,7 @@
               display: block;
             }
           </style>
+          <p class="classic-rave-mobile-now-playing">Now Playing</p>
           <div class="classic-rave-mobile-header">
             <span class="classic-rave-mobile-title">${track.title}</span>
             <button class="classic-rave-mobile-close" type="button" aria-label="Close classic rave player">×</button>
@@ -387,6 +397,16 @@
                 padding: 0 8px;
               }
 
+              .now-playing-label {
+                margin: 0 0 2px;
+                text-align: center;
+                color: var(--pink);
+                font-size: 0.5rem;
+                letter-spacing: 0.24em;
+                text-transform: uppercase;
+                text-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
+              }
+
               .vinyl {
                 width: 78px;
                 height: 78px;
@@ -456,6 +476,7 @@
                 <div class="deck-lights"><span></span><span></span></div>
               </div>
               <h1>Classic Rave Set</h1>
+              <p class="now-playing-label">Now Playing</p>
               <p class="subtext">${track.title}</p>
               <div class="vinyl" aria-hidden="true"></div>
               <div class="mixer-strip" aria-hidden="true">
