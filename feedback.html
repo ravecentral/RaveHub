@@ -60,10 +60,17 @@
        <form
          id="feedback-form"
          class="feedback-form"
-         action="mailto:info@alltingsrave.com"
-         method="post"
-         enctype="text/plain"
+         name="feedback"
+         method="POST"
+         data-netlify="true"
+         netlify-honeypot="bot-field"
+         action="/feedback-thanks.html"
        >
+           <input type="hidden" name="form-name" value="feedback">
+           <p class="feedback-hidden-field">
+             <label>Don't fill this out if you're human: <input name="bot-field"></label>
+           </p>
+
            <label for="feedback-name">Name</label>
            <input type="text" id="feedback-name" name="Name" placeholder="Your name" required>
 
@@ -82,9 +89,17 @@
            <div class="feedback-char-count"><span id="feedback-char-remaining">500</span> characters remaining</div>
 
            <button type="submit" class="feedback-submit-btn">Submit Feedback</button>
-           <p class="feedback-note">Submitting opens your email app with this feedback ready to send to <strong>info@alltingsrave.com</strong>.</p>
+           <p class="feedback-note">Submitting sends your feedback straight to <strong>info@alltingsrave.com</strong> &mdash; no email app required.</p>
        </form>
    </section>
+
+   <!-- Hidden static form so Netlify's build bots can detect the field set (Netlify Forms requirement) -->
+   <form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+       <input type="text" name="Name">
+       <input type="email" name="Email">
+       <textarea name="Comments"></textarea>
+       <input name="bot-field">
+   </form>
 
     <!-- Footer -->
     <footer class="footer">
@@ -100,6 +115,12 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+    }
+
+    .feedback-hidden-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
     }
 
     .feedback-form label {
