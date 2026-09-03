@@ -86,7 +86,8 @@
       return;
     }
 
-    const isMusicPage = window.location.pathname.toLowerCase().endsWith('/music.html');
+    const path = window.location.pathname.toLowerCase();
+    const isMusicPage = path.endsWith('/music.html') || path.endsWith('/music') || path === '/music/';
 
     if (!isMusicPage) {
       button.textContent = 'Classic Rave Sets';
