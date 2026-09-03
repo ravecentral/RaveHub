@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments &amp; Feedback · All Tings Rave</title>
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="navigation.css">
+  <link rel="stylesheet" href="music-page-theme.css">
+  <script src="music-player.js" defer></script>
+</head>
+
+<body>
+    <!-- Cosmic background elements -->
+    <div class="grid-overlay"></div>
+    <div class="planet p1"></div>
+    <div class="planet p2"></div>
+    <div class="planet p3"></div>
+
+    <!-- Laser layer -->
+    <div class="laser-layer">
+        <div class="laser l1"></div>
+        <div class="laser l2"></div>
+        <div class="laser l3"></div>
+    </div>
+
+   <!-- All Tings Rave Header Banner -->
+   <header class="rave-header">
+     <div class="rave-banner">
+       <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+     </div>
+   </header>
+
+   <!-- Navigation Band -->
+   <nav class="nav-band">
+  <a href="index.html">Home</a>
+  <a href="radio.html">Rave Radio</a>
+  <a href="events.html">Events</a>
+  <a href="dj-tech.html">DJ &amp; Rave Tech</a>
+  <a href="Books.html">Books</a>
+  <a href="music.html">Music</a>
+  <a href="art.html">Art</a>
+  <a href="https://en.wikipedia.org/wiki/Rave#" target="_blank">History</a>
+  <a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chat &amp; Games</a><a href="feedback.html">Comments &amp; Feedback</a>
+</nav>
+
+   <!-- Page Header -->
+   <header class="hero">
+       <div class="hero-inner">
+           <div class="tribal-backdrop"></div>
+           <div class="logo-block">
+               <h1 class="site-title">COMMENTS &amp; FEEDBACK</h1>
+               <p class="tagline">Got thoughts, ideas, or love to share? Drop us a message from the cosmos.</p>
+           </div>
+       </div>
+   </header>
+
+   <!-- Feedback Form -->
+   <section class="section-block feedback-block">
+       <form
+         id="feedback-form"
+         class="feedback-form"
+         action="mailto:info@alltingsrave.com"
+         method="post"
+         enctype="text/plain"
+       >
+           <label for="feedback-name">Name</label>
+           <input type="text" id="feedback-name" name="Name" placeholder="Your name" required>
+
+           <label for="feedback-email">Email Address</label>
+           <input type="email" id="feedback-email" name="Email" placeholder="you@example.com" required>
+
+           <label for="feedback-message">Comments</label>
+           <textarea
+             id="feedback-message"
+             name="Comments"
+             rows="6"
+             maxlength="500"
+             placeholder="Tell us what's on your mind... (max 500 characters)"
+             required
+           ></textarea>
+           <div class="feedback-char-count"><span id="feedback-char-remaining">500</span> characters remaining</div>
+
+           <button type="submit" class="feedback-submit-btn">Submit Feedback</button>
+           <p class="feedback-note">Submitting opens your email app with this feedback ready to send to <strong>info@alltingsrave.com</strong>.</p>
+       </form>
+   </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>All Tings Rave · Cosmic Underground · We Love Hearing From You</p>
+    </footer>
+
+    <style>
+    .feedback-block {
+      max-width: 600px;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .feedback-form label {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4df3ff;
+      text-shadow: 0 0 8px rgba(77, 243, 255, 0.5);
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(77, 243, 255, 0.4);
+      background: rgba(5, 8, 20, 0.85);
+      color: #f5f7ff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .feedback-form input:focus,
+    .feedback-form textarea:focus {
+      outline: none;
+      border-color: #4df3ff;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.45);
+    }
+
+    .feedback-char-count {
+      align-self: flex-end;
+      font-size: 0.75rem;
+      color: #b6c2ff;
+      opacity: 0.8;
+    }
+
+    .feedback-submit-btn {
+      margin-top: 20px;
+      align-self: center;
+      background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%);
+      color: #050814;
+      border: 2px solid rgba(77, 243, 255, 0.8);
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(77, 243, 255, 0.4), 0 0 24px rgba(255, 0, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .feedback-submit-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.5);
+    }
+
+    .feedback-submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .feedback-note {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9aa5d1;
+    }
+
+    .rave-header {
+      width: 100%;
+      background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+      border-bottom: 2px solid rgba(77, 243, 255, 0.4);
+      box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .rave-banner img {
+      width: min(720px, 94vw);
+      filter: drop-shadow(0 0 12px #4df3ff) drop-shadow(0 0 24px #ff00ff);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    </style>
+
+    <script>
+      (() => {
+        const messageField = document.getElementById('feedback-message');
+        const charRemaining = document.getElementById('feedback-char-remaining');
+
+        if (!messageField || !charRemaining) {
+          return;
+        }
+
+        const updateCount = () => {
+          const remaining = 500 - messageField.value.length;
+          charRemaining.textContent = remaining;
+        };
+
+        messageField.addEventListener('input', updateCount);
+        updateCount();
+      })();
+    </script>
+</body>
+</html>
