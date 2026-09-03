@@ -16,15 +16,15 @@
   const playerStateKey = 'atr-player-state';
   const classicRaveTracks = [
     {
-      url: 'https://www.dropbox.com/scl/fi/v721ziglysfpjamec6pvg/RobO-SN3-Mid-Life-Krisis-Diversify-The-Vic-27.09.25.mp3?rlkey=5suymobqyc6hjhtr9dscafv50&st=6jdp5hm5&dl=1',
+      url: 'https://www.dropbox.com/scl/fi/v721ziglysfpjamec6pvg/RobO-SN3-Mid-Life-Krisis-Diversify-The-Vic-27.09.25.mp3?rlkey=5suymobqyc6hjhtr9dscafv50&st=6jdp5hm5&raw=1',
       title: 'RobO SN3 · Mid Life Krisis · Diversify @ The Vic'
     },
     {
-      url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=3srgk88h&dl=1',
+      url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=3srgk88h&raw=1',
       title: 'Vinylgroover · Live The Fruit Club, Brunel Rooms Swindon 1996'
     },
     {
-      url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=85bsh0of&dl=1',
+      url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=85bsh0of&raw=1',
       title: 'DJ Swan-E with MC MC · World Dance 2nd April 1994'
     }
   ];
