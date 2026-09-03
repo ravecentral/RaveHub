@@ -1,0 +1,138 @@
+.events-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px 56px;
+}
+
+.events-intro {
+  max-width: 820px;
+  margin: 24px auto 34px;
+  text-align: center;
+}
+
+.events-intro h2 {
+  color: #4df3ff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.events-intro p,
+.event-card p {
+  color: #cbd2f4;
+  line-height: 1.5;
+}
+
+.region-grid,
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.region-card,
+.event-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(77, 243, 255, 0.45);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(19, 26, 54, 0.96), rgba(6, 9, 24, 0.98));
+  box-shadow: 0 0 18px rgba(77, 243, 255, 0.15);
+}
+
+.region-card-image,
+.promoter-logo {
+  min-height: 145px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.22), rgba(5, 8, 20, 0.9) 70%);
+}
+
+.region-card-image img,
+.promoter-logo img {
+  width: min(180px, 70%);
+  max-height: 125px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(77, 243, 255, 0.55));
+}
+
+.region-card-body,
+.event-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.region-card h2,
+.event-card h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.15rem;
+}
+
+.region-card .enter-link,
+.ticket-link {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 9px 16px;
+  border: 1px solid #4df3ff;
+  border-radius: 999px;
+  color: #050814;
+  background: linear-gradient(135deg, #4df3ff, #ff4fd8);
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.promoter-name {
+  margin: 0;
+  color: #ff4fd8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.event-details {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 18px;
+  padding: 12px;
+  border-left: 2px solid #4df3ff;
+  background: rgba(77, 243, 255, 0.06);
+  color: #eef1ff;
+  font-size: 0.9rem;
+}
+
+.event-details strong {
+  color: #4df3ff;
+}
+
+.event-note {
+  margin: 0 0 16px;
+  color: #9da8d5;
+  font-size: 0.82rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin: 8px 0 22px;
+  color: #4df3ff;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .events-page {
+    padding-inline: 10px;
+  }
+
+  .region-grid,
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+}
