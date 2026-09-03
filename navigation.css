@@ -47,3 +47,29 @@
   box-shadow: 0 0 12px rgba(77, 243, 255, 0.6);
   transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+  .nav-band {
+    gap: 4px 6px;
+    padding: 6px 8px;
+  }
+
+  .nav-band a {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-band {
+    gap: 3px 5px;
+    padding: 5px 6px;
+  }
+
+  .nav-band a {
+    font-size: 0.58rem;
+    padding: 3px 6px;
+  }
+}
