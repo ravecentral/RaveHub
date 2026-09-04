@@ -152,8 +152,7 @@ main {
 .artist-image,
 .product-image,
 .home-card > img,
-.gear-card > img,
-.home-icon {
+.gear-card > img {
   width: 100% !important;
   height: 170px !important;
   margin: 0 !important;
@@ -161,6 +160,17 @@ main {
   border: 0 !important;
   border-radius: 0 !important;
   background: radial-gradient(circle at center, rgba(77, 243, 255, 0.18), rgba(21, 28, 58, 0.65) 42%, rgba(5, 8, 20, 1) 100%);
+  box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
+}
+
+.home-icon {
+  width: 100% !important;
+  height: 170px !important;
+  margin: 0 !important;
+  object-fit: contain;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #000000 !important;
   box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
 }
 
