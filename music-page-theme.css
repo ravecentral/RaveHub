@@ -323,8 +323,28 @@ main:has(> .product-card) {
   .store-grid,
   .artist-grid,
   .gear-grid,
-  .icon-grid {
+  .icon-grid,
+  .region-grid,
+  .event-grid,
+  main:has(> .product-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
+  }
+
+  .page:has(> .book-card) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .page:has(> .book-card) > :not(.book-card) {
+    grid-column: 1 / -1;
+  }
+
+  .book-card {
+    min-width: 0;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .rave-header {
@@ -569,9 +589,11 @@ button:active,
   .gear-grid,
     .icon-grid,
     .home-card-grid,
+    .region-grid,
+    .event-grid,
     main:has(> .product-card) {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
   }
 
   #music-player-container {
@@ -611,6 +633,18 @@ button:active,
 body {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  body:has(> .book-card) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  body:has(> .book-card) > :not(.book-card) {
+    grid-column: 1 / -1;
+  }
 }
 
 body > .rave-header {
