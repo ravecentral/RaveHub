@@ -511,3 +511,29 @@ button:active,
     background: rgba(5, 8, 20, 0.35);
   }
 }
+
+/* Keep the shared player immediately below the navigation on every page. */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+body > .rave-header {
+  order: 1;
+}
+
+body > .nav-band {
+  order: 2;
+}
+
+body > #music-player-container {
+  order: 3;
+}
+
+body > .hero,
+body > main,
+body > .page,
+body > footer,
+body > .site-footer {
+  order: 4;
+}
