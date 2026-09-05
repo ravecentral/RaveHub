@@ -243,201 +243,142 @@
       }
 
       const openClassicRavePopup = (track, startTime = 0, autoPlay = true) => {
-        const popup = window.open('', 'classicRavePlayer', 'width=360,height=220,left=24,top=24,resizable=yes,scrollbars=no');
-
-        if (!popup) {
-          window.open(track.url, '_blank', 'noopener,noreferrer');
-          return;
+        const existingPlayer = document.querySelector('.classic-rave-overlay');
+        if (existingPlayer) {
+          existingPlayer.remove();
         }
 
-        popup.document.title = 'Classic Rave Set';
-        popup.document.write(`<!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <style>
-              :root {
-                --bg: #050814;
-                --panel: rgba(12, 18, 36, 0.96);
-                --panel-2: rgba(20, 28, 52, 0.96);
-                --line: rgba(77, 243, 255, 0.65);
-                --cyan: #4df3ff;
-                --pink: #ff4fd8;
-                --text: #f5f7ff;
-              }
+        const overlay = document.createElement('div');
+        overlay.className = 'classic-rave-overlay';
+        overlay.innerHTML = `
+          <style>
+            .classic-rave-overlay {
+              position: fixed;
+              inset: 0;
+              display: grid;
+              place-items: center;
+              background: rgba(5, 8, 20, 0.7);
+              z-index: 3000;
+              backdrop-filter: blur(4px);
+            }
 
-              * { box-sizing: border-box; }
+            .classic-rave-panel {
+              width: min(360px, calc(100vw - 24px));
+              padding: 18px 16px 14px;
+              border-radius: 18px;
+              border: 1px solid rgba(77, 243, 255, 0.7);
+              background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
+              box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 20px rgba(77, 243, 255, 0.2), 0 0 28px rgba(255, 79, 216, 0.15);
+              color: #f5f7ff;
+              font-family: Arial, sans-serif;
+            }
 
-              html, body {
-                margin: 0;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                font-family: Arial, sans-serif;
-                background: linear-gradient(135deg, #090d1c 0%, #03060e 100%);
-                color: var(--text);
-              }
+            .classic-rave-panel-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 8px;
+              margin-bottom: 10px;
+              font-size: 0.6rem;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+              color: #4df3ff;
+            }
 
-              body {
-                display: grid;
-                place-items: center;
-                position: relative;
-                background: radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%), #050814;
-              }
+            .classic-rave-close {
+              appearance: none;
+              border: 1px solid rgba(77, 243, 255, 0.6);
+              background: rgba(77, 243, 255, 0.08);
+              color: #effdff;
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              font-size: 1.2rem;
+              line-height: 1;
+              cursor: pointer;
+            }
 
-              .player-wrap {
-                position: relative;
-                width: 330px;
-                padding: 12px 12px 10px;
-                border-radius: 18px;
-                border: 1px solid rgba(77, 243, 255, 0.65);
-                background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(77, 243, 255, 0.14), 0 0 18px rgba(77, 243, 255, 0.22), 0 0 24px rgba(255, 79, 216, 0.10);
-              }
+            .classic-rave-panel h3 {
+              margin: 0 0 8px;
+              text-align: center;
+              font-size: 0.76rem;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+              color: #4df3ff;
+            }
 
-              .player-wrap::before {
-                content: "";
-                position: absolute;
-                inset: 8px;
-                border-radius: 12px;
-                border: 1px solid rgba(255, 79, 216, 0.22);
-                pointer-events: none;
-              }
+            .classic-rave-track {
+              margin: 0 0 12px;
+              text-align: center;
+              line-height: 1.4;
+              color: #dbe6ff;
+              font-size: 0.7rem;
+              letter-spacing: 0.08em;
+            }
 
-              .player-wrap::after {
-                content: "";
-                position: absolute;
-                left: 14px;
-                right: 14px;
-                top: 42px;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9), transparent);
-                box-shadow: 0 0 12px rgba(77, 243, 255, 0.4);
-              }
-
-              .deck-top {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 6px;
-                padding: 0 2px;
-              }
-
-              .badge {
-                font-size: 0.58rem;
-                letter-spacing: 0.18em;
-                color: var(--cyan);
-                text-transform: uppercase;
-                text-shadow: 0 0 10px rgba(77, 243, 255, 0.75);
-              }
-
-              .deck-lights {
-                display: flex;
-                gap: 6px;
-                align-items: center;
-              }
-
-              .deck-lights span {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                display: block;
-                background: var(--cyan);
-                box-shadow: 0 0 10px rgba(77, 243, 255, 0.8);
-              }
-
-              .deck-lights span:nth-child(2) {
-                background: var(--pink);
-                box-shadow: 0 0 10px rgba(255, 79, 216, 0.8);
-              }
-
-              h1 {
-                margin: 0 0 6px;
-                font-size: 0.68rem;
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                text-align: center;
-                color: var(--cyan);
-                text-shadow: 0 0 12px rgba(77, 243, 255, 0.8);
-              }
-
-              .subtext {
-                margin: 0 0 8px;
-                text-align: center;
-                color: #dbe6ff;
-                font-size: 0.54rem;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                padding: 0 8px;
-              }
-
-              .now-playing-label {
-                margin: 0 0 2px;
-                text-align: center;
-                color: var(--pink);
-                font-size: 0.5rem;
-                letter-spacing: 0.24em;
-                text-transform: uppercase;
-                text-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
-              }
-
-              audio {
-                width: 100%;
-                margin-top: 8px;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="player-wrap">
-              <div class="deck-top">
-                <span class="badge">Lucky dip</span>
-                <div class="deck-lights"><span></span><span></span></div>
-              </div>
-              <h1>Classic Rave Set</h1>
-              <p class="subtext">${track.title}</p>
-              <p class="now-playing-label">Now Playing</p>
-              <audio controls autoplay src="${track.url}"></audio>
+            .classic-rave-panel audio {
+              display: block;
+              width: 100%;
+              margin: 0;
+            }
+          </style>
+          <div class="classic-rave-panel" role="dialog" aria-label="Classic rave player">
+            <div class="classic-rave-panel-header">
+              <span>Lucky dip</span>
+              <button type="button" class="classic-rave-close" aria-label="Close classic player">×</button>
             </div>
-          </body>
-          </html>`);
-        popup.document.close();
+            <h3>Classic Rave Set</h3>
+            <p class="classic-rave-track">${track.title}</p>
+            <audio controls ${autoPlay ? 'autoplay' : ''} src="${track.url}"></audio>
+          </div>
+        `;
 
-        const popupAudio = popup.document.querySelector('audio');
-        if (popupAudio) {
-          if (startTime > 0) {
-            popupAudio.addEventListener('loadedmetadata', () => {
-              popupAudio.currentTime = Math.min(startTime, popupAudio.duration || startTime);
-            }, { once: true });
-          }
+        const closeButton = overlay.querySelector('.classic-rave-close');
+        closeButton.addEventListener('click', () => {
+          overlay.remove();
+          clearClassicRaveState();
+          clearClassicTrackOrder();
+        });
 
-          const persistState = () => {
+        const audio = overlay.querySelector('audio');
+        if (audio) {
+          audio.addEventListener('play', () => {
             saveClassicRaveState({
               url: track.url,
               title: track.title,
-              currentTime: popupAudio.currentTime,
-              isPlaying: !popupAudio.paused
+              currentTime: audio.currentTime,
+              isPlaying: true
             });
-          };
-
-          popupAudio.addEventListener('play', persistState);
-          popupAudio.addEventListener('pause', persistState);
-          popupAudio.addEventListener('timeupdate', persistState);
-          popupAudio.addEventListener('ended', () => {
+          });
+          audio.addEventListener('pause', () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: audio.currentTime,
+              isPlaying: false
+            });
+          });
+          audio.addEventListener('timeupdate', () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: audio.currentTime,
+              isPlaying: !audio.paused
+            });
+          });
+          audio.addEventListener('ended', () => {
+            overlay.remove();
             clearClassicRaveState();
             clearClassicTrackOrder();
           });
-
-          if (autoPlay) {
-            popupAudio.play().catch(() => {
-              popupAudio.muted = true;
-              popupAudio.play().catch(() => {});
-            });
+          if (startTime > 0) {
+            audio.addEventListener('loadedmetadata', () => {
+              audio.currentTime = Math.min(startTime, audio.duration || startTime);
+            }, { once: true });
           }
         }
+
+        document.body.appendChild(overlay);
       };
 
       const resumeState = getClassicRaveState();
@@ -457,7 +398,8 @@
       }
 
       document.addEventListener('click', (event) => {
-        if (event.target !== button) {
+        const clickedButton = event.target && event.target.closest ? event.target.closest('#fill-ears-btn') : null;
+        if (!clickedButton || clickedButton !== button) {
           return;
         }
 
@@ -560,7 +502,8 @@
     };
 
     document.addEventListener('click', (event) => {
-      if (event.target !== button) {
+      const clickedButton = event.target && event.target.closest ? event.target.closest('#fill-ears-btn') : null;
+      if (!clickedButton || clickedButton !== button) {
         return;
       }
 
