@@ -76,6 +76,7 @@ body {
   letter-spacing: 0.08em !important;
   text-transform: uppercase;
   text-shadow: none !important;
+  line-height: 1.08;
 }
 
 .tagline,
@@ -84,7 +85,8 @@ body {
   margin: 8px auto 0 !important;
   color: var(--text-muted) !important;
   font-size: 0.95rem !important;
-  line-height: 1.4;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
 }
 
 .page,
@@ -203,12 +205,12 @@ main {
 .gear-card h2,
 .product-card h2,
 .home-card h2 {
-  line-height: 1.2;
-  margin: 0 !important;
+  line-height: 1.15;
+  margin: 0 0 4px !important;
   color: var(--text-main) !important;
   font-size: 1rem !important;
   font-weight: 700;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.06em !important;
   text-transform: uppercase;
 }
 
@@ -217,7 +219,8 @@ main {
 .artist-card p,
 .store-card p {
   font-size: 0.9rem;
-  line-height: 1.4;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
   margin: 0;
 }
 

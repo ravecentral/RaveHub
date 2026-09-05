@@ -16,40 +16,42 @@
   const playerStateKey = 'atr-player-state';
   const classicRaveTracks = [
     {
-      url: 'https://www.dropbox.com/scl/fi/v721ziglysfpjamec6pvg/RobO-SN3-Mid-Life-Krisis-Diversify-The-Vic-27.09.25.mp3?rlkey=5suymobqyc6hjhtr9dscafv50&st=6jdp5hm5&raw=1',
-      title: 'RobO SN3 · Mid Life Krisis · Diversify @ The Vic'
-    },
-    {
-      url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=3srgk88h&raw=1',
-      title: 'Vinylgroover · Live The Fruit Club, Brunel Rooms Swindon 1996'
-    },
-    {
-      url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=85bsh0of&raw=1',
-      title: 'DJ Swan-E with MC MC · World Dance 2nd April 1994'
-    },
-    {
-      url: 'https://www.dropbox.com/scl/fi/bhtgvb2xpl97dbor5lj6g/dj-sy-obsession-the-third-dimension-30th-october-1992.m4a?rlkey=4om6fxeq3gjtbm6o8o2uvrkm7&st=bva9mmgt&raw=1',
-      title: 'DJ Sy · Obsession — The Third Dimension · 30th October 1992'
-    },
-    {
-      url: 'https://www.dropbox.com/scl/fi/bo7rysd15wfwzl17nlge8/dj-hype-w-magika-stixman-helter-skelter-sign-of-the-times-o2-birmingham-04.05.97.m4a?rlkey=0dqn0yxejuyakx0gunpzkp6jk&st=nrn0rcgf&raw=1',
+      url: 'https://www.dropbox.com/scl/fi/bo7rysd15wfwzl17nlge8/dj-hype-w-magika-stixman-helter-skelter-sign-of-the-times-o2-birmingham-04.05.97.m4a?rlkey=0dqn0yxejuyakx0gunpzkp6jk&st=hif09v7n&dl=0&raw=1',
       title: 'DJ Hype w/ Magika Stixman · Helter Skelter · Sign of the Times · O2 Birmingham · 04.05.97'
     },
     {
-      url: 'https://www.dropbox.com/scl/fi/mwsywmmjpdx3dcjtf98v2/dj-sy-dreamscape-10-get-smashed-8th-april-1994.m4a?rlkey=rvja19e78pwmx850ne3xen1ry&st=q1321s0e&raw=1',
+      url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=l0zddfr6&dl=0&raw=1',
+      title: 'DJ Swan-E with MC MC · World Dance 2nd April 1994'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/mwsywmmjpdx3dcjtf98v2/dj-sy-dreamscape-10-get-smashed-8th-april-1994.m4a?rlkey=rvja19e78pwmx850ne3xen1ry&st=ki0d7m8o&dl=0&raw=1',
       title: 'DJ Sy · Dreamscape 10 · Get Smashed · 8th April 1994'
     },
     {
-      url: 'https://www.dropbox.com/scl/fi/yktnxk2ficp0n4zjyret9/slipmatt-live-fantazia-littlecote-house-nye-31-12-1992.m4a?rlkey=uy3cgge8alhqbif4zhmnko5g1&st=zfemeexg&raw=1',
+      url: 'https://www.dropbox.com/scl/fi/bhtgvb2xpl97dbor5lj6g/dj-sy-obsession-the-third-dimension-30th-october-1992.m4a?rlkey=4om6fxeq3gjtbm6o8o2uvrkm7&st=aruz14ca&dl=0&raw=1',
+      title: 'DJ Sy · Obsession — The Third Dimension · 30th October 1992'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/ix97ari6xdcwze4kjas8e/ratpack-fantazia-one-step-beyond-castle-donnington-25-7-1992.m4a?rlkey=f7zh914g90jj02knsdcw0tmty&st=e3rwlf1i&dl=0&raw=1',
+      title: 'Ratpack · Fantazia · One Step Beyond · Castle Donnington · 25.7.1992'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/yktnxk2ficp0n4zjyret9/slipmatt-live-fantazia-littlecote-house-nye-31-12-1992.m4a?rlkey=uy3cgge8alhqbif4zhmnko5g1&st=s1w6d86h&dl=0&raw=1',
       title: 'Slipmatt · Live Fantazia, Littlecote House NYE · 31.12.1992'
     },
     {
-      url: 'https://www.dropbox.com/scl/fi/ix97ari6xdcwze4kjas8e/ratpack-fantazia-one-step-beyond-castle-donnington-25-7-1992.m4a?rlkey=f7zh914g90jj02knsdcw0tmty&st=2wfjry3p&raw=1',
-      title: 'Ratpack · Fantazia · One Step Beyond · Castle Donnington · 25.7.1992'
+      url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=qfvzol7s&dl=0&raw=1',
+      title: 'Vinylgroover · Live The Fruit Club, Brunel Rooms Swindon 1996'
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
-  const pickRandomClassicTrack = () => classicRaveTracks[Math.floor(Math.random() * classicRaveTracks.length)];
+  const pickRandomClassicTrack = () => {
+    if (!classicRaveTracks.length) {
+      return null;
+    }
+
+    return classicRaveTracks[Math.floor(Math.random() * classicRaveTracks.length)];
+  };
   const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -106,10 +108,54 @@
       return;
     }
 
+    const getClassicRaveState = () => {
+      try {
+        const savedState = localStorage.getItem(classicRaveStateKey);
+        return savedState ? JSON.parse(savedState) : null;
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const saveClassicRaveState = (state) => {
+      try {
+        localStorage.setItem(classicRaveStateKey, JSON.stringify(state));
+      } catch (error) {}
+    };
+
+    const clearClassicRaveState = () => {
+      try {
+        localStorage.removeItem(classicRaveStateKey);
+      } catch (error) {}
+    };
+
+    const getMusicPageState = () => {
+      try {
+        const savedState = sessionStorage.getItem(playerStateKey);
+        return savedState ? JSON.parse(savedState) : null;
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const clearMusicPageState = () => {
+      try {
+        sessionStorage.removeItem(playerStateKey);
+      } catch (error) {}
+    };
+
     const path = window.location.pathname.toLowerCase();
     const isMusicPage = path.endsWith('/music.html') || path.endsWith('/music') || path === '/music/';
 
-    if (!isMusicPage) {
+    if (isMusicPage) {
+      button.className = 'fill-ears-btn';
+      button.textContent = 'Play New Music';
+      button.title = 'Fill my ears with rave';
+      button.setAttribute('aria-label', 'Fill my ears with rave');
+      title.parentElement.hidden = false;
+      button.classList.remove('lucky-dip-btn');
+      button.parentElement.querySelector('.lucky-dip-copy')?.remove();
+    } else {
       button.classList.add('lucky-dip-btn');
       button.innerHTML = '<span class="play-icon" aria-hidden="true">▶</span>';
       button.title = 'Lucky dip!';
@@ -123,27 +169,6 @@
         promoCopy.textContent = 'Lucky dip! Press play to listen to some of the best rave sets of all time! Oi Oi!';
         button.parentElement.insertBefore(promoCopy, button.nextSibling);
       }
-
-      const getClassicRaveState = () => {
-        try {
-          const savedState = localStorage.getItem(classicRaveStateKey);
-          return savedState ? JSON.parse(savedState) : null;
-        } catch (error) {
-          return null;
-        }
-      };
-
-      const saveClassicRaveState = (state) => {
-        try {
-          localStorage.setItem(classicRaveStateKey, JSON.stringify(state));
-        } catch (error) {}
-      };
-
-      const clearClassicRaveState = () => {
-        try {
-          localStorage.removeItem(classicRaveStateKey);
-        } catch (error) {}
-      };
 
       const buildMobileInlinePlayer = (track, startTime = 0, autoPlay = true) => {
         const existingInlinePlayer = document.querySelector('.classic-rave-mobile-player');
@@ -271,14 +296,16 @@
       };
 
       const resumeState = getClassicRaveState();
+      const musicPageState = getMusicPageState();
 
-      if (resumeState && resumeState.isPlaying) {
-        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url) || {
-          url: resumeState.url,
-          title: resumeState.title
-        };
+      if (musicPageState && musicPageState.isPlaying) {
+        clearClassicRaveState();
+      } else if (resumeState && resumeState.isPlaying) {
+        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
 
-        if (isMobileDevice()) {
+        if (!resumeTrack) {
+          clearClassicRaveState();
+        } else if (isMobileDevice()) {
           buildMobileInlinePlayer(resumeTrack, resumeState.currentTime || 0, true);
         } else {
           const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
@@ -341,6 +368,11 @@
         event.stopPropagation();
 
         const track = pickRandomClassicTrack();
+        if (!track) {
+          return;
+        }
+
+        clearMusicPageState();
         saveClassicRaveState({
           url: track.url,
           title: track.title,
@@ -610,7 +642,7 @@
       return;
     }
 
-    button.textContent = 'Fill My Ears With Rave';
+    button.textContent = 'Play New Music';
     let playOrder = [];
     let currentOrderIndex = 0;
 
@@ -672,6 +704,7 @@
     const playCurrentTrack = (startTime = 0) => {
       const track = tracks[playOrder[currentOrderIndex]];
 
+      clearClassicRaveState();
       audio.src = track.path;
       audio.addEventListener('loadedmetadata', () => {
         audio.currentTime = Math.min(startTime, audio.duration || startTime);
@@ -688,6 +721,7 @@
       event.stopPropagation();
 
       if (audio.paused) {
+        clearClassicRaveState();
         playCurrentTrack();
       } else {
         audio.pause();
