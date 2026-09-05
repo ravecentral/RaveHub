@@ -242,7 +242,140 @@
         button.parentElement.insertBefore(promoCopy, button.nextSibling);
       }
 
+      const buildMobileMiniPlayer = (track, startTime = 0, autoPlay = true) => {
+        const existingPlayer = document.querySelector('.classic-rave-mini-player');
+        if (existingPlayer) {
+          existingPlayer.remove();
+        }
+
+        const miniPlayer = document.createElement('div');
+        miniPlayer.className = 'classic-rave-mini-player';
+        miniPlayer.innerHTML = `
+          <style>
+            .classic-rave-mini-player {
+              position: fixed;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+              z-index: 2000;
+              padding: 10px 10px 8px;
+              border-radius: 16px;
+              background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
+              border: 1px solid rgba(77, 243, 255, 0.7);
+              box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 18px rgba(77, 243, 255, 0.2), 0 0 24px rgba(255, 79, 216, 0.15);
+              font-family: Arial, sans-serif;
+              color: #f5f7ff;
+            }
+
+            .classic-rave-mini-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 8px;
+              margin-bottom: 6px;
+            }
+
+            .classic-rave-mini-labels {
+              min-width: 0;
+            }
+
+            .classic-rave-mini-badge {
+              display: block;
+              color: #4df3ff;
+              font-size: 0.58rem;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+            }
+
+            .classic-rave-mini-title {
+              display: block;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              color: #dbe6ff;
+              font-size: 0.68rem;
+            }
+
+            .classic-rave-mini-close {
+              appearance: none;
+              border: 1px solid rgba(77, 243, 255, 0.6);
+              background: rgba(77, 243, 255, 0.08);
+              color: #effdff;
+              border-radius: 50%;
+              width: 26px;
+              height: 26px;
+              font-size: 1.1rem;
+              line-height: 1;
+              padding: 0;
+              flex: 0 0 auto;
+            }
+
+            .classic-rave-mini-player audio {
+              width: 100%;
+              max-height: 40px;
+              display: block;
+            }
+          </style>
+          <div class="classic-rave-mini-header">
+            <div class="classic-rave-mini-labels">
+              <span class="classic-rave-mini-badge">Lucky dip · Now Playing</span>
+              <span class="classic-rave-mini-title">${track.title}</span>
+            </div>
+            <button type="button" class="classic-rave-mini-close" aria-label="Close classic rave player">×</button>
+          </div>
+          <audio controls playsinline ${autoPlay ? 'autoplay' : ''} src="${track.url}"></audio>
+        `;
+
+        const closeButton = miniPlayer.querySelector('.classic-rave-mini-close');
+        closeButton.addEventListener('click', () => {
+          miniPlayer.remove();
+          clearClassicRaveState();
+          clearClassicTrackOrder();
+        });
+
+        document.body.appendChild(miniPlayer);
+
+        const miniAudio = miniPlayer.querySelector('audio');
+        if (miniAudio) {
+          const persistState = () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: miniAudio.currentTime,
+              isPlaying: !miniAudio.paused
+            });
+          };
+
+          miniAudio.addEventListener('play', persistState);
+          miniAudio.addEventListener('pause', persistState);
+          miniAudio.addEventListener('timeupdate', persistState);
+          miniAudio.addEventListener('ended', () => {
+            miniPlayer.remove();
+            clearClassicRaveState();
+            clearClassicTrackOrder();
+          });
+
+          if (startTime > 0) {
+            miniAudio.addEventListener('loadedmetadata', () => {
+              miniAudio.currentTime = Math.min(startTime, miniAudio.duration || startTime);
+            }, { once: true });
+          }
+
+          if (autoPlay) {
+            miniAudio.play().catch(() => {
+              miniAudio.muted = true;
+              miniAudio.play().catch(() => {});
+            });
+          }
+        }
+      };
+
       const openClassicRavePopup = (track, startTime = 0, autoPlay = true) => {
+        if (isMobileDevice()) {
+          buildMobileMiniPlayer(track, startTime, autoPlay);
+          return;
+        }
+
         const popup = window.open('', 'classicRavePlayer', 'width=360,height=220,left=24,top=24,resizable=yes,scrollbars=no');
 
         if (!popup || !popup.document) {
