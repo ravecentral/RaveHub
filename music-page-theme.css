@@ -39,6 +39,19 @@ body > :not(.laser-layer):not(.grid-overlay):not(.planet):not(.cosmic-orbit) {
   z-index: 1;
 }
 
+body > .rave-header,
+body > .page-header,
+body > .hero,
+body > header {
+  position: relative;
+  z-index: 300 !important;
+}
+
+.nav-band {
+  position: sticky !important;
+  z-index: 301 !important;
+}
+
 body::after {
   content: "";
   position: fixed;
