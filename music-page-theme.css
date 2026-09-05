@@ -24,10 +24,47 @@ body {
 
 .grid-overlay,
 .planet,
-.laser-layer,
 .cosmic-orbit,
 .tribal-backdrop {
   display: none !important;
+}
+
+.laser-layer {
+  display: block !important;
+  z-index: 0;
+}
+
+body > :not(.laser-layer):not(.grid-overlay):not(.planet):not(.cosmic-orbit) {
+  position: relative;
+  z-index: 1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -35%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.42;
+  background:
+    linear-gradient(112deg, transparent 47%, rgba(77, 243, 255, 0.7) 49%, transparent 51%),
+    linear-gradient(68deg, transparent 43%, rgba(255, 56, 216, 0.62) 45%, transparent 47%),
+    linear-gradient(128deg, transparent 58%, rgba(255, 180, 84, 0.52) 60%, transparent 62%);
+  filter: blur(2px);
+  transform: rotate(-10deg);
+  animation: global-laser-sweep 11s linear infinite;
+}
+
+@keyframes global-laser-sweep {
+  0% {
+    transform: translate3d(-16%, 12%, 0) rotate(-10deg);
+  }
+  50% {
+    transform: translate3d(16%, -8%, 0) rotate(-4deg);
+  }
+  100% {
+    transform: translate3d(-16%, 12%, 0) rotate(-10deg);
+  }
 }
 
 .rave-header {
@@ -177,6 +214,13 @@ main:has(> .product-card) {
   border-radius: 0 !important;
   background: radial-gradient(circle at center, rgba(77, 243, 255, 0.18), rgba(21, 28, 58, 0.65) 42%, rgba(5, 8, 20, 1) 100%) !important;
   box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
+}
+
+.book-cover,
+.region-card-image,
+.event-card > img,
+.promoter-logo {
+  background: radial-gradient(circle at center, rgba(77, 243, 255, 0.18), rgba(21, 28, 58, 0.65) 42%, rgba(5, 8, 20, 1) 100%);
 }
 
 .store-body,
