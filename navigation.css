@@ -9,13 +9,16 @@
 }
 
 .nav-band {
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   background: linear-gradient(90deg, rgba(4, 200, 255, 0.15) 0%, rgba(77, 243, 255, 0.12) 50%, rgba(4, 200, 255, 0.15) 100%);
   border-top: 1px solid rgba(77, 243, 255, 0.4);
   border-bottom: 2px solid rgba(77, 243, 255, 0.6);
   box-shadow: 0 4px 16px rgba(77, 243, 255, 0.2);
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 4px 6px;
   padding: 8px 10px;
@@ -50,7 +53,7 @@
 
 @media (max-width: 768px) {
   .nav-band {
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
