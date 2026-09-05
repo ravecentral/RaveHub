@@ -221,6 +221,53 @@ main {
   margin: 0;
 }
 
+@media (max-width: 640px) {
+  .home-card-grid,
+  .store-grid,
+  .artist-grid,
+  .gear-grid,
+  .icon-grid {
+    gap: 12px !important;
+  }
+
+  .rave-header {
+    padding: 14px 0 !important;
+  }
+
+  .site-title,
+  .page-title {
+    font-size: 1.8rem !important;
+  }
+
+  .home-card > img,
+  .home-icon,
+  .store-image,
+  .artist-image,
+  .product-image,
+  .gear-card > img {
+    height: 110px !important;
+  }
+
+  .section-info,
+  .store-body,
+  .artist-body,
+  .book-info,
+  .product-card > :not(.product-image) {
+    padding: 10px 12px 12px !important;
+    gap: 6px !important;
+  }
+
+  .nav-band {
+    gap: 8px !important;
+    padding: 8px 10px !important;
+  }
+
+  .nav-band a {
+    font-size: 0.7rem !important;
+    padding: 7px 9px !important;
+  }
+}
+
 .book-card {
   display: flex !important;
   align-items: stretch !important;
