@@ -261,13 +261,13 @@ main {
   }
 
   .nav-band {
-    gap: 8px !important;
-    padding: 8px 10px !important;
+    gap: 3px 5px !important;
+    padding: 6px 8px !important;
   }
 
   .nav-band a {
-    font-size: 0.7rem !important;
-    padding: 7px 9px !important;
+    font-size: 0.62rem !important;
+    padding: 4px 7px !important;
   }
 }
 
@@ -445,13 +445,13 @@ button:active,
 
 @media (max-width: 600px) {
   .nav-band {
-    gap: 4px;
-    padding: 10px 8px;
+    gap: 3px 4px !important;
+    padding: 5px 6px !important;
   }
 
   .nav-band a {
-    padding: 8px 12px !important;
-    font-size: 0.82rem;
+    padding: 3px 6px !important;
+    font-size: 0.54rem !important;
   }
 
   .site-title,
