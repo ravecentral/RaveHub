@@ -168,6 +168,43 @@ main:has(> .product-card) {
 
 .store-card,
 .artist-card,
+.gear-card,
+.product-card,
+.home-card,
+.book-card,
+.region-card,
+.event-card {
+  --card-top: #4df3ff;
+  --card-bottom: rgba(8, 26, 34, 0.96);
+}
+
+:is(.store-card, .artist-card, .gear-card, .product-card, .home-card, .book-card, .region-card, .event-card):nth-child(6n + 2) {
+  --card-top: #ff56d7;
+  --card-bottom: rgba(34, 10, 26, 0.96);
+}
+
+:is(.store-card, .artist-card, .gear-card, .product-card, .home-card, .book-card, .region-card, .event-card):nth-child(6n + 3) {
+  --card-top: #ffb454;
+  --card-bottom: rgba(31, 16, 5, 0.96);
+}
+
+:is(.store-card, .artist-card, .gear-card, .product-card, .home-card, .book-card, .region-card, .event-card):nth-child(6n + 4) {
+  --card-top: #8d7dff;
+  --card-bottom: rgba(18, 16, 38, 0.96);
+}
+
+:is(.store-card, .artist-card, .gear-card, .product-card, .home-card, .book-card, .region-card, .event-card):nth-child(6n + 5) {
+  --card-top: #ff73c8;
+  --card-bottom: rgba(38, 8, 25, 0.96);
+}
+
+:is(.store-card, .artist-card, .gear-card, .product-card, .home-card, .book-card, .region-card, .event-card):nth-child(6n) {
+  --card-top: #ffcf5a;
+  --card-bottom: rgba(30, 17, 4, 0.96);
+}
+
+.store-card,
+.artist-card,
 .product-card,
 .home-card,
 .gear-card {
@@ -203,12 +240,12 @@ main:has(> .product-card) {
   object-fit: contain;
   border: 0 !important;
   border-radius: 0 !important;
-  background: linear-gradient(180deg, #4df3ff 0%, rgba(8, 26, 34, 0.96) 100%) !important;
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bottom) 100%) !important;
   box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
 }
 
 .book-cover {
-  background: linear-gradient(180deg, #4df3ff 0%, rgba(8, 26, 34, 0.96) 100%) !important;
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bottom) 100%) !important;
 }
 
 .home-icon {
@@ -218,7 +255,7 @@ main:has(> .product-card) {
   object-fit: contain;
   border: 0 !important;
   border-radius: 0 !important;
-  background: linear-gradient(180deg, #4df3ff 0%, rgba(8, 26, 34, 0.96) 100%) !important;
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bottom) 100%) !important;
   box-shadow: inset 0 0 18px rgba(77, 243, 255, 0.1) !important;
 }
 
