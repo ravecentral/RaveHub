@@ -100,7 +100,8 @@ main {
 .artist-grid,
 .gear-grid,
 .icon-grid,
-.home-card-grid {
+.home-card-grid,
+main:has(> .product-card) {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
   gap: 16px !important;
@@ -474,7 +475,8 @@ button:active,
   .artist-grid,
   .gear-grid,
     .icon-grid,
-    .home-card-grid {
+    .home-card-grid,
+    main:has(> .product-card) {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
   }
