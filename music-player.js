@@ -213,6 +213,9 @@
     const isMusicPage = path.endsWith('/music.html') || path.endsWith('/music') || path === '/music/';
 
     if (isMusicPage) {
+      clearClassicRaveState();
+      clearClassicTrackOrder();
+      audio.src = '';
       button.className = 'fill-ears-btn';
       button.textContent = 'Play New Music';
       button.title = 'Fill my ears with rave';
@@ -221,6 +224,10 @@
       button.classList.remove('lucky-dip-btn');
       button.parentElement.querySelector('.lucky-dip-copy')?.remove();
     } else {
+      clearMusicPageState();
+      if (audio.src) {
+        audio.removeAttribute('src');
+      }
       button.classList.add('lucky-dip-btn');
       button.innerHTML = '<span class="play-icon" aria-hidden="true">▶</span>';
       button.title = 'Lucky dip!';
@@ -235,234 +242,11 @@
         button.parentElement.insertBefore(promoCopy, button.nextSibling);
       }
 
-      const buildMobileInlinePlayer = (track, startTime = 0, autoPlay = true) => {
-        const existingInlinePlayer = document.querySelector('.classic-rave-mobile-player');
-        if (existingInlinePlayer) {
-          existingInlinePlayer.remove();
-        }
-
-        const inlinePlayer = document.createElement('div');
-        inlinePlayer.className = 'classic-rave-mobile-player';
-        inlinePlayer.innerHTML = `
-          <style>
-            .classic-rave-mobile-player {
-              position: fixed;
-              left: 12px;
-              right: 12px;
-              bottom: 12px;
-              z-index: 2000;
-              padding: 12px 12px 10px;
-              border-radius: 18px;
-              background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-              border: 1px solid rgba(77, 243, 255, 0.7);
-              box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 20px rgba(77, 243, 255, 0.2), 0 0 28px rgba(255, 79, 216, 0.15);
-            }
-
-            .classic-rave-mobile-header {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              margin-bottom: 8px;
-              color: #4df3ff;
-              font-size: 0.7rem;
-              letter-spacing: 0.18em;
-              text-transform: uppercase;
-            }
-
-            .classic-rave-mobile-title {
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              padding-right: 8px;
-            }
-
-            .classic-rave-mobile-now-playing {
-              margin: 0 0 6px;
-              color: #ff4fd8;
-              font-size: 0.58rem;
-              letter-spacing: 0.22em;
-              text-transform: uppercase;
-              text-shadow: 0 0 8px rgba(255, 79, 216, 0.6);
-            }
-
-            .classic-rave-mobile-close {
-              appearance: none;
-              border: 1px solid rgba(77, 243, 255, 0.6);
-              background: rgba(77, 243, 255, 0.08);
-              color: #effdff;
-              border-radius: 50%;
-              width: 24px;
-              height: 24px;
-              font-size: 1.1rem;
-              line-height: 1;
-              padding: 0;
-              flex: 0 0 auto;
-            }
-
-            .classic-rave-mobile-player audio {
-              width: 100%;
-              max-height: 42px;
-              display: block;
-            }
-          </style>
-          <p class="classic-rave-mobile-now-playing">Now Playing</p>
-          <div class="classic-rave-mobile-header">
-            <span class="classic-rave-mobile-title">${track.title}</span>
-            <button class="classic-rave-mobile-close" type="button" aria-label="Close classic rave player">×</button>
-          </div>
-          <audio id="classicRaveMobileAudio" controls playsinline src="${track.url}"></audio>
-        `;
-
-        const closeButton = inlinePlayer.querySelector('.classic-rave-mobile-close');
-        closeButton.addEventListener('click', () => {
-          inlinePlayer.remove();
-          clearClassicRaveState();
-        });
-
-        saveClassicRaveState({
-          url: track.url,
-          title: track.title,
-          currentTime: startTime,
-          isPlaying: true
-        });
-
-        document.body.appendChild(inlinePlayer);
-
-        const inlineAudio = inlinePlayer.querySelector('audio');
-
-        if (inlineAudio) {
-          if (startTime > 0) {
-            inlineAudio.addEventListener('loadedmetadata', () => {
-              inlineAudio.currentTime = Math.min(startTime, inlineAudio.duration || startTime);
-            }, { once: true });
-          }
-
-          const persistState = () => {
-            saveClassicRaveState({
-              url: track.url,
-              title: track.title,
-              currentTime: inlineAudio.currentTime,
-              isPlaying: !inlineAudio.paused
-            });
-          };
-
-          inlineAudio.addEventListener('play', persistState);
-          inlineAudio.addEventListener('pause', persistState);
-          inlineAudio.addEventListener('timeupdate', persistState);
-          inlineAudio.addEventListener('ended', () => {
-            clearClassicRaveState();
-            clearClassicTrackOrder();
-          });
-
-          if (autoPlay) {
-            inlineAudio.play().catch(() => {
-              inlineAudio.muted = true;
-              inlineAudio.play().catch(() => {});
-            });
-          }
-        }
-      };
-
-      const resumeState = getClassicRaveState();
-      const musicPageState = getMusicPageState();
-
-      if (musicPageState && musicPageState.isPlaying) {
-        clearClassicRaveState();
-        clearClassicTrackOrder();
-      } else if (resumeState && resumeState.isPlaying) {
-        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
-
-        if (!resumeTrack) {
-          clearClassicRaveState();
-        } else if (isMobileDevice()) {
-          buildMobileInlinePlayer(resumeTrack, resumeState.currentTime || 0, true);
-        } else {
-          const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
-          if (popup) {
-            popup.document.title = 'Classic Rave Set';
-            popup.document.write(`<!DOCTYPE html>
-              <html lang="en">
-              <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <style>
-                  :root { --bg: #050814; --panel: rgba(12, 18, 36, 0.96); --panel-2: rgba(20, 28, 52, 0.96); --line: rgba(77, 243, 255, 0.65); --cyan: #4df3ff; --pink: #ff4fd8; --text: #f5f7ff; }
-                  * { box-sizing: border-box; }
-                  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; background: linear-gradient(135deg, #090d1c 0%, #03060e 100%); color: var(--text); }
-                  body { display: grid; place-items: center; position: relative; background: radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%), #050814; }
-                  .player-wrap { position: relative; width: 330px; padding: 12px 12px 10px; border-radius: 18px; border: 1px solid rgba(77, 243, 255, 0.65); background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(77, 243, 255, 0.14), 0 0 18px rgba(77, 243, 255, 0.22), 0 0 24px rgba(255, 79, 216, 0.10); }
-                  .player-wrap::before { content: ""; position: absolute; inset: 8px; border-radius: 12px; border: 1px solid rgba(255, 79, 216, 0.22); pointer-events: none; }
-                  .player-wrap::after { content: ""; position: absolute; left: 14px; right: 14px; top: 42px; height: 1px; background: linear-gradient(90deg, transparent, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9), transparent); box-shadow: 0 0 12px rgba(77, 243, 255, 0.4); }
-                  .deck-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding: 0 2px; }
-                  .badge { font-size: 0.58rem; letter-spacing: 0.18em; color: var(--cyan); text-transform: uppercase; text-shadow: 0 0 10px rgba(77, 243, 255, 0.75); }
-                  .deck-lights { display: flex; gap: 6px; align-items: center; }
-                  .deck-lights span { width: 8px; height: 8px; border-radius: 50%; display: block; background: var(--cyan); box-shadow: 0 0 10px rgba(77, 243, 255, 0.8); }
-                  .deck-lights span:nth-child(2) { background: var(--pink); box-shadow: 0 0 10px rgba(255, 79, 216, 0.8); }
-                  h1 { margin: 0 0 6px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; text-align: center; color: var(--cyan); text-shadow: 0 0 12px rgba(77, 243, 255, 0.8); }
-                  .subtext { margin: 0 0 8px; text-align: center; color: #dbe6ff; font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 8px; }
-                  .now-playing-label { margin: 0 0 2px; text-align: center; color: var(--pink); font-size: 0.5rem; letter-spacing: 0.24em; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 79, 216, 0.7); }
-                  audio { width: 100%; margin-top: 8px; }
-                </style>
-              </head>
-              <body>
-                <div class="player-wrap">
-                  <div class="deck-top">
-                    <span class="badge">Lucky dip</span>
-                    <div class="deck-lights"><span></span><span></span></div>
-                  </div>
-                  <h1>Classic Rave Set</h1>
-                  <p class="subtext">${resumeTrack.title}</p>
-                  <p class="now-playing-label">Now Playing</p>
-                  <audio controls autoplay src="${resumeTrack.url}"></audio>
-                </div>
-              </body>
-              </html>`);
-            popup.document.close();
-            const resumeAudio = popup.document.querySelector('audio');
-            if (resumeAudio && (resumeState.currentTime || 0) > 0) {
-              resumeAudio.addEventListener('loadedmetadata', () => {
-                resumeAudio.currentTime = Math.min(resumeState.currentTime || 0, resumeAudio.duration || resumeState.currentTime || 0);
-              }, { once: true });
-            }
-          }
-        }
-      }
-
-      document.addEventListener('click', (event) => {
-        if (event.target !== button) {
-          return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        const track = getNextClassicTrack();
-        if (!track) {
-          return;
-        }
-
-        clearMusicPageState();
-        saveClassicRaveState({
-          url: track.url,
-          title: track.title,
-          currentTime: 0,
-          isPlaying: true
-        });
-
-        if (isMobileDevice()) {
-          buildMobileInlinePlayer(track, 0, true);
-          return;
-        }
-
-        const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
+      const openClassicRavePopup = (track, startTime = 0, autoPlay = true) => {
+        const popup = window.open('', 'classicRavePlayer', 'width=360,height=220,left=24,top=24,resizable=yes,scrollbars=no');
 
         if (!popup) {
           window.open(track.url, '_blank', 'noopener,noreferrer');
-          return;
-        }
-
-        if (popup.closed) {
-          window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
           return;
         }
 
@@ -499,10 +283,7 @@
                 display: grid;
                 place-items: center;
                 position: relative;
-                background:
-                  radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%),
-                  radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%),
-                  #050814;
+                background: radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%), #050814;
               }
 
               .player-wrap {
@@ -512,12 +293,7 @@
                 border-radius: 18px;
                 border: 1px solid rgba(77, 243, 255, 0.65);
                 background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-                box-shadow:
-                  inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                  inset 0 -8px 20px rgba(0, 0, 0, 0.35),
-                  0 0 0 1px rgba(77, 243, 255, 0.14),
-                  0 0 18px rgba(77, 243, 255, 0.22),
-                  0 0 24px rgba(255, 79, 216, 0.10);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(77, 243, 255, 0.14), 0 0 18px rgba(77, 243, 255, 0.22), 0 0 24px rgba(255, 79, 216, 0.10);
               }
 
               .player-wrap::before {
@@ -609,103 +385,99 @@
                 text-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
               }
 
-              .vinyl {
-                width: 78px;
-                height: 78px;
-                border-radius: 50%;
-                margin: 8px auto 10px;
-                background:
-                  radial-gradient(circle at center, #0f1629 0 18%, #050814 19% 28%, #0a0f1d 29% 38%, #060a12 39% 100%);
-                border: 2px solid rgba(77, 243, 255, 0.38);
-                box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.04), 0 0 18px rgba(77, 243, 255, 0.22);
-              }
-
-              .mixer-strip {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin: 2px 0 10px;
-                padding: 0 16px;
-              }
-
-              .knob {
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: radial-gradient(circle at 35% 35%, #f4fbff 0%, #98a7d7 18%, #2e355f 58%, #0d1123 100%);
-                border: 1px solid rgba(77, 243, 255, 0.5);
-                box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08), 0 0 10px rgba(77, 243, 255, 0.22);
-              }
-
-              .level-bar {
-                position: relative;
-                height: 8px;
-                margin: 0 18px 10px;
-                border-radius: 10px;
-                background: linear-gradient(90deg, rgba(77, 243, 255, 0.15), rgba(255, 79, 216, 0.10));
-                border: 1px solid rgba(77, 243, 255, 0.18);
-                overflow: hidden;
-              }
-
-              .level-bar::before {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 60%;
-                border-radius: 10px;
-                background: linear-gradient(90deg, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9));
-                box-shadow: 0 0 12px rgba(77, 243, 255, 0.45);
-              }
-
               audio {
                 width: 100%;
-                height: 34px;
-                margin-top: 2px;
-                filter: drop-shadow(0 0 9px rgba(77, 243, 255, 0.25));
-              }
-
-              audio::-webkit-media-controls-panel {
-                background: rgba(18, 24, 42, 0.94);
+                margin-top: 8px;
               }
             </style>
           </head>
           <body>
             <div class="player-wrap">
               <div class="deck-top">
-                <span class="badge">Deck 1</span>
+                <span class="badge">Lucky dip</span>
                 <div class="deck-lights"><span></span><span></span></div>
               </div>
               <h1>Classic Rave Set</h1>
-              <p class="now-playing-label">Now Playing</p>
               <p class="subtext">${track.title}</p>
-              <div class="vinyl" aria-hidden="true"></div>
-              <div class="mixer-strip" aria-hidden="true">
-                <span class="knob"></span>
-                <span class="knob"></span>
-                <span class="knob"></span>
-              </div>
-              <div class="level-bar" aria-hidden="true"></div>
-              <audio id="classicRaveAudio" controls playsinline src="${track.url}"></audio>
+              <p class="now-playing-label">Now Playing</p>
+              <audio controls autoplay src="${track.url}"></audio>
             </div>
           </body>
           </html>`);
-        popup.resizeTo(360, 200);
-        popup.moveTo(24, 24);
         popup.document.close();
 
-        setTimeout(() => {
-          const popupAudio = popup.document.getElementById('classicRaveAudio');
-          if (popupAudio) {
+        const popupAudio = popup.document.querySelector('audio');
+        if (popupAudio) {
+          if (startTime > 0) {
+            popupAudio.addEventListener('loadedmetadata', () => {
+              popupAudio.currentTime = Math.min(startTime, popupAudio.duration || startTime);
+            }, { once: true });
+          }
+
+          const persistState = () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: popupAudio.currentTime,
+              isPlaying: !popupAudio.paused
+            });
+          };
+
+          popupAudio.addEventListener('play', persistState);
+          popupAudio.addEventListener('pause', persistState);
+          popupAudio.addEventListener('timeupdate', persistState);
+          popupAudio.addEventListener('ended', () => {
+            clearClassicRaveState();
+            clearClassicTrackOrder();
+          });
+
+          if (autoPlay) {
             popupAudio.play().catch(() => {
               popupAudio.muted = true;
               popupAudio.play().catch(() => {});
             });
           }
-        }, 250);
+        }
+      };
 
-        popup.focus();
+      const resumeState = getClassicRaveState();
+      const musicPageState = getMusicPageState();
+
+      if (musicPageState && musicPageState.isPlaying) {
+        clearClassicRaveState();
+        clearClassicTrackOrder();
+      } else if (resumeState && resumeState.isPlaying) {
+        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
+
+        if (resumeTrack) {
+          openClassicRavePopup(resumeTrack, resumeState.currentTime || 0, true);
+        } else {
+          clearClassicRaveState();
+        }
+      }
+
+      document.addEventListener('click', (event) => {
+        if (event.target !== button) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const track = getNextClassicTrack();
+        if (!track) {
+          return;
+        }
+
+        clearMusicPageState();
+        saveClassicRaveState({
+          url: track.url,
+          title: track.title,
+          currentTime: 0,
+          isPlaying: true
+        });
+
+        openClassicRavePopup(track, 0, true);
       }, true);
 
       return;
