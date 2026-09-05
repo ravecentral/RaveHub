@@ -90,9 +90,19 @@
     const isMusicPage = path.endsWith('/music.html') || path.endsWith('/music') || path === '/music/';
 
     if (!isMusicPage) {
-      button.textContent = 'Classic Rave Sets';
-      button.title = 'Open Classic Rave Set';
+      button.classList.add('lucky-dip-btn');
+      button.innerHTML = '<span class="play-icon" aria-hidden="true">▶</span>';
+      button.title = 'Lucky dip!';
+      button.setAttribute('aria-label', 'Lucky dip! Press play to listen to some of the best rave sets of all time! Oi Oi!');
       title.parentElement.hidden = true;
+
+      const copy = button.parentElement.querySelector('.lucky-dip-copy');
+      if (!copy) {
+        const promoCopy = document.createElement('span');
+        promoCopy.className = 'lucky-dip-copy';
+        promoCopy.textContent = 'Lucky dip! Press play to listen to some of the best rave sets of all time! Oi Oi!';
+        button.parentElement.insertBefore(promoCopy, button.nextSibling);
+      }
 
       const getClassicRaveState = () => {
         const savedState = sessionStorage.getItem(classicRaveStateKey);

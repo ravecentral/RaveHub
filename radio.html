@@ -33,15 +33,15 @@
 
    <!-- Navigation Band -->
    <nav class="nav-band">
-  <a href="index.html">Home</a>
+  <a href="index.html">Main Room</a>
   <a href="radio.html">Rave Radio</a>
   <a href="events.html">Events</a>
-  <a href="dj-tech.html">DJ &amp; Rave Tech</a>
+  <a href="dj-tech.html">DJ Tech</a>
   <a href="Books.html">Books</a>
-  <a href="music.html">Music</a>
+  <a href="music.html">Buy Music</a>
   <a href="art.html">Art</a>
   <a href="https://en.wikipedia.org/wiki/Rave#" target="_blank">History</a>
-  <a href="https://www.phatmedia.co.uk/" target="_blank" rel="noopener">Rave Flyers</a><a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chat &amp; Games</a><a href="feedback.html">Comments &amp; Feedback</a>
+  <a href="https://www.phatmedia.co.uk/" target="_blank" rel="noopener">Flyers</a><a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chatroom</a><a href="feedback.html">Hit Us Up</a>
 </nav>
 
    <!-- Page Header -->
@@ -55,8 +55,17 @@
        </div>
    </header>
 
+   <!-- Music Player -->
+   <div id="music-player-container">
+     <audio id="rave-audio" preload="none"></audio>
+     <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
+       🎵 Fill My Ears With Rave
+     </button>
+     <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
+   </div>
+
    <!-- RADIO STATION SECTIONS -->
-<section class="section-block home-card">
+<section class="section-block home-card station-kniteforce">
     <img src="images/radio/kniteforceradio.jpg" alt="Kniteforce Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -68,7 +77,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-centreforce">
     <img src="images/radio/centreforceradio.jpg" alt="Centreforce Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -80,7 +89,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-rinse">
     <img src="images/radio/rinse.png" alt="Rinse FM Icon" class="home-icon">
 
     <div class="section-info">
@@ -92,7 +101,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-raiders">
     <img src="images/radio/raidersradio.jpg" alt="Raiders Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -104,7 +113,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-kool">
     <img src="images/radio/koolfm.jpg" alt="Kool London Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -116,7 +125,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-eruption">
     <img src="images/radio/eruptionradio.jpg" alt="Eruption Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -128,7 +137,7 @@
     </div>
 </section>
 
-<section class="section-block home-card">
+<section class="section-block home-card station-cyndicut">
     <img src="images/radio/cyndicutradio.jpg" alt="Cyndicut Radio Icon" class="home-icon">
 
     <div class="section-info">
@@ -150,6 +159,42 @@
     .home-card .section-links {
       justify-content: center !important;
     }
+
+    .section-block.home-card {
+      min-height: 0;
+    }
+
+    .section-block.home-card .home-icon {
+      height: 126px !important;
+      max-height: 126px;
+      object-fit: contain;
+      object-position: center;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+
+    .section-block.home-card .section-info {
+      padding: 12px 14px 14px !important;
+      gap: 8px !important;
+    }
+
+    .section-block.home-card .section-info h2 {
+      font-size: 1rem !important;
+    }
+
+    .section-block.home-card .section-info p {
+      font-size: 0.9rem !important;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .station-kniteforce .home-icon { background: linear-gradient(180deg, #ff7b00 0%, rgba(22, 9, 5, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-centreforce .home-icon { background: linear-gradient(180deg, #24d1a6 0%, rgba(8, 20, 18, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-rinse .home-icon { background: linear-gradient(180deg, #ff2fb8 0%, rgba(30, 8, 24, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-raiders .home-icon { background: linear-gradient(180deg, #ff9d1c 0%, rgba(28, 14, 6, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-kool .home-icon { background: linear-gradient(180deg, #ff3b47 0%, rgba(28, 5, 10, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-eruption .home-icon { background: linear-gradient(180deg, #6728ff 0%, rgba(16, 12, 28, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
+    .station-cyndicut .home-icon { background: linear-gradient(180deg, #ff5a36 0%, rgba(24, 10, 7, 0.96) 100%) !important; padding: 14px; box-sizing: border-box; }
 
     #music-player-container {
       width: 100%;

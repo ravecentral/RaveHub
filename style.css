@@ -161,6 +161,9 @@ body {
   padding: 20px;
   font-size: 0.85rem;
   color: #8888aa;
+  background-image: linear-gradient(rgba(5, 8, 20, 0.58), rgba(2, 3, 10, 0.72)), url("images/Background/Rave Backdrop.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 /* RESPONSIVE */
@@ -533,7 +536,9 @@ body {
 /* RAVE HEADER AND BANNER */
 .rave-header {
   width: 100%;
-  background: radial-gradient(circle at center, #0b1024 0%, #050814 60%, #02030a 100%);
+  background-image: linear-gradient(rgba(5, 8, 20, 0.58), rgba(2, 3, 10, 0.72)), url("images/Background/Rave Backdrop.jpg");
+  background-position: center;
+  background-size: cover;
   border-bottom: 2px solid rgba(77, 243, 255, 0.4);
   box-shadow: 0 0 20px rgba(77, 243, 255, 0.6);
   text-align: center;
