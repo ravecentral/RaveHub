@@ -45,12 +45,75 @@
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
+  const classicTrackOrderKey = 'atr-classic-rave-order';
   const pickRandomClassicTrack = () => {
     if (!classicRaveTracks.length) {
       return null;
     }
 
     return classicRaveTracks[Math.floor(Math.random() * classicRaveTracks.length)];
+  };
+
+  const getClassicTrackOrder = () => {
+    try {
+      const savedOrder = localStorage.getItem(classicTrackOrderKey);
+      if (!savedOrder) {
+        return null;
+      }
+      const parsedOrder = JSON.parse(savedOrder);
+      return Array.isArray(parsedOrder) && parsedOrder.length === classicRaveTracks.length ? parsedOrder : null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const saveClassicTrackOrder = (order) => {
+    try {
+      localStorage.setItem(classicTrackOrderKey, JSON.stringify(order));
+    } catch (error) {}
+  };
+
+  const clearClassicTrackOrder = () => {
+    try {
+      localStorage.removeItem(classicTrackOrderKey);
+    } catch (error) {}
+  };
+
+  const shuffleClassicTrackOrder = () => {
+    const order = classicRaveTracks.map((_, index) => index);
+
+    for (let index = order.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
+    }
+
+    saveClassicTrackOrder(order);
+    return order;
+  };
+
+  const getNextClassicTrack = () => {
+    if (!classicRaveTracks.length) {
+      return null;
+    }
+
+    let order = getClassicTrackOrder();
+    if (!order) {
+      order = shuffleClassicTrackOrder();
+    }
+
+    const activeTrackIndex = order.shift();
+    if (typeof activeTrackIndex !== 'number' || activeTrackIndex < 0 || activeTrackIndex >= classicRaveTracks.length) {
+      const freshOrder = shuffleClassicTrackOrder();
+      const fallbackIndex = freshOrder.shift();
+      if (typeof fallbackIndex !== 'number') {
+        return null;
+      }
+      saveClassicTrackOrder(freshOrder);
+      return classicRaveTracks[fallbackIndex];
+    }
+
+    saveClassicTrackOrder(order);
+    return classicRaveTracks[activeTrackIndex];
   };
   const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
@@ -143,6 +206,8 @@
         sessionStorage.removeItem(playerStateKey);
       } catch (error) {}
     };
+
+    clearMusicPageState();
 
     const path = window.location.pathname.toLowerCase();
     const isMusicPage = path.endsWith('/music.html') || path.endsWith('/music') || path === '/music/';
@@ -284,7 +349,10 @@
           inlineAudio.addEventListener('play', persistState);
           inlineAudio.addEventListener('pause', persistState);
           inlineAudio.addEventListener('timeupdate', persistState);
-          inlineAudio.addEventListener('ended', clearClassicRaveState);
+          inlineAudio.addEventListener('ended', () => {
+            clearClassicRaveState();
+            clearClassicTrackOrder();
+          });
 
           if (autoPlay) {
             inlineAudio.play().catch(() => {
@@ -300,6 +368,7 @@
 
       if (musicPageState && musicPageState.isPlaying) {
         clearClassicRaveState();
+        clearClassicTrackOrder();
       } else if (resumeState && resumeState.isPlaying) {
         const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
 
@@ -367,7 +436,7 @@
         event.preventDefault();
         event.stopPropagation();
 
-        const track = pickRandomClassicTrack();
+        const track = getNextClassicTrack();
         if (!track) {
           return;
         }
@@ -657,6 +726,11 @@
       return order;
     };
 
+    const resetToRandomTrackOrder = () => {
+      playOrder = shuffleTracks();
+      currentOrderIndex = 0;
+    };
+
     const getSavedState = () => {
       const savedState = sessionStorage.getItem(playerStateKey);
       return savedState ? JSON.parse(savedState) : null;
@@ -688,7 +762,7 @@
       playOrder = savedState.playOrder;
       currentOrderIndex = savedState.currentOrderIndex;
     } else {
-      playOrder = shuffleTracks();
+      resetToRandomTrackOrder();
     }
 
     const setStoppedState = () => {
@@ -706,6 +780,7 @@
 
       clearClassicRaveState();
       audio.src = track.path;
+      saveState();
       audio.addEventListener('loadedmetadata', () => {
         audio.currentTime = Math.min(startTime, audio.duration || startTime);
       }, { once: true });
@@ -722,6 +797,7 @@
 
       if (audio.paused) {
         clearClassicRaveState();
+        resetToRandomTrackOrder();
         playCurrentTrack();
       } else {
         audio.pause();
@@ -739,13 +815,7 @@
       }
 
       event.stopPropagation();
-      currentOrderIndex += 1;
-
-      if (currentOrderIndex >= playOrder.length) {
-        playOrder = shuffleTracks();
-        currentOrderIndex = 0;
-      }
-
+      resetToRandomTrackOrder();
       playCurrentTrack();
     }, true);
 
