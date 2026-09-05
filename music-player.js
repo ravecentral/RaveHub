@@ -26,6 +26,26 @@
     {
       url: 'https://www.dropbox.com/scl/fi/sp9ahxgu9i45mzlws9mgi/dj-swan-e-with-mc-mc-world-dance-2nd-april-1994.m4a?rlkey=9xv5t6mqg2yofzqpcrmr8kb27&st=85bsh0of&raw=1',
       title: 'DJ Swan-E with MC MC · World Dance 2nd April 1994'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/bhtgvb2xpl97dbor5lj6g/dj-sy-obsession-the-third-dimension-30th-october-1992.m4a?rlkey=4om6fxeq3gjtbm6o8o2uvrkm7&st=bva9mmgt&raw=1',
+      title: 'DJ Sy · Obsession — The Third Dimension · 30th October 1992'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/bo7rysd15wfwzl17nlge8/dj-hype-w-magika-stixman-helter-skelter-sign-of-the-times-o2-birmingham-04.05.97.m4a?rlkey=0dqn0yxejuyakx0gunpzkp6jk&st=nrn0rcgf&raw=1',
+      title: 'DJ Hype w/ Magika Stixman · Helter Skelter · Sign of the Times · O2 Birmingham · 04.05.97'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/mwsywmmjpdx3dcjtf98v2/dj-sy-dreamscape-10-get-smashed-8th-april-1994.m4a?rlkey=rvja19e78pwmx850ne3xen1ry&st=q1321s0e&raw=1',
+      title: 'DJ Sy · Dreamscape 10 · Get Smashed · 8th April 1994'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/yktnxk2ficp0n4zjyret9/slipmatt-live-fantazia-littlecote-house-nye-31-12-1992.m4a?rlkey=uy3cgge8alhqbif4zhmnko5g1&st=zfemeexg&raw=1',
+      title: 'Slipmatt · Live Fantazia, Littlecote House NYE · 31.12.1992'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/ix97ari6xdcwze4kjas8e/ratpack-fantazia-one-step-beyond-castle-donnington-25-7-1992.m4a?rlkey=f7zh914g90jj02knsdcw0tmty&st=2wfjry3p&raw=1',
+      title: 'Ratpack · Fantazia · One Step Beyond · Castle Donnington · 25.7.1992'
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
@@ -105,16 +125,24 @@
       }
 
       const getClassicRaveState = () => {
-        const savedState = sessionStorage.getItem(classicRaveStateKey);
-        return savedState ? JSON.parse(savedState) : null;
+        try {
+          const savedState = localStorage.getItem(classicRaveStateKey);
+          return savedState ? JSON.parse(savedState) : null;
+        } catch (error) {
+          return null;
+        }
       };
 
       const saveClassicRaveState = (state) => {
-        sessionStorage.setItem(classicRaveStateKey, JSON.stringify(state));
+        try {
+          localStorage.setItem(classicRaveStateKey, JSON.stringify(state));
+        } catch (error) {}
       };
 
       const clearClassicRaveState = () => {
-        sessionStorage.removeItem(classicRaveStateKey);
+        try {
+          localStorage.removeItem(classicRaveStateKey);
+        } catch (error) {}
       };
 
       const buildMobileInlinePlayer = (track, startTime = 0, autoPlay = true) => {
@@ -201,6 +229,13 @@
           clearClassicRaveState();
         });
 
+        saveClassicRaveState({
+          url: track.url,
+          title: track.title,
+          currentTime: startTime,
+          isPlaying: true
+        });
+
         document.body.appendChild(inlinePlayer);
 
         const inlineAudio = inlinePlayer.querySelector('audio');
@@ -235,16 +270,65 @@
         }
       };
 
-      if (isMobileDevice()) {
-        const resumeState = getClassicRaveState();
+      const resumeState = getClassicRaveState();
 
-        if (resumeState && resumeState.isPlaying) {
-          const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url) || {
-            url: resumeState.url,
-            title: resumeState.title
-          };
+      if (resumeState && resumeState.isPlaying) {
+        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url) || {
+          url: resumeState.url,
+          title: resumeState.title
+        };
 
+        if (isMobileDevice()) {
           buildMobileInlinePlayer(resumeTrack, resumeState.currentTime || 0, true);
+        } else {
+          const popup = window.open('', 'classicRavePlayer', 'width=360,height=200,left=24,top=24,resizable=yes,scrollbars=no');
+          if (popup) {
+            popup.document.title = 'Classic Rave Set';
+            popup.document.write(`<!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <style>
+                  :root { --bg: #050814; --panel: rgba(12, 18, 36, 0.96); --panel-2: rgba(20, 28, 52, 0.96); --line: rgba(77, 243, 255, 0.65); --cyan: #4df3ff; --pink: #ff4fd8; --text: #f5f7ff; }
+                  * { box-sizing: border-box; }
+                  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; font-family: Arial, sans-serif; background: linear-gradient(135deg, #090d1c 0%, #03060e 100%); color: var(--text); }
+                  body { display: grid; place-items: center; position: relative; background: radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%), #050814; }
+                  .player-wrap { position: relative; width: 330px; padding: 12px 12px 10px; border-radius: 18px; border: 1px solid rgba(77, 243, 255, 0.65); background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(77, 243, 255, 0.14), 0 0 18px rgba(77, 243, 255, 0.22), 0 0 24px rgba(255, 79, 216, 0.10); }
+                  .player-wrap::before { content: ""; position: absolute; inset: 8px; border-radius: 12px; border: 1px solid rgba(255, 79, 216, 0.22); pointer-events: none; }
+                  .player-wrap::after { content: ""; position: absolute; left: 14px; right: 14px; top: 42px; height: 1px; background: linear-gradient(90deg, transparent, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9), transparent); box-shadow: 0 0 12px rgba(77, 243, 255, 0.4); }
+                  .deck-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding: 0 2px; }
+                  .badge { font-size: 0.58rem; letter-spacing: 0.18em; color: var(--cyan); text-transform: uppercase; text-shadow: 0 0 10px rgba(77, 243, 255, 0.75); }
+                  .deck-lights { display: flex; gap: 6px; align-items: center; }
+                  .deck-lights span { width: 8px; height: 8px; border-radius: 50%; display: block; background: var(--cyan); box-shadow: 0 0 10px rgba(77, 243, 255, 0.8); }
+                  .deck-lights span:nth-child(2) { background: var(--pink); box-shadow: 0 0 10px rgba(255, 79, 216, 0.8); }
+                  h1 { margin: 0 0 6px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; text-align: center; color: var(--cyan); text-shadow: 0 0 12px rgba(77, 243, 255, 0.8); }
+                  .subtext { margin: 0 0 8px; text-align: center; color: #dbe6ff; font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 8px; }
+                  .now-playing-label { margin: 0 0 2px; text-align: center; color: var(--pink); font-size: 0.5rem; letter-spacing: 0.24em; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 79, 216, 0.7); }
+                  audio { width: 100%; margin-top: 8px; }
+                </style>
+              </head>
+              <body>
+                <div class="player-wrap">
+                  <div class="deck-top">
+                    <span class="badge">Lucky dip</span>
+                    <div class="deck-lights"><span></span><span></span></div>
+                  </div>
+                  <h1>Classic Rave Set</h1>
+                  <p class="subtext">${resumeTrack.title}</p>
+                  <p class="now-playing-label">Now Playing</p>
+                  <audio controls autoplay src="${resumeTrack.url}"></audio>
+                </div>
+              </body>
+              </html>`);
+            popup.document.close();
+            const resumeAudio = popup.document.querySelector('audio');
+            if (resumeAudio && (resumeState.currentTime || 0) > 0) {
+              resumeAudio.addEventListener('loadedmetadata', () => {
+                resumeAudio.currentTime = Math.min(resumeState.currentTime || 0, resumeAudio.duration || resumeState.currentTime || 0);
+              }, { once: true });
+            }
+          }
         }
       }
 
@@ -257,6 +341,12 @@
         event.stopPropagation();
 
         const track = pickRandomClassicTrack();
+        saveClassicRaveState({
+          url: track.url,
+          title: track.title,
+          currentTime: 0,
+          isPlaying: true
+        });
 
         if (isMobileDevice()) {
           buildMobileInlinePlayer(track, 0, true);
