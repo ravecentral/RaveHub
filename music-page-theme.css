@@ -361,8 +361,11 @@ main:has(> .product-card) {
   .store-image,
   .artist-image,
   .product-image,
-  .gear-card > img {
-    height: 110px !important;
+  .gear-card > img,
+  .region-card-image,
+  .promoter-logo {
+    height: 126px !important;
+    min-height: 126px !important;
   }
 
   .section-info,
@@ -370,8 +373,46 @@ main:has(> .product-card) {
   .artist-body,
   .book-info,
   .product-card > :not(.product-image) {
+    min-height: 110px;
+    max-height: 126px;
+    overflow: hidden;
     padding: 10px 12px 12px !important;
-    gap: 6px !important;
+    gap: 4px !important;
+  }
+
+  .section-info p,
+  .store-body p,
+  .artist-body p,
+  .book-info p,
+  .product-card p,
+  .region-card-body p,
+  .event-card-body p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  .region-card-body,
+  .event-card-body {
+    min-height: 110px;
+    max-height: 126px;
+    overflow: hidden;
+    padding: 10px 12px !important;
+  }
+
+  .section-info h2,
+  .store-name,
+  .artist-name,
+  .book-info h2,
+  .product-card h2,
+  .region-card h2,
+  .event-card h2,
+  .gear-card h2 {
+    font-size: 0.78rem !important;
+    line-height: 1.1;
   }
 
   .nav-band {
