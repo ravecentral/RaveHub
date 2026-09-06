@@ -610,7 +610,8 @@
 
               .player-controls {
                 display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: 1fr auto 1fr;
+                align-items: center;
                 gap: 8px;
                 margin-top: 10px;
               }
@@ -630,9 +631,25 @@
                 cursor: pointer;
               }
 
+              .player-control.prev,
+              .player-control.next {
+                width: 100%;
+                max-width: 90px;
+              }
+
+              .player-control.prev {
+                justify-self: start;
+              }
+
               .player-control.stop {
+                justify-self: center;
+                min-width: 82px;
                 border-color: rgba(255, 79, 216, 0.7);
                 background: rgba(255, 79, 216, 0.09);
+              }
+
+              .player-control.next {
+                justify-self: end;
               }
 
               audio {
