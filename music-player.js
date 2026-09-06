@@ -315,6 +315,31 @@
               max-height: 40px;
               display: block;
             }
+
+            .classic-rave-mini-controls {
+              display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 6px;
+              margin-top: 8px;
+            }
+
+            .classic-rave-mini-control {
+              appearance: none;
+              border: 1px solid rgba(77, 243, 255, 0.7);
+              background: rgba(77, 243, 255, 0.09);
+              color: #f5f7ff;
+              border-radius: 10px;
+              padding: 7px 6px;
+              font-size: 0.58rem;
+              font-weight: 700;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+            }
+
+            .classic-rave-mini-control.stop {
+              background: rgba(255, 79, 216, 0.12);
+              border-color: rgba(255, 79, 216, 0.7);
+            }
           </style>
           <div class="classic-rave-mini-header">
             <div class="classic-rave-mini-labels">
@@ -324,6 +349,11 @@
             <button type="button" class="classic-rave-mini-close" aria-label="Close classic rave player">×</button>
           </div>
           <audio controls playsinline ${autoPlay ? 'autoplay' : ''} src="${track.url}"></audio>
+          <div class="classic-rave-mini-controls">
+            <button type="button" class="classic-rave-mini-control prev" aria-label="Previous track">⏮ Prev</button>
+            <button type="button" class="classic-rave-mini-control stop" aria-label="Stop playback">Stop</button>
+            <button type="button" class="classic-rave-mini-control next" aria-label="Next track">Next ⏭</button>
+          </div>
         `;
 
         const closeButton = miniPlayer.querySelector('.classic-rave-mini-close');
@@ -336,6 +366,66 @@
         document.body.appendChild(miniPlayer);
 
         const miniAudio = miniPlayer.querySelector('audio');
+        const miniTrackTitle = miniPlayer.querySelector('.classic-rave-mini-title');
+        const miniPrevButton = miniPlayer.querySelector('.classic-rave-mini-control.prev');
+        const miniNextButton = miniPlayer.querySelector('.classic-rave-mini-control.next');
+        const miniStopButton = miniPlayer.querySelector('.classic-rave-mini-control.stop');
+
+        const updateMiniTrack = (nextTrack, shouldAutoplay = true) => {
+          track = nextTrack;
+          if (miniTrackTitle) {
+            miniTrackTitle.textContent = nextTrack.title;
+          }
+
+          if (miniAudio) {
+            miniAudio.src = nextTrack.url;
+            miniAudio.load();
+          }
+
+          if (shouldAutoplay && miniAudio) {
+            miniAudio.play().catch(() => {
+              miniAudio.muted = true;
+              miniAudio.play().catch(() => {});
+            });
+          }
+
+          saveClassicRaveState({
+            url: nextTrack.url,
+            title: nextTrack.title,
+            currentTime: 0,
+            isPlaying: shouldAutoplay
+          });
+        };
+
+        if (miniPrevButton) {
+          miniPrevButton.addEventListener('click', () => {
+            const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
+            const previousIndex = (currentIndex >= 0 ? currentIndex : 0) - 1;
+            const targetIndex = (previousIndex + classicRaveTracks.length) % classicRaveTracks.length;
+            updateMiniTrack(classicRaveTracks[targetIndex], true);
+          });
+        }
+
+        if (miniNextButton) {
+          miniNextButton.addEventListener('click', () => {
+            const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
+            const nextIndex = (currentIndex >= 0 ? currentIndex : 0) + 1;
+            updateMiniTrack(classicRaveTracks[nextIndex % classicRaveTracks.length], true);
+          });
+        }
+
+        if (miniStopButton && miniAudio) {
+          miniStopButton.addEventListener('click', () => {
+            miniAudio.pause();
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: miniAudio.currentTime,
+              isPlaying: false
+            });
+          });
+        }
+
         if (miniAudio) {
           const persistState = () => {
             saveClassicRaveState({
@@ -518,6 +608,33 @@
                 text-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
               }
 
+              .player-controls {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+                margin-top: 10px;
+              }
+
+              .player-control {
+                appearance: none;
+                border: 1px solid rgba(77, 243, 255, 0.7);
+                background: rgba(77, 243, 255, 0.08);
+                color: var(--text);
+                border-radius: 10px;
+                padding: 8px 6px;
+                font: inherit;
+                font-size: 0.54rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                cursor: pointer;
+              }
+
+              .player-control.stop {
+                border-color: rgba(255, 79, 216, 0.7);
+                background: rgba(255, 79, 216, 0.09);
+              }
+
               audio {
                 width: 100%;
                 margin-top: 8px;
@@ -534,12 +651,80 @@
               <p class="subtext">${track.title}</p>
               <p class="now-playing-label">Now Playing</p>
               <audio controls autoplay src="${track.url}"></audio>
+              <div class="player-controls">
+                <button type="button" class="player-control prev" aria-label="Previous track">⏮ Prev</button>
+                <button type="button" class="player-control stop" aria-label="Stop playback">Stop</button>
+                <button type="button" class="player-control next" aria-label="Next track">Next ⏭</button>
+              </div>
             </div>
           </body>
           </html>`);
         popup.document.close();
 
         const popupAudio = popup.document.querySelector('audio');
+        const updatePopupTrack = (nextTrack, shouldAutoplay = true) => {
+          track = nextTrack;
+          const popupTitle = popup.document.querySelector('.subtext');
+          if (popupTitle) {
+            popupTitle.textContent = nextTrack.title;
+          }
+          popup.document.title = `${nextTrack.title} · Classic Rave Set`;
+
+          if (popupAudio) {
+            popupAudio.src = nextTrack.url;
+            popupAudio.load();
+          }
+
+          if (shouldAutoplay && popupAudio) {
+            popupAudio.play().catch(() => {
+              popupAudio.muted = true;
+              popupAudio.play().catch(() => {});
+            });
+          }
+
+          saveClassicRaveState({
+            url: nextTrack.url,
+            title: nextTrack.title,
+            currentTime: 0,
+            isPlaying: shouldAutoplay
+          });
+        };
+
+        const popupPrevButton = popup.document.querySelector('.player-control.prev');
+        const popupNextButton = popup.document.querySelector('.player-control.next');
+        const popupStopButton = popup.document.querySelector('.player-control.stop');
+
+        const jumpPopupTrack = (direction) => {
+          if (!classicRaveTracks.length) {
+            return;
+          }
+
+          const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
+          const safeIndex = currentIndex >= 0 ? currentIndex : 0;
+          const nextIndex = (safeIndex + direction + classicRaveTracks.length) % classicRaveTracks.length;
+          updatePopupTrack(classicRaveTracks[nextIndex], true);
+        };
+
+        if (popupPrevButton) {
+          popupPrevButton.addEventListener('click', () => jumpPopupTrack(-1));
+        }
+
+        if (popupNextButton) {
+          popupNextButton.addEventListener('click', () => jumpPopupTrack(1));
+        }
+
+        if (popupStopButton && popupAudio) {
+          popupStopButton.addEventListener('click', () => {
+            popupAudio.pause();
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: popupAudio.currentTime,
+              isPlaying: false
+            });
+          });
+        }
+
         if (popupAudio) {
           popupAudio.addEventListener('play', () => {
             saveClassicRaveState({
