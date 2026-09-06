@@ -259,6 +259,11 @@ body {
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
+  background-image: linear-gradient(rgba(2, 6, 17, 0.55), rgba(2, 6, 17, 0.72)), url("images/Background/Rave Background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.42;
 }
 
 .laser {
