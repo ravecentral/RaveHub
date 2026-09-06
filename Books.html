@@ -86,6 +86,7 @@
 
     </div>
 
+    <main class="page book-grid">
     <section id="raveart" class="section-block book-card">
     <img src="images/books/raveart.jpg" alt="Rave Art Book Cover" class="book-cover">
     <div class="book-info">
@@ -296,8 +297,9 @@
         </div>
     </div>
 </section>
+</main>
 
-    <style>
+<style>
       .section-block.book-card {
         max-width: 900px;
         margin: 22px auto;
@@ -320,6 +322,8 @@
       .book-info {
         flex: 1;
         min-width: 0;
+        max-height: none !important;
+        overflow: visible !important;
       }
 
       .book-info h2 {
@@ -331,6 +335,12 @@
       .book-info p {
         margin: 8px 0;
         line-height: 1.5;
+        max-height: none !important;
+        overflow: visible !important;
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        -webkit-box-orient: initial !important;
+        white-space: normal !important;
       }
 
       .section-links {
@@ -347,6 +357,16 @@
         .book-cover {
           width: 170px;
           margin: 0 auto;
+        }
+
+        .book-info {
+          max-height: none !important;
+          overflow: visible !important;
+        }
+
+        .book-info p {
+          font-size: 0.8rem;
+          line-height: 1.4;
         }
 
         .section-links {

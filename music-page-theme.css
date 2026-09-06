@@ -373,18 +373,20 @@ main:has(> .product-card) {
     min-height: 126px !important;
   }
 
+  .home-card .section-info,
   .section-info,
   .store-body,
   .artist-body,
   .book-info,
   .product-card > :not(.product-image) {
     min-height: 90px;
-    max-height: 108px;
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
     padding: 8px 10px 10px !important;
     gap: 2px !important;
   }
 
+  .home-card .section-info p,
   .section-info p,
   .store-body p,
   .artist-body p,
@@ -392,10 +394,11 @@ main:has(> .product-card) {
   .product-card p,
   .region-card-body p,
   .event-card-body p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+    display: block;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+    white-space: normal;
     font-size: 0.68rem;
     line-height: 1.18;
     margin: 0;
@@ -600,6 +603,12 @@ button:active,
   text-align: center;
 }
 
+.footer p,
+.atr-footer p,
+footer p {
+  display: none !important;
+}
+
 .atr-footer {
   width: 100%;
   margin-top: 32px;
@@ -664,13 +673,33 @@ button:active,
   }
 
   #music-player-container {
-    gap: 8px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 10px;
     padding: 10px 12px;
   }
 
   .fill-ears-btn {
     width: 100%;
     max-width: 320px;
+  }
+
+  .fill-ears-btn.lucky-dip-btn {
+    flex: 0 0 auto !important;
+    width: 42px !important;
+    min-width: 42px !important;
+    max-width: 42px !important;
+    margin: 0 !important;
+  }
+
+  .lucky-dip-copy {
+    flex: 1 1 auto;
+    max-width: none;
+    min-width: 0;
+    font-size: 0.72rem;
+    line-height: 1.2;
   }
 
   .now-playing {
