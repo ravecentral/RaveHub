@@ -686,6 +686,37 @@ body {
   body:has(> .book-card) > :not(.book-card) {
     grid-column: 1 / -1;
   }
+
+  .section-info,
+  .store-body,
+  .artist-body,
+  .book-info,
+  .product-card > :not(.product-image),
+  .region-card-body,
+  .event-card-body {
+    min-height: 126px;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .section-info p,
+  .store-body p,
+  .artist-body p,
+  .book-info p,
+  .product-card p,
+  .region-card-body p,
+  .event-card-body p {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  .book-cover {
+    width: 100% !important;
+    height: 126px !important;
+    min-height: 126px !important;
+    object-fit: contain;
+  }
 }
 
 body > .rave-header {
