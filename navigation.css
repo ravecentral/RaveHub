@@ -53,6 +53,23 @@
   transform: translateY(-2px);
 }
 
+@media (min-width: 769px) {
+  .nav-band {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 3px;
+    padding: 6px 8px;
+  }
+
+  .nav-band a {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 5px 6px;
+    font-size: 0.68rem;
+    text-align: center;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-band {
     justify-content: center;
