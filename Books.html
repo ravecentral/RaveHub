@@ -24,6 +24,10 @@
   <link rel="stylesheet" href="navigation.css">
   <link rel="stylesheet" href="music-page-theme.css">
   <script src="music-player.js" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050814">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/app-icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/app-icons/apple-touch-icon.png">
 </head>
 
 <body>
@@ -310,6 +314,10 @@
         box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.08), 0 18px 28px rgba(0, 0, 0, 0.28);
       }
 
+      .section-block.book-card::before {
+        display: none !important;
+      }
+
       .book-card {
         display: flex;
         align-items: flex-start;
@@ -323,6 +331,8 @@
         height: auto;
         border-radius: 12px;
         flex-shrink: 0;
+        background: rgba(10, 10, 30, 0.65) !important;
+        box-shadow: 0 0 18px rgba(255, 0, 255, 0.2) !important;
       }
 
       .book-info {

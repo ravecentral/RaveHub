@@ -30,6 +30,8 @@
 
 .rave-header.sticky-site-header + .nav-band {
   top: min(267.66px, calc(28.94vw + 46px));
+  transform: translateY(-12px);
+  margin-bottom: 0;
 }
 
 .nav-band a {

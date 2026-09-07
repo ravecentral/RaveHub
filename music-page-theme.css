@@ -592,6 +592,73 @@ button:active,
   max-width: 420px;
 }
 
+.new-music-controls {
+  display: contents;
+}
+
+.new-music-button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(48px, 1fr));
+  gap: 4px;
+  width: 196px;
+  flex: 0 0 196px;
+}
+
+.new-music-button-grid > .fill-ears-btn {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 30px !important;
+  padding: 4px 7px !important;
+  border-radius: 8px !important;
+  font-size: 0.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+}
+
+.new-music-button-grid > .new-music-controls > .new-music-control {
+  min-width: 0;
+  width: 100% !important;
+  height: 30px;
+}
+
+.new-music-button-grid > .new-music-controls > .new-music-control.prev {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.new-music-button-grid > .new-music-controls > .new-music-control.stop {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.new-music-button-grid > .new-music-controls > .new-music-control.next {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.new-music-control {
+  appearance: none;
+  border: 1px solid rgba(77, 243, 255, 0.7);
+  background: rgba(77, 243, 255, 0.09);
+  color: #f5f7ff;
+  border-radius: 7px;
+  padding: 5px 4px;
+  font-size: 0.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.new-music-control.stop {
+  border-color: rgba(255, 79, 216, 0.7);
+  background: rgba(255, 79, 216, 0.12);
+}
+
 .promo-message {
   margin-bottom: 0 !important;
 }
@@ -789,10 +856,14 @@ body > #music-player-container {
   order: 3;
 }
 
+body > .promo-message {
+  order: 4;
+}
+
 body > .hero,
 body > main,
 body > .page,
 body > footer,
 body > .site-footer {
-  order: 4;
+  order: 5;
 }

@@ -223,6 +223,22 @@
       title.parentElement.hidden = false;
       button.classList.remove('lucky-dip-btn');
       button.parentElement.querySelector('.lucky-dip-copy')?.remove();
+      if (!button.parentElement.querySelector('.new-music-controls')) {
+        const controls = document.createElement('div');
+        controls.className = 'new-music-controls';
+        controls.innerHTML = `
+          <button type="button" class="new-music-control prev" aria-label="Previous track">⏮ Prev</button>
+          <button type="button" class="new-music-control stop" aria-label="Stop playback">Stop</button>
+          <button type="button" class="new-music-control next" aria-label="Next track">Next ⏭</button>
+        `;
+        button.parentElement.appendChild(controls);
+      }
+      if (!button.parentElement.querySelector('.new-music-button-grid')) {
+        const buttonGrid = document.createElement('div');
+        buttonGrid.className = 'new-music-button-grid';
+        button.parentElement.insertBefore(buttonGrid, button);
+        buttonGrid.append(button, button.parentElement.querySelector('.new-music-controls'));
+      }
     } else {
       clearMusicPageState();
       if (audio.src) {
@@ -911,6 +927,25 @@
       }, { once: true });
       audio.play().then(() => setPlayingState(track)).catch(setStoppedState);
     };
+
+    const newMusicControls = button.parentElement.querySelector('.new-music-controls');
+    const previousMusicButton = newMusicControls?.querySelector('.new-music-control.prev');
+    const stopMusicButton = newMusicControls?.querySelector('.new-music-control.stop');
+    const nextMusicButton = newMusicControls?.querySelector('.new-music-control.next');
+
+    const skipToTrack = (direction) => {
+      currentOrderIndex = (currentOrderIndex + direction + playOrder.length) % playOrder.length;
+      playCurrentTrack();
+    };
+
+    previousMusicButton?.addEventListener('click', () => skipToTrack(-1));
+    nextMusicButton?.addEventListener('click', () => skipToTrack(1));
+    stopMusicButton?.addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      saveState();
+      setStoppedState();
+    });
 
     document.addEventListener('click', (event) => {
       const clickedButton = event.target && event.target.closest ? event.target.closest('#fill-ears-btn') : null;
