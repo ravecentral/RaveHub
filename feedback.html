@@ -55,7 +55,7 @@
    <nav class="nav-band">
   <a href="index.html">Main Room</a>
   <a href="radio.html">Rave Radio</a>
-  <a href="events.html">Events</a>
+  <a href="events.html">Events</a><a href="holidays.html">Holidays</a>
   <a href="dj-tech.html">DJ Tech</a>
   <a href="Books.html">Books</a>
   <a href="music.html">Buy Music</a>
@@ -75,6 +75,7 @@
        </div>
    </header>
 
+   <main class="feedback-page">
    <!-- Feedback Form -->
    <section class="section-block feedback-block">
        <form
@@ -112,7 +113,8 @@
            <p class="feedback-note">Submitting sends your feedback straight to <strong>info@alltingsrave.com</strong> &mdash; no email app required.</p>
        </form>
    </section>
-
+   </main>
+ 
    <!-- Hidden static form so Netlify's build bots can detect the field set (Netlify Forms requirement) -->
    <form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
        <input type="text" name="Name">
@@ -127,8 +129,15 @@
     </footer>
 
     <style>
+    .feedback-page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 16px 30px;
+    }
+
     .feedback-block {
       max-width: 600px;
+      margin: 0 auto;
     }
 
     .feedback-form {
