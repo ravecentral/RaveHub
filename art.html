@@ -101,10 +101,12 @@
     }
 
     .artist-body {
+      min-width: 0;
       padding: 14px 16px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      overflow: visible;
     }
 
     .artist-name {
@@ -117,12 +119,16 @@
     .artist-tagline {
       font-size: 0.85rem;
       color: var(--accent);
+      overflow-wrap: anywhere;
     }
 
     .artist-bio {
       font-size: 0.85rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.5;
+      overflow: visible;
+      overflow-wrap: anywhere;
+      white-space: normal;
     }
 
     .artist-links {
@@ -322,7 +328,21 @@
   <meta name="theme-color" content="#050814">
   <link rel="icon" type="image/png" sizes="32x32" href="images/app-icons/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/app-icons/apple-touch-icon.png">
-</head>
+  <style>
+    @media (max-width: 600px) {
+      .artist-body {
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .artist-body p {
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        overflow: visible !important;
+        white-space: normal !important;
+      }
+    }
+  </style></head>
 <body>
   <!-- ðŸ”¥ All Tings Rave Header Banner -->
   <header class="rave-header">
