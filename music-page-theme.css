@@ -845,33 +845,6 @@ body {
     grid-column: 1 / -1;
   }
 
-  .section-info,
-  .store-body,
-  .artist-body,
-  .book-info,
-  .product-card > :not(.product-image),
-  .region-card-body,
-  .event-card-body {
-    min-height: 90px;
-    max-height: 108px;
-    overflow: hidden;
-    padding: 8px 10px 10px !important;
-  }
-
-  .section-info p,
-  .store-body p,
-  .artist-body p,
-  .book-info p,
-  .product-card p,
-  .region-card-body p,
-  .event-card-body p {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    font-size: 0.68rem;
-    line-height: 1.18;
-  }
-
   .book-cover {
     width: 100% !important;
     height: 118px !important;
