@@ -62,6 +62,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding: 18px;
 }
 
@@ -76,7 +78,7 @@
 
 .region-card .enter-link,
 .ticket-link {
-  align-self: flex-start;
+  align-self: center;
   margin-top: auto;
   padding: 9px 16px;
   border: 1px solid #4df3ff;
