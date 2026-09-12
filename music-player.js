@@ -387,8 +387,15 @@
         const miniNextButton = miniPlayer.querySelector('.classic-rave-mini-control.next');
         const miniStopButton = miniPlayer.querySelector('.classic-rave-mini-control.stop');
 
+        // Tracks whether playback should be considered "on" for persistence purposes.
+        // Only explicit user actions (Stop button, track ending) or a fresh play call
+        // should change this - NOT the implicit 'pause' event browsers fire on media
+        // elements while a page is being navigated away from/unloaded.
+        let shouldBePlaying = autoPlay;
+
         const updateMiniTrack = (nextTrack, shouldAutoplay = true) => {
           track = nextTrack;
+          shouldBePlaying = shouldAutoplay;
           if (miniTrackTitle) {
             miniTrackTitle.textContent = nextTrack.title;
           }
@@ -432,6 +439,7 @@
 
         if (miniStopButton && miniAudio) {
           miniStopButton.addEventListener('click', () => {
+            shouldBePlaying = false;
             miniAudio.pause();
             saveClassicRaveState({
               url: track.url,
@@ -443,22 +451,38 @@
         }
 
         if (miniAudio) {
-          const persistState = () => {
+          miniAudio.addEventListener('play', () => {
+            shouldBePlaying = true;
             saveClassicRaveState({
               url: track.url,
               title: track.title,
               currentTime: miniAudio.currentTime,
-              isPlaying: !miniAudio.paused
+              isPlaying: true
             });
-          };
+          });
 
-          miniAudio.addEventListener('play', persistState);
-          miniAudio.addEventListener('pause', persistState);
-          miniAudio.addEventListener('timeupdate', persistState);
+          miniAudio.addEventListener('timeupdate', () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: miniAudio.currentTime,
+              isPlaying: shouldBePlaying
+            });
+          });
+
           miniAudio.addEventListener('ended', () => {
             miniPlayer.remove();
             clearClassicRaveState();
             clearClassicTrackOrder();
+          });
+
+          window.addEventListener('pagehide', () => {
+            saveClassicRaveState({
+              url: track.url,
+              title: track.title,
+              currentTime: miniAudio.currentTime,
+              isPlaying: shouldBePlaying
+            });
           });
 
           if (startTime > 0) {
