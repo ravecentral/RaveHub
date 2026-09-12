@@ -24,6 +24,17 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="navigation.css">
   <link rel="stylesheet" href="music-page-theme.css">
+  <style>
+    #holidays-grid {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+    }
+    #holidays-grid .home-card {
+      flex: 1 1 260px;
+      max-width: 280px;
+    }
+  </style>
   <script src="music-player.js" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#050814">
@@ -77,20 +88,9 @@
     <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
   </div>
 
-  <main class="home-card-grid">
-    <section id="rave-holidays" class="section-block home-card">
-      <img src="images/index/events.png" alt="Rave Holidays icon" class="home-icon">
-      <div class="section-info">
-        <h2>Rave Holidays</h2>
-        <p><strong>Review:</strong> A pure beach-and-bass escape for fans who want full-on dance energy with a proper holiday feeling.</p>
-        <div class="section-links">
-          <a href="https://www.raveholidays.com/" target="_blank" rel="noopener">Visit website</a>
-        </div>
-      </div>
-    </section>
-
+  <main class="home-card-grid" id="holidays-grid">
     <section id="hospitality" class="section-block home-card">
-      <img src="images/index/events.png" alt="Hospitality icon" class="home-icon">
+      <img src="images/holidays/hospitality.png" alt="Hospitality icon" class="home-icon">
       <div class="section-info">
         <h2>Hospitality</h2>
         <p><strong>Review:</strong> One of the great destination festivals for dance-floor devotion, big names and high-sun energy.</p>
@@ -112,7 +112,7 @@
     </section>
 
     <section id="housework" class="section-block home-card">
-      <img src="images/holidays/housework.jpg" alt="Housework icon" class="home-icon">
+      <img src="images/holidays/housework.svg" alt="Housework icon" class="home-icon">
       <div class="section-info">
         <h2>Housework</h2>
         <p><strong>Review:</strong> A warm-weather, house-heavy escape for people who want proper club atmosphere with festival scale.</p>
@@ -122,19 +122,8 @@
       </div>
     </section>
 
-    <section id="unity-in-the-sun" class="section-block home-card">
-      <img src="images/index/events.png" alt="Unity in the Sun icon" class="home-icon">
-      <div class="section-info">
-        <h2>Unity in the Sun</h2>
-        <p><strong>Review:</strong> Sun, soulful energy and a feel-good electronic crowd that makes it a classic destination party.</p>
-        <div class="section-links">
-          <a href="https://unityinthesun.com" target="_blank" rel="noopener">Visit website</a>
-        </div>
-      </div>
-    </section>
-
     <section id="burning-man" class="section-block home-card">
-      <img src="images/index/events.png" alt="Burning Man icon" class="home-icon">
+      <img src="images/holidays/burning man.jpg" alt="Burning Man icon" class="home-icon">
       <div class="section-info">
         <h2>Burning Man</h2>
         <p><strong>Review:</strong> The ultimate radical art and sound experiment, where creativity, community and extreme atmosphere collide.</p>
@@ -177,16 +166,6 @@
       </div>
     </section>
 
-    <section id="annie-mac-presents" class="section-block home-card">
-      <img src="images/index/events.png" alt="Annie Mac Presents icon" class="home-icon">
-      <div class="section-info">
-        <h2>Annie Mac Presents</h2>
-        <p><strong>Review:</strong> A polished, taste-driven platform for club culture, global dance weekends and unforgettable curated experiences.</p>
-        <div class="section-links">
-          <a href="https://www.anniemacmanus.com" target="_blank" rel="noopener">Visit website</a>
-        </div>
-      </div>
-    </section>
   </main>
 </body>
 </html>
