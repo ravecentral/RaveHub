@@ -137,4 +137,15 @@
   .event-grid {
     grid-template-columns: 1fr;
   }
+
+  .region-card-body,
+  .event-card-body {
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .event-details {
+    width: 100%;
+  }
 }
