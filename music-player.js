@@ -832,20 +832,11 @@
         popup.focus();
       };
 
-      const resumeState = getClassicRaveState();
       const musicPageState = getMusicPageState();
 
       if (musicPageState && musicPageState.isPlaying) {
         clearClassicRaveState();
         clearClassicTrackOrder();
-      } else if (resumeState && resumeState.isPlaying) {
-        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
-
-        if (resumeTrack) {
-          openClassicRavePopup(resumeTrack, resumeState.currentTime || 0, true);
-        } else {
-          clearClassicRaveState();
-        }
       }
 
       document.addEventListener('click', (event) => {
