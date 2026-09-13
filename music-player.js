@@ -118,6 +118,25 @@
   const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
+    if (window !== window.top && window.top.document.querySelector('.classic-rave-player-shell')) {
+      document.addEventListener('click', (event) => {
+        const link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+        if (!link || link.target || link.hasAttribute('download')) {
+          return;
+        }
+
+        const targetUrl = new URL(link.href, window.location.href);
+        if (targetUrl.origin === window.location.origin) {
+          window.top.postMessage({
+            type: 'atr-player-shell-navigation',
+            href: targetUrl.href
+          }, window.location.origin);
+        }
+      }, true);
+
+      return;
+    }
+
     const navigation = document.querySelector('.nav-band');
     const standardHeader = document.querySelector('.rave-header');
     const header = standardHeader || navigation?.closest('header');
@@ -258,6 +277,33 @@
         button.parentElement.insertBefore(promoCopy, button.nextSibling);
       }
 
+      let mobilePlayerShell;
+
+      const openMobilePlayerShell = (targetUrl, addToHistory = true) => {
+        if (!mobilePlayerShell) {
+          mobilePlayerShell = document.createElement('iframe');
+          mobilePlayerShell.className = 'classic-rave-player-shell';
+          mobilePlayerShell.title = 'All Tings Rave';
+          mobilePlayerShell.addEventListener('load', () => {
+            const playerContainer = mobilePlayerShell.contentDocument?.getElementById('music-player-container');
+
+            if (playerContainer) {
+              playerContainer.hidden = true;
+            }
+          });
+          mobilePlayerShell.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;background:#050814;z-index:1500;';
+          document.body.appendChild(mobilePlayerShell);
+        }
+
+        mobilePlayerShell.src = targetUrl.href;
+
+        if (addToHistory) {
+          window.history.pushState({}, '', `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
+        }
+
+        window.scrollTo(0, 0);
+      };
+
       const buildMobileMiniPlayer = (track, startTime = 0, autoPlay = true) => {
         const existingPlayer = document.querySelector('.classic-rave-mini-player');
         if (existingPlayer) {
@@ -375,11 +421,14 @@
         const closeButton = miniPlayer.querySelector('.classic-rave-mini-close');
         closeButton.addEventListener('click', () => {
           miniPlayer.remove();
+          mobilePlayerShell?.remove();
+          mobilePlayerShell = undefined;
           clearClassicRaveState();
           clearClassicTrackOrder();
         });
 
         document.body.appendChild(miniPlayer);
+        miniPlayer.style.zIndex = '2000';
 
         const miniAudio = miniPlayer.querySelector('audio');
         const miniTrackTitle = miniPlayer.querySelector('.classic-rave-mini-title');
@@ -872,6 +921,46 @@
 
         openClassicRavePopup(track, 0, true);
       }, true);
+
+      document.addEventListener('click', (event) => {
+        if (!isMobileDevice() || !document.querySelector('.classic-rave-mini-player')) {
+          return;
+        }
+
+        const link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+        if (!link || link.target || link.hasAttribute('download')) {
+          return;
+        }
+
+        const targetUrl = new URL(link.href, window.location.href);
+        const currentUrl = new URL(window.location.href);
+
+        if (
+          targetUrl.origin !== currentUrl.origin ||
+          (targetUrl.pathname === currentUrl.pathname && targetUrl.search === currentUrl.search && targetUrl.hash)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        openMobilePlayerShell(targetUrl);
+      }, true);
+
+      window.addEventListener('popstate', () => {
+        if (mobilePlayerShell) {
+          openMobilePlayerShell(new URL(window.location.href), false);
+        }
+      });
+
+      window.addEventListener('message', (event) => {
+        if (
+          event.origin === window.location.origin &&
+          event.data?.type === 'atr-player-shell-navigation' &&
+          mobilePlayerShell
+        ) {
+          openMobilePlayerShell(new URL(event.data.href), true);
+        }
+      });
 
       return;
     }
