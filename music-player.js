@@ -115,6 +115,8 @@
     saveClassicTrackOrder(order);
     return classicRaveTracks[activeTrackIndex];
   };
+  const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
+
   document.addEventListener('DOMContentLoaded', () => {
     const navigation = document.querySelector('.nav-band');
     const standardHeader = document.querySelector('.rave-header');
@@ -499,6 +501,11 @@
       };
 
       const openClassicRavePopup = (track, startTime = 0, autoPlay = true) => {
+        if (isMobileDevice()) {
+          buildMobileMiniPlayer(track, startTime, autoPlay);
+          return;
+        }
+
         const popup = window.open('', 'classicRavePlayer', 'width=360,height=220,left=24,top=24,resizable=yes,scrollbars=no');
 
         if (!popup || !popup.document) {
@@ -825,11 +832,20 @@
         popup.focus();
       };
 
+      const resumeState = getClassicRaveState();
       const musicPageState = getMusicPageState();
 
       if (musicPageState && musicPageState.isPlaying) {
         clearClassicRaveState();
         clearClassicTrackOrder();
+      } else if (isMobileDevice() && resumeState && resumeState.isPlaying) {
+        const resumeTrack = classicRaveTracks.find((track) => track.url === resumeState.url);
+
+        if (resumeTrack) {
+          buildMobileMiniPlayer(resumeTrack, resumeState.currentTime || 0, true);
+        } else {
+          clearClassicRaveState();
+        }
       }
 
       document.addEventListener('click', (event) => {
