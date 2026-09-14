@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clobber</title>
+  <meta name="description" content="Rave clobber, bomber jackets, tees, hoodies, hats, slipmats and footwear for the underground scene.">
+  <meta name="author" content="All Tings Rave">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://alltingsrave.com/Clobber.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="All Tings Rave">
+  <meta property="og:title" content="Clobber">
+  <meta property="og:description" content="Rave clobber, bomber jackets, tees, hoodies, hats, slipmats and footwear for the underground scene.">
+  <meta property="og:url" content="https://alltingsrave.com/Clobber.html">
+  <meta property="og:image" content="https://alltingsrave.com/images/assets/ATR%20Banner%20Logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clobber">
+  <meta name="twitter:description" content="Rave clobber, bomber jackets, tees, hoodies, hats, slipmats and footwear for the underground scene.">
+  <meta name="twitter:image" content="https://alltingsrave.com/images/assets/ATR%20Banner%20Logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="navigation.css">
+  <link rel="stylesheet" href="music-page-theme.css">
+  <script src="music-player.js" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050814">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/app-icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/app-icons/apple-touch-icon.png">
+  <style>
+    .page-heading {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    .page-heading h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4rem);
+      color: #ffffff;
+      text-shadow: 0 0 16px rgba(77, 243, 255, 0.7), 0 0 28px rgba(255, 0, 255, 0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .page-heading p {
+      max-width: 840px;
+      margin: 14px auto 0;
+      color: rgba(224, 235, 255, 0.82);
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    .merch-page {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 10px 18px 50px;
+    }
+
+    .merch-section {
+      margin-top: 28px;
+      margin-bottom: 36px;
+      border: 1px solid rgba(77, 243, 255, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(8, 15, 31, 0.9) 0%, rgba(12, 22, 38, 0.83) 100%);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 18px 22px 12px;
+      border-bottom: 1px solid rgba(77, 243, 255, 0.18);
+      background: linear-gradient(90deg, rgba(77, 243, 255, 0.08), rgba(255, 0, 255, 0.06));
+    }
+
+    .section-header h2 {
+      margin: 0;
+      color: #4df3ff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+    }
+
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      padding: 22px;
+    }
+
+    .merch-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(77, 243, 255, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(8, 15, 29, 0.86);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .merch-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(77, 243, 255, 0.16);
+      border-color: rgba(77, 243, 255, 0.6);
+    }
+
+    .merch-card img,
+    .merch-card .placeholder-art {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, rgba(77, 243, 255, 0.15), rgba(255, 0, 255, 0.15));
+      border-bottom: 1px solid rgba(77, 243, 255, 0.15);
+    }
+
+    .placeholder-art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4df3ff;
+      text-shadow: 0 0 18px rgba(77, 243, 255, 0.45);
+    }
+
+    .merch-meta {
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .merch-meta h3 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .merch-meta p {
+      margin: 0;
+      color: rgba(225, 235, 255, 0.8);
+      font-size: 0.96rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .merch-meta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%);
+      color: #050814;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .merch-meta a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(77, 243, 255, 0.5);
+    }
+
+    @media (max-width: 640px) {
+      .merch-page {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .merch-grid {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="rave-header">
+    <div class="rave-banner">
+      <img src="images/assets/ATR Banner Logo.png" alt="All Tings Rave Logo">
+    </div>
+  </header>
+
+  <nav class="nav-band">
+    <a href="index.html">Main Room</a>
+    <a href="radio.html">Rave Radio</a>
+    <a href="events.html">Events</a>
+    <a href="holidays.html">Holidays</a>
+    <a href="dj-tech.html">DJ Tech</a>
+    <a href="Books.html">Books</a>
+    <a href="music.html">Buy Music</a>
+    <a href="Clobber.html">Clobber</a>
+    <a href="art.html">Art</a>
+    <a href="https://en.wikipedia.org/wiki/Rave#" target="_blank" rel="noopener">History</a>
+    <a href="https://www.phatmedia.co.uk/" target="_blank" rel="noopener">Flyers</a>
+    <a href="https://chat.kniteforceradio.com/" target="_blank" rel="noopener">Chatroom</a>
+    <a href="feedback.html">Hit Us Up</a>
+  </nav>
+
+  <div id="music-player-container">
+    <audio id="rave-audio" preload="none"></audio>
+    <button id="fill-ears-btn" class="fill-ears-btn" title="Fill my ears with rave">
+      🎵 Fill My Ears With Rave
+    </button>
+    <div id="now-playing" class="now-playing">Now Playing: <span id="track-title">--</span></div>
+  </div>
+
+  <main class="merch-page">
+    <div class="page-heading">
+      <h1>Clobber</h1>
+      <p>From classic MA1 bombers to tees, hoodies, hats, slipmats and footwear, this is where the underground wardrobe gets its proper rotation.</p>
+    </div>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>MA1 Bombers</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <img src="images/Merch/Formation.jpg" alt="Formation MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Formation MA1</h3>
+            <a href="https://kniteforcerevolution.com/store/product/formation-bomber-jacket" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/kniteforce%20MA1.jpg" alt="Kniteforce MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Kniteforce MA1</h3>
+            <a href="https://kniteforcerevolution.com/store/product/kf-embroidered-jacket" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/RSR%20MA1.jpg" alt="RSR Recordings MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>RSR Recordings MA1</h3>
+            <a href="https://kniteforcerevolution.com/store/product/rsr-embroidered-jacket" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/Fantazia%20MA1.jpg" alt="Fantazia MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Fantazia MA1</h3>
+            <a href="https://www.digitalpharaoh.co.uk/products/fantazia-crew-rave-era-ma1-embroidered-bomber-jacket-dreamscape-helter-skelter" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <div class="placeholder-art">MA1</div>
+          <div class="merch-meta">
+            <h3>Vibealite MA1</h3>
+            <a href="https://www.digitalpharaoh.co.uk/products/vibealite-ma1-bomber-jacket-rave-classic-dreamscape-helter-skelter-fantazia" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/perception%20MA1.jpg" alt="Perception MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Perception MA1</h3>
+            <a href="https://www.digitalpharaoh.co.uk/products/perception-rave-era-ma1-embroidered-bomber-jacket-dreamscape-helter-skelter-fantazia?variant=40012528746548" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <div class="placeholder-art">BT</div>
+          <div class="merch-meta">
+            <h3>Bangin Tunes MA1</h3>
+            <a href="https://www.amnesiahouseest1988.com/product/bangin-tunes-black-ma1-bomber-jacket-left-breast-back-white-logo" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <div class="placeholder-art">AH</div>
+          <div class="merch-meta">
+            <h3>Amnesia House MA1</h3>
+            <a href="https://www.amnesiahouseest1988.com/product/new-amnesia-house-black-or-olive-ma1-bomber-jacket-left-breast-back-gold-logo" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/slammin-vinyl-ma1.jpg" alt="Slammin Vinyl MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Slammin Vinyl MA1</h3>
+            <a href="https://www.ravesuperstore.com/slammin-vinyl---ma1-bomber-jacket---radioactive-logo----embroidered-26531-p.asp" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/Pandemonium%20MA1.jpg" alt="Pandemonium MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Pandemonium MA1</h3>
+            <a href="https://www.ravesuperstore.com/pandemonium---ma1-bomber-jacket---pandemonium-silver-logo-round----embroidered-26264-p.asp" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/united-dance-ma1.jpg" alt="United Dance MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>United Dance MA1</h3>
+            <a href="https://www.ravesuperstore.com/united-dance---ma1-bomber-jacket---black--logo----embroidered-28814-p.asp" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <div class="placeholder-art">RD</div>
+          <div class="merch-meta">
+            <h3>Raindance MA1</h3>
+            <a href="https://dewdropprint.co.uk/products/raindance-2024-edition-ma1-bomber-jacket" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>T-Shirts</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="placeholder-art">T</div>
+          <div class="merch-meta">
+            <h3>Rave T-Shirts</h3>
+            <p>Classic drops, retro logos and statement graphics landing soon.</p>
+            <a href="index.html">Back to main room</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>Hoodies</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="placeholder-art">H</div>
+          <div class="merch-meta">
+            <h3>Rave Hoodies</h3>
+            <p>Heavyweight fleece and bold logo pieces are on the way.</p>
+            <a href="index.html">Back to main room</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>Hats</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="placeholder-art">Hat</div>
+          <div class="merch-meta">
+            <h3>Caps &amp; Beanies</h3>
+            <p>Fresh headwear for warehouse nights and festival sets.</p>
+            <a href="index.html">Back to main room</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>Slipmats</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="placeholder-art">SP</div>
+          <div class="merch-meta">
+            <h3>Slipmats</h3>
+            <p>Deck-friendly graphics and old-school club energy coming soon.</p>
+            <a href="index.html">Back to main room</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="merch-section">
+      <div class="section-header">
+        <h2>Footwear</h2>
+      </div>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="placeholder-art">F</div>
+          <div class="merch-meta">
+            <h3>Rave Footwear</h3>
+            <p>Trainers and boots with classic club-ready attitude.</p>
+            <a href="index.html">Back to main room</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>All Tings Rave · Cosmic underground · Built with love by Rob &amp; Nova</p>
+  </footer>
+
+  <script>
+    const tracks = [
+      'music/DJ Sy & Micky Finn Amnesia House @ Quest 23_01_93.mp3',
+      'music/DJ Sy Live @ The Fruit Club 29th September 1995 Swindon Brunel Rooms.mp3',
+      'music/Micky Finn Dance Fest 1992.mp3',
+      'music/Dougal Live @ The Fruit Club Brunel Rooms Swindon 1st March 1996.mp3',
+      'music/RobO SN3 - KFR - 30th Sept 24.mp3',
+      'music/Vinylgroover Live @ The Fruit Club - Brunel Rooms - Swindon 1996 1st march.mp3'
+    ];
+
+    const trackNames = [
+      'DJ Sy & Micky Finn - Amnesia House (Quest 1993)',
+      'DJ Sy - The Fruit Club (September 1995)',
+      'Micky Finn - Dance Fest 1992',
+      'Dougal - The Fruit Club (March 1996)',
+      'RobO - SN3 KFR Mix (Sept 2024)',
+      'Vinylgroover - The Fruit Club (March 1996)'
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let shuffledTracks = [];
+
+    const audio = document.getElementById('rave-audio');
+    const fillEarsBtn = document.getElementById('fill-ears-btn');
+    const trackTitle = document.getElementById('track-title');
+
+    function shuffleTracks() {
+      const arr = [...tracks];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function updateTrackLabel() {
+      const actualIndex = tracks.indexOf(shuffledTracks[currentTrackIndex]);
+      trackTitle.textContent = trackNames[actualIndex] || 'Rave selection';
+    }
+
+    function setTrack(index) {
+      currentTrackIndex = index;
+      const selected = shuffledTracks[currentTrackIndex];
+      audio.src = selected;
+      updateTrackLabel();
+      if (isPlaying) {
+        audio.play();
+      }
+    }
+
+    function playNext() {
+      currentTrackIndex = (currentTrackIndex + 1) % shuffledTracks.length;
+      setTrack(currentTrackIndex);
+    }
+
+    fillEarsBtn.addEventListener('click', () => {
+      if (!shuffledTracks.length) {
+        shuffledTracks = shuffleTracks();
+      }
+
+      if (!isPlaying) {
+        isPlaying = true;
+        fillEarsBtn.classList.add('playing');
+        setTrack(currentTrackIndex);
+        audio.play();
+      } else {
+        isPlaying = false;
+        fillEarsBtn.classList.remove('playing');
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      playNext();
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      updateTrackLabel();
+    });
+
+    shuffledTracks = shuffleTracks();
+    updateTrackLabel();
+  </script>
+</body>
+</html>
