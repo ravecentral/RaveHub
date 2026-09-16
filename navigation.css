@@ -72,8 +72,8 @@
 
 @media (max-width: 768px) {
   .nav-band {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
     gap: 6px 8px;
@@ -81,7 +81,8 @@
   }
 
   .nav-band a {
-    flex: none;
+    box-sizing: border-box;
+    flex: 0 0 calc((100% - 6 * 8px) / 7);
     font-size: 0.72rem;
     padding: 7px 6px;
     border-radius: 5px;
@@ -96,12 +97,12 @@
 
 @media (max-width: 480px) {
   .nav-band {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 5px 6px;
     padding: 7px 8px;
   }
 
   .nav-band a {
+    flex-basis: calc((100% - 4 * 6px) / 5);
     font-size: 0.6rem;
     padding: 6px 4px;
   }
@@ -109,12 +110,12 @@
 
 @media (max-width: 360px) {
   .nav-band {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 4px 5px;
     padding: 6px 7px;
   }
 
   .nav-band a {
+    flex-basis: calc((100% - 4 * 5px) / 5);
     font-size: 0.54rem;
     padding: 5px 3px;
   }

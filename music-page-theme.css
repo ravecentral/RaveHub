@@ -568,8 +568,9 @@ button,
 
 @media (max-width: 768px) {
   .nav-band {
-    display: grid !important;
-    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     gap: 6px 8px !important;
     padding: 8px 10px !important;
   }
@@ -579,6 +580,7 @@ button,
   .nav-band a:visited,
   .nav-band a:hover,
   .nav-band a:active {
+    flex: 0 0 calc((100% - 6 * 8px) / 7) !important;
     font-size: 0.72rem !important;
     padding: 7px 6px !important;
     line-height: 1.15 !important;
@@ -592,7 +594,6 @@ button,
 
 @media (max-width: 480px) {
   .nav-band {
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
     gap: 5px 6px !important;
     padding: 7px 8px !important;
   }
@@ -602,6 +603,7 @@ button,
   .nav-band a:visited,
   .nav-band a:hover,
   .nav-band a:active {
+    flex-basis: calc((100% - 4 * 6px) / 5) !important;
     font-size: 0.6rem !important;
     padding: 6px 4px !important;
   }
@@ -609,7 +611,6 @@ button,
 
 @media (max-width: 360px) {
   .nav-band {
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
     gap: 4px 5px !important;
     padding: 6px 7px !important;
   }
@@ -619,6 +620,7 @@ button,
   .nav-band a:visited,
   .nav-band a:hover,
   .nav-band a:active {
+    flex-basis: calc((100% - 4 * 5px) / 5) !important;
     font-size: 0.54rem !important;
     padding: 5px 3px !important;
   }
