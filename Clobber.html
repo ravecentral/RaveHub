@@ -153,6 +153,7 @@
       align-items: center;
       justify-content: center;
       width: fit-content;
+      margin-top: auto;
       padding: 10px 16px;
       border-radius: 999px;
       background: linear-gradient(135deg, #4df3ff 0%, #ff00ff 100%);
@@ -169,6 +170,59 @@
       box-shadow: 0 0 18px rgba(77, 243, 255, 0.5);
     }
 
+    .merch-subnav {
+      position: sticky;
+      top: 74px;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px 10px;
+      margin: 0 auto 18px;
+      max-width: 1240px;
+      background: rgba(5, 8, 20, 0.78);
+      border: 1px solid rgba(77, 243, 255, 0.25);
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(8px);
+    }
+
+    .merch-subnav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(77, 243, 255, 0.5);
+      background: rgba(13, 20, 35, 0.9);
+      color: #f5f7ff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .merch-subnav a:hover {
+      transform: translateY(-1px);
+      border-color: rgba(77, 243, 255, 0.9);
+      box-shadow: 0 0 14px rgba(77, 243, 255, 0.32);
+    }
+
+    .merch-subnav a.is-active {
+      color: #050814;
+      border-color: #4df3ff;
+      background: linear-gradient(135deg, #4df3ff 0%, #ff45d9 100%);
+      box-shadow: 0 0 18px rgba(77, 243, 255, 0.5), 0 0 22px rgba(255, 69, 217, 0.3);
+    }
+
+    .merch-section {
+      scroll-margin-top: 160px;
+    }
+
     @media (max-width: 640px) {
       .merch-page {
         padding-left: 12px;
@@ -177,6 +231,18 @@
 
       .merch-grid {
         padding: 16px;
+      }
+
+      .merch-subnav {
+        gap: 8px;
+        padding: 10px 12px 8px;
+        top: 66px;
+      }
+
+      .merch-subnav a {
+        font-size: 0.7rem;
+        padding: 8px 10px;
+        min-height: 36px;
       }
     }
   </style>
@@ -218,7 +284,16 @@
       <p>From classic MA1 bombers to tees, hoodies, hats, slipmats and footwear, this is where the underground wardrobe gets its proper rotation.</p>
     </div>
 
-    <section class="merch-section">
+    <nav class="merch-subnav" aria-label="Clobber sections">
+      <a href="#ma1-bombers">MA1 Bombers</a>
+      <a href="#t-shirts">T-Shirts</a>
+      <a href="#hoodies">Hoodies</a>
+      <a href="#hats">Hats</a>
+      <a href="#slipmats">Slipmats</a>
+      <a href="#footwear">Footwear</a>
+    </nav>
+
+    <section class="merch-section" id="ma1-bombers">
       <div class="section-header">
         <h2>MA1 Bombers</h2>
       </div>
@@ -228,6 +303,14 @@
           <div class="merch-meta">
             <h3>Formation MA1</h3>
             <a href="https://kniteforcerevolution.com/store/product/formation-bomber-jacket" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/SuburbanBase%20MA1.jpg" alt="Suburban Base MA1 bomber jacket">
+          <div class="merch-meta">
+            <h3>Suburban Base MA1</h3>
+            <a href="https://www.suburbanbaserecords.com/merchandise/sbma1embblk" target="_blank" rel="noopener noreferrer">Buy now</a>
           </div>
         </article>
 
@@ -321,23 +404,102 @@
       </div>
     </section>
 
-    <section class="merch-section">
+    <section class="merch-section" id="t-shirts">
       <div class="section-header">
         <h2>T-Shirts</h2>
       </div>
       <div class="merch-grid">
         <article class="merch-card">
-          <div class="placeholder-art">T</div>
+          <img src="images/Merch/T-shirts/Oi%20Oi.avif" alt="#RCFF T-Shirt">
           <div class="merch-meta">
-            <h3>Rave T-Shirts</h3>
-            <p>Classic drops, retro logos and statement graphics landing soon.</p>
-            <a href="index.html">Back to main room</a>
+            <h3>#RCFF T-Shirt</h3>
+            <a href="https://vibenajungle.com/collections/frontpage/products/new-style-unisex-rcff-t-shirt-in-camouflage-red-text" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Fantazia.jpg" alt="Fantazia Logo T-Shirt">
+          <div class="merch-meta">
+            <h3>Fantazia Logo T-Shirt</h3>
+            <a href="https://www.digitalpharaoh.co.uk/products/official-fantazia-crew-rave-t-shirt" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/dreamscape.jpg" alt="Dreamscape 23 Flyer T-Shirt">
+          <div class="merch-meta">
+            <h3>Dreamscape 23 Flyer T-Shirt</h3>
+            <a href="https://www.amazon.co.uk/Dreamscape-t-Shirt-Colours-Cotton-Regular/dp/B0F3NGSG5Q/ref=sr_1_2?dib=eyJ2IjoiMSJ9.gHhzg18NmAGqM_u0lpU44kYoz3ZgN7RjaFhnC0uQiHz_cWR2H9PHRkNEbe7rGJIAlb6C9sENKQhVUSFzuBG8FgCutbKWZrZ2n81k6cSkTCXtendzK6yOJZ2AriKzdQqUctKQ8HlJqt9qlK16ypcdmUhl9tVmnOcIogGc5SlitzTpJsRGjeOgbMUbI4Dh06YKzyV4Xlox0vLsPeaCFUJYxwR_WaJ910RhOiZ8by8k8jySEfSGMZ0fDY46TnyH77QVqxtN8VzwNqpmhpG8ch3eH2kRM99G96uUm6z6g7EBgn0.xZng46J_hs_fq5IBm-c5675nr6Xje4pknRn0A53xZCk&dib_tag=se&keywords=dreamscape%2Btshirt&qid=1789589256&sr=8-2&th=1&psc=1" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Oi%20Oi.jpg" alt="Oi Oi Rave T-Shirt">
+          <div class="merch-meta">
+            <h3>Oi Oi Rave T-Shirt</h3>
+            <a href="https://www.amazon.co.uk/raver-raving-house-music-T-Shirt/dp/B0C7LFXZ3B/ref=sr_1_6?crid=1890GD1VH91TV&dib=eyJ2IjoiMSJ9.xJ1GOs_0lSX16F3AjH5RZQB08cw6meVoHpA5opgv1ANRjnyuJOXDEyxwbSH4vBAgQaQkRc10HFaZYeyVYqYWhwknnX0kqtxvYBBNt4OBYZtKpDTsgKIjf2vOLC9hv4YHf8v7sami4T_9_hMGdaZbl_I-0Ggd2pijo7vW1l4uh_xNMcZRbZhGqPXx3Hx8YHUUJYhBetqMyCcOQOm-_OJx6yvw2N-yEyWU49JjU7eeD0ShCjOmQ8i0hx6t3F5PDElER6niNmF9kcK-OrNhmP27qwVCP96djKvZODlnXZr_ehY.unQ5nGWgSncEvsGZTbS2ySgWlflDWw1e6H_uOVWMC5o&dib_tag=se&keywords=universe%2Brave%2Btshirt&qid=1789589366&sprefix=universe%2Brave%2Btshirt%2Caps%2C109&sr=8-6&customId=B07536XX75&customizationToken=MC_Assembly_1%23B07536XX75&th=1&psc=1" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Retro%20Psychedelic%20Smilie.jpg" alt="Retro Psychedelic Smilie T-Shirt">
+          <div class="merch-meta">
+            <h3>Retro Psychedelic Smilie</h3>
+            <a href="https://amzn.eu/d/0gECVbAE" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/wasted-heroes-football-jersey-ACID-1.webp" alt="Acid FC Retro T-Shirt">
+          <div class="merch-meta">
+            <h3>Acid FC Retro T-Shirt</h3>
+            <a href="https://www.wastedheroes-shop.com/products/acid-fc-retro-25-jersey-yellow?currency=GBP&country=GB&variant=55132293333378&stkn=c0f0df41cbb4&tw_source=google&tw_adid=781526801732&tw_campaign=23206694623&tw_kwdid=pla-293946777986&gad_source=1&gad_campaignid=23206694623&gbraid=0AAAAABOvihrE5BbgJUCv7zWwEuCIULMlW&gclid=EAIaIQobChMIrYqukPXzlgMVNpCDBx3LjAZWEAQYASABEgIKTvD_BwE" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Techno%20Every%20Little%20Helps.jpg" alt="Techno Every Little Helps T-Shirt">
+          <div class="merch-meta">
+            <h3>Techno – Every Little Helps</h3>
+            <a href="https://amzn.eu/d/06xikjki" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Kniteforce%20Adidas.png" alt="Kniteforce x Adidas Football Shirt">
+          <div class="merch-meta">
+            <h3>Kniteforce x Adidas Football Shirt</h3>
+            <a href="https://kniteforcerevolution.com/store/product/kniteforce-x-adidas-football-top" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Kniteforce%20Logo.png" alt="Kniteforce Logo T-Shirt">
+          <div class="merch-meta">
+            <h3>Kniteforce Logo T-Shirt</h3>
+            <a href="https://kniteforcerevolution.com/store/product/kniteforce-logo-t-shirt-heather" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/kniteforce%20crew.jpg" alt="Kniteforce Crew T-Shirt">
+          <div class="merch-meta">
+            <h3>Kniteforce Crew T-Shirt</h3>
+            <a href="https://kniteforcerevolution.com/store/product/kf-crew-t-shirt-purple" target="_blank" rel="noopener noreferrer">Buy now</a>
+          </div>
+        </article>
+
+        <article class="merch-card">
+          <img src="images/Merch/T-shirts/Defected.jpg" alt="Defected T-Shirt">
+          <div class="merch-meta">
+            <h3>Defected T-Shirt</h3>
+            <a href="https://amzn.eu/d/0bro1OL7" target="_blank" rel="noopener noreferrer">Buy now</a>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="merch-section">
+    <section class="merch-section" id="hoodies">
       <div class="section-header">
         <h2>Hoodies</h2>
       </div>
@@ -353,7 +515,7 @@
       </div>
     </section>
 
-    <section class="merch-section">
+    <section class="merch-section" id="hats">
       <div class="section-header">
         <h2>Hats</h2>
       </div>
@@ -369,7 +531,7 @@
       </div>
     </section>
 
-    <section class="merch-section">
+    <section class="merch-section" id="slipmats">
       <div class="section-header">
         <h2>Slipmats</h2>
       </div>
@@ -385,7 +547,7 @@
       </div>
     </section>
 
-    <section class="merch-section">
+    <section class="merch-section" id="footwear">
       <div class="section-header">
         <h2>Footwear</h2>
       </div>
@@ -407,6 +569,42 @@
   </footer>
 
   <script>
+    const merchNavLinks = [...document.querySelectorAll('.merch-subnav a')];
+    const merchSections = merchNavLinks
+      .map(link => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+
+    const updateActiveMerchLink = () => {
+      const marker = window.scrollY + 190;
+      let activeSection = merchSections[0];
+
+      merchSections.forEach(section => {
+        if (section.offsetTop <= marker) {
+          activeSection = section;
+        }
+      });
+
+      merchNavLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${activeSection.id}`;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    merchNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        merchNavLinks.forEach(item => item.classList.remove('is-active'));
+        link.classList.add('is-active');
+      });
+    });
+
+    updateActiveMerchLink();
+    window.addEventListener('scroll', updateActiveMerchLink, { passive: true });
+
     const tracks = [
       'music/DJ Sy & Micky Finn Amnesia House @ Quest 23_01_93.mp3',
       'music/DJ Sy Live @ The Fruit Club 29th September 1995 Swindon Brunel Rooms.mp3',
