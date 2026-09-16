@@ -586,9 +586,9 @@ button,
     line-height: 1.15 !important;
     white-space: normal !important;
     text-align: center !important;
-    overflow-wrap: break-word !important;
+    overflow-wrap: normal !important;
     word-break: normal !important;
-    hyphens: auto !important;
+    hyphens: none !important;
   }
 }
 

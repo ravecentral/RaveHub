@@ -91,7 +91,7 @@
     text-align: center;
     overflow-wrap: normal;
     word-break: normal;
-    hyphens: auto;
+    hyphens: none;
   }
 }
 
