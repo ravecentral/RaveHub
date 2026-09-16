@@ -72,41 +72,50 @@
 
 @media (max-width: 768px) {
   .nav-band {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 4px 6px;
-    padding: 7px 9px;
+    align-items: stretch;
+    gap: 6px 8px;
+    padding: 8px 10px;
   }
 
   .nav-band a {
-    font-size: 0.94rem;
-    padding: 10px 14px;
+    flex: none;
+    font-size: 0.72rem;
+    padding: 7px 6px;
     border-radius: 5px;
     line-height: 1.15;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
   }
 }
 
 @media (max-width: 480px) {
   .nav-band {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px 6px;
+    padding: 7px 8px;
+  }
+
+  .nav-band a {
+    font-size: 0.6rem;
+    padding: 6px 4px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-band {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 4px 5px;
     padding: 6px 7px;
   }
 
   .nav-band a {
-    font-size: 0.82rem;
-    padding: 8px 11px;
-  }
-}
-
-@media (max-width: 400px) {
-  .nav-band {
-    gap: 3px 4px;
-    padding: 5px 6px;
-  }
-
-  .nav-band a {
-    font-size: 0.74rem;
-    padding: 7px 10px;
+    font-size: 0.54rem;
+    padding: 5px 3px;
   }
 }
