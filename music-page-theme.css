@@ -737,9 +737,9 @@ button:active,
 
 .new-music-control {
   appearance: none;
-  border: 1px solid rgba(77, 243, 255, 0.7);
-  background: rgba(77, 243, 255, 0.09);
-  color: #f5f7ff;
+  border: 1px solid rgba(57, 255, 20, 0.9);
+  background: linear-gradient(135deg, #d8ff52 0%, #39ff14 52%, #00c853 100%);
+  color: #031006;
   border-radius: 7px;
   padding: 5px 4px;
   font-size: 0.5rem !important;
@@ -747,11 +747,23 @@ button:active,
   letter-spacing: 0.04em !important;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.42), 0 0 20px rgba(0, 200, 83, 0.24);
 }
 
+.new-music-button-grid > .fill-ears-btn,
+.new-music-control,
 .new-music-control.stop {
-  border-color: rgba(255, 79, 216, 0.7);
-  background: rgba(255, 79, 216, 0.12);
+  border-color: rgba(57, 255, 20, 0.9) !important;
+  background: linear-gradient(135deg, #d8ff52 0%, #39ff14 52%, #00c853 100%) !important;
+  color: #031006 !important;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.42), 0 0 20px rgba(0, 200, 83, 0.24) !important;
+}
+
+.new-music-button-grid > .fill-ears-btn:hover,
+.new-music-button-grid > .fill-ears-btn.playing,
+.new-music-control:hover {
+  background: linear-gradient(135deg, #efff8a 0%, #55ff33 48%, #00e676 100%) !important;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.78), 0 0 30px rgba(0, 230, 118, 0.45) !important;
 }
 
 .promo-message {

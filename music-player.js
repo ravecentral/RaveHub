@@ -9,6 +9,10 @@
       title: '4am Kru - Hurt Me No More (Extended Mix)'
     },
     {
+      path: 'music/DJ Deluxe - Lost In Music EP - 01 Into The Zone - Lazarus Recordings.wav',
+      title: 'DJ Deluxe - Into The Zone (Lazarus Recordings)'
+    },
+    {
       path: 'music/Zero B - Lock Up (2019 Remaster).wav',
       title: 'Zero B - Lock Up (2019 Remaster)'
     }
