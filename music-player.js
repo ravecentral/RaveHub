@@ -46,6 +46,14 @@
     {
       url: 'https://www.dropbox.com/scl/fi/1r87pkiue5mzx0d4qfm21/Vinylgroover-Live-The-Fruit-Club-Brunel-Rooms-Swindon-1996-1st-march.mp3?rlkey=z0hbhonewhynjezljqff9ye7q&st=qfvzol7s&dl=0&raw=1',
       title: 'Vinylgroover · Live The Fruit Club, Brunel Rooms Swindon 1996'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/1eogddvlwapxxygisp93w/LTJ_Bukem_MC_Conrad_BBC_Essential_Mix_Live_Cream_25_08_1996_KLICKAUD.mp3?rlkey=l1tucq3277wjys2y587cj6er6&st=nnpzggdn&dl=0&raw=1',
+      title: 'LTJ Bukem & MC Conrad · BBC Essential Mix Live @ Cream · 25.08.1996'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/btszf3zyxjafcjgvie8is/Slipmatt_Live_O2_Arena_London_Supporting_The_Prodigy_31_12_2013_KLICKAUD.mp3?rlkey=m2ceeyaowfi51g7x6hlmvaiyg&st=r5jbuqi0&dl=0&raw=1',
+      title: 'Slipmatt · Live O2 Arena London, Supporting The Prodigy · 31.12.2013'
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
