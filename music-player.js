@@ -54,6 +54,22 @@
     {
       url: 'https://www.dropbox.com/scl/fi/btszf3zyxjafcjgvie8is/Slipmatt_Live_O2_Arena_London_Supporting_The_Prodigy_31_12_2013_KLICKAUD.mp3?rlkey=m2ceeyaowfi51g7x6hlmvaiyg&st=r5jbuqi0&dl=0&raw=1',
       title: 'Slipmatt · Live O2 Arena London, Supporting The Prodigy · 31.12.2013'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/4bo6gk9lpkohpwo1a4m5i/Nicky-Blackmarket-Stevie-Hyper-D-One-Nation-June-1997-1423218611.mp3?rlkey=n7w88r4y0jh39375biuea0zb2&st=0k3jhtsq&dl=0&raw=1',
+      title: 'Nicky Blackmarket & Stevie Hyper D · One Nation · June 1997'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/luhj8wwtqt5117jhk2wyf/One-In-The-Jungle-DJ-Zinc-DJ-Hype-and-DJ-Ron-15.11.1996-525572333.mp3?rlkey=q8l9v7weyi70h2gmuzle1ixdh&st=0wqm6qoq&dl=0&raw=1',
+      title: 'One In The Jungle · DJ Zinc, DJ Hype & DJ Ron · 15.11.1996'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/jytqw8z4f91x5ik1jpjsk/Chase-Status-_-Boiler-Room_-London-2068175525.mp3?rlkey=qicytz1ni8cl5lyc1i4p7ff0o&st=w6xt8wr0&dl=0&raw=1',
+      title: 'Chase & Status · Boiler Room London'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/t010pv3u2mmydsl4kv17o/K-Klass-DJ-Set-CLOSING-MAIN-ROOM-1am-2am-live-UpYerRonson-Day-Night-Terrace-Party-26.5.2018-1586306712.mp3?rlkey=dzmug9k4upzi0ii56fi5ddtji&st=hpv64wk6&dl=0&raw=1',
+      title: 'K-Klass · Closing Main Room · UpYerRonson Terrace Party · 26.5.2018'
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
@@ -166,6 +182,22 @@
         link.innerHTML = `<span class="atr-social-icon">${social.icon}</span><span class="atr-social-text"><span class="atr-social-platform">${social.platform}</span><span class="atr-social-handle">${social.label}</span></span>`;
         socialParent.appendChild(link);
       });
+
+      // Small screens have no room beside the logo, so show a full-text row under the nav.
+      if (!document.querySelector('.atr-social-mobile')) {
+        const mobileRow = document.createElement('div');
+        mobileRow.className = 'atr-social-mobile';
+        socialParent.querySelectorAll('.atr-social').forEach((link) => {
+          mobileRow.appendChild(link.cloneNode(true));
+        });
+        const navBand = document.querySelector('body > .nav-band');
+        const anchor = navBand || (siteHeader.parentElement === document.body ? siteHeader : null);
+        if (anchor) {
+          anchor.insertAdjacentElement('afterend', mobileRow);
+        } else {
+          document.body.prepend(mobileRow);
+        }
+      }
     }
 
     if (window !== window.top && window.top.document.querySelector('.classic-rave-player-shell')) {
@@ -365,16 +397,16 @@
         miniPlayer.innerHTML = `
           <style>
             .classic-rave-mini-player {
-              position: fixed;
+              position: fixed !important;
               left: 10px;
               right: 10px;
               bottom: 10px;
               z-index: 2000;
               padding: 10px 10px 8px;
               border-radius: 16px;
-              background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-              border: 1px solid rgba(77, 243, 255, 0.7);
-              box-shadow: 0 0 0 1px rgba(77, 243, 255, 0.15), 0 0 18px rgba(77, 243, 255, 0.2), 0 0 24px rgba(255, 79, 216, 0.15);
+              background: linear-gradient(180deg, #1d1a2e 0%, #121224 34%, #0a0b16 100%) padding-box, linear-gradient(90deg, #ffe600, #ff8a00, #ff2fb3, #4df3ff, #39ff14) border-box;
+              border: 2px solid transparent;
+              box-shadow: 0 0 18px rgba(255, 138, 0, 0.35), 0 0 24px rgba(57, 255, 20, 0.15);
               font-family: Arial, sans-serif;
               color: #f5f7ff;
             }
@@ -393,7 +425,7 @@
 
             .classic-rave-mini-badge {
               display: block;
-              color: #4df3ff;
+              color: #ffe94d;
               font-size: 0.58rem;
               letter-spacing: 0.18em;
               text-transform: uppercase;
@@ -410,8 +442,8 @@
 
             .classic-rave-mini-close {
               appearance: none;
-              border: 1px solid rgba(77, 243, 255, 0.6);
-              background: rgba(77, 243, 255, 0.08);
+              border: 1px solid rgba(255, 170, 70, 0.8);
+              background: rgba(255, 138, 0, 0.12);
               color: #effdff;
               border-radius: 50%;
               width: 26px;
@@ -429,28 +461,54 @@
             }
 
             .classic-rave-mini-controls {
-              display: grid;
-              grid-template-columns: repeat(3, minmax(0, 1fr));
-              gap: 6px;
+              display: flex;
+              justify-content: center;
+              gap: 8px;
               margin-top: 8px;
             }
 
-            .classic-rave-mini-control {
+            .classic-rave-mini-player .classic-rave-mini-control,
+            .classic-rave-mini-player .classic-rave-mini-control:hover {
               appearance: none;
-              border: 1px solid rgba(77, 243, 255, 0.7);
-              background: rgba(77, 243, 255, 0.09);
-              color: #f5f7ff;
-              border-radius: 10px;
-              padding: 7px 6px;
-              font-size: 0.58rem;
-              font-weight: 700;
+              flex: 0 1 96px;
+              width: auto !important;
+              border: 1px solid rgba(120, 255, 90, 0.85) !important;
+              background: linear-gradient(135deg, rgba(196, 255, 150, 0.92), rgba(84, 230, 70, 0.85)) !important;
+              color: #160a00 !important;
+              border-radius: 10px !important;
+              padding: 7px 6px !important;
+              font-size: 0.58rem !important;
+              font-weight: 800;
               letter-spacing: 0.08em;
               text-transform: uppercase;
+              box-shadow: 0 0 10px rgba(57, 255, 20, 0.4) !important;
             }
 
-            .classic-rave-mini-control.stop {
-              background: rgba(255, 79, 216, 0.12);
-              border-color: rgba(255, 79, 216, 0.7);
+            .classic-rave-mini-player .classic-rave-mini-control.stop,
+            .classic-rave-mini-player .classic-rave-mini-control.stop:hover {
+              background: linear-gradient(135deg, rgba(255, 205, 130, 0.95), rgba(255, 138, 0, 0.85)) !important;
+              border-color: rgba(255, 170, 70, 0.9) !important;
+              box-shadow: 0 0 10px rgba(255, 138, 0, 0.45) !important;
+            }
+
+            .classic-rave-mini-player .classic-rave-mini-control.next,
+            .classic-rave-mini-player .classic-rave-mini-control.next:hover {
+              background: linear-gradient(135deg, rgba(255, 248, 170, 0.95), rgba(255, 214, 0, 0.85)) !important;
+              border-color: rgba(255, 235, 90, 0.9) !important;
+              box-shadow: 0 0 10px rgba(255, 214, 0, 0.45) !important;
+            }
+
+            .classic-rave-mini-player .classic-rave-mini-close,
+            .classic-rave-mini-player .classic-rave-mini-close:hover {
+              width: 26px !important;
+              height: 26px !important;
+              padding: 0 !important;
+              border: 1px solid rgba(255, 170, 70, 0.8) !important;
+              border-radius: 50% !important;
+              background: rgba(255, 138, 0, 0.18) !important;
+              color: #fff3d6 !important;
+              font-size: 1.1rem !important;
+              box-shadow: 0 0 8px rgba(255, 138, 0, 0.4) !important;
             }
           </style>
           <div class="classic-rave-mini-header">
@@ -623,9 +681,9 @@
                 --bg: #050814;
                 --panel: rgba(12, 18, 36, 0.96);
                 --panel-2: rgba(20, 28, 52, 0.96);
-                --line: rgba(77, 243, 255, 0.65);
-                --cyan: #4df3ff;
-                --pink: #ff4fd8;
+                --line: rgba(255, 138, 0, 0.75);
+                --cyan: #ffe94d;
+                --pink: #ff8a00;
                 --text: #f5f7ff;
               }
 
@@ -645,7 +703,7 @@
                 display: grid;
                 place-items: center;
                 position: relative;
-                background: radial-gradient(circle at top left, rgba(77, 243, 255, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.12), transparent 25%), #050814;
+                background: radial-gradient(circle at top left, rgba(255, 214, 0, 0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(57, 255, 20, 0.12), transparent 25%), #050814;
               }
 
               .player-wrap {
@@ -653,9 +711,9 @@
                 width: 330px;
                 padding: 12px 12px 10px;
                 border-radius: 18px;
-                border: 1px solid rgba(77, 243, 255, 0.65);
-                background: linear-gradient(180deg, #171f33 0%, #111827 34%, #090d18 100%);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(77, 243, 255, 0.14), 0 0 18px rgba(77, 243, 255, 0.22), 0 0 24px rgba(255, 79, 216, 0.10);
+                border: 2px solid transparent;
+                background: linear-gradient(180deg, #1d1a2e 0%, #121224 34%, #0a0b16 100%) padding-box, linear-gradient(90deg, #ffe600, #ff8a00, #ff2fb3, #4df3ff, #39ff14) border-box;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -8px 20px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 138, 0, 0.35), 0 0 26px rgba(57, 255, 20, 0.15);
               }
 
               .player-wrap::before {
@@ -663,7 +721,7 @@
                 position: absolute;
                 inset: 8px;
                 border-radius: 12px;
-                border: 1px solid rgba(255, 79, 216, 0.22);
+                border: 1px solid rgba(255, 214, 0, 0.2);
                 pointer-events: none;
               }
 
@@ -674,8 +732,8 @@
                 right: 14px;
                 top: 42px;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(77, 243, 255, 0.9), rgba(255, 79, 216, 0.9), transparent);
-                box-shadow: 0 0 12px rgba(77, 243, 255, 0.4);
+                background: linear-gradient(90deg, transparent, rgba(255, 230, 0, 0.9), rgba(255, 138, 0, 0.9), rgba(57, 255, 20, 0.9), transparent);
+                box-shadow: 0 0 12px rgba(255, 138, 0, 0.4);
               }
 
               .deck-top {
@@ -691,7 +749,7 @@
                 letter-spacing: 0.18em;
                 color: var(--cyan);
                 text-transform: uppercase;
-                text-shadow: 0 0 10px rgba(77, 243, 255, 0.75);
+                text-shadow: 0 0 10px rgba(255, 214, 0, 0.75);
               }
 
               .deck-lights {
@@ -706,12 +764,12 @@
                 border-radius: 50%;
                 display: block;
                 background: var(--cyan);
-                box-shadow: 0 0 10px rgba(77, 243, 255, 0.8);
+                box-shadow: 0 0 10px rgba(255, 214, 0, 0.8);
               }
 
               .deck-lights span:nth-child(2) {
                 background: var(--pink);
-                box-shadow: 0 0 10px rgba(255, 79, 216, 0.8);
+                box-shadow: 0 0 10px rgba(255, 138, 0, 0.8);
               }
 
               h1 {
@@ -721,7 +779,7 @@
                 text-transform: uppercase;
                 text-align: center;
                 color: var(--cyan);
-                text-shadow: 0 0 12px rgba(77, 243, 255, 0.8);
+                text-shadow: 0 0 12px rgba(255, 214, 0, 0.8);
               }
 
               .subtext {
@@ -744,51 +802,54 @@
                 font-size: 0.5rem;
                 letter-spacing: 0.24em;
                 text-transform: uppercase;
-                text-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
+                text-shadow: 0 0 10px rgba(255, 138, 0, 0.7);
               }
 
               .player-controls {
-                display: grid;
-                grid-template-columns: 1fr auto 1fr;
+                display: flex;
+                justify-content: center;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
                 margin-top: 10px;
               }
 
               .player-control {
                 appearance: none;
-                border: 1px solid rgba(77, 243, 255, 0.7);
-                background: rgba(77, 243, 255, 0.08);
-                color: var(--text);
+                width: 84px;
+                border: 1px solid transparent;
+                color: #160a00;
                 border-radius: 10px;
                 padding: 8px 6px;
                 font: inherit;
-                font-size: 0.54rem;
-                font-weight: 700;
+                font-size: 0.56rem;
+                font-weight: 800;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
                 cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
               }
 
-              .player-control.prev,
-              .player-control.next {
-                width: 100%;
-                max-width: 90px;
+              .player-control:hover {
+                transform: translateY(-1px) scale(1.05);
+                filter: brightness(1.1);
               }
 
               .player-control.prev {
-                justify-self: start;
+                border-color: rgba(120, 255, 90, 0.85);
+                background: linear-gradient(135deg, rgba(196, 255, 150, 0.92), rgba(84, 230, 70, 0.85));
+                box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
               }
 
               .player-control.stop {
-                justify-self: center;
-                min-width: 82px;
-                border-color: rgba(255, 79, 216, 0.7);
-                background: rgba(255, 79, 216, 0.09);
+                border-color: rgba(255, 170, 70, 0.9);
+                background: linear-gradient(135deg, rgba(255, 205, 130, 0.95), rgba(255, 138, 0, 0.85));
+                box-shadow: 0 0 10px rgba(255, 138, 0, 0.45);
               }
 
               .player-control.next {
-                justify-self: end;
+                border-color: rgba(255, 235, 90, 0.9);
+                background: linear-gradient(135deg, rgba(255, 248, 170, 0.95), rgba(255, 214, 0, 0.85));
+                box-shadow: 0 0 10px rgba(255, 214, 0, 0.45);
               }
 
               audio {
