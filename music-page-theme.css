@@ -1024,3 +1024,29 @@ body > .site-footer {
     font-size: 0.74rem;
   }
 }
+
+/* Music page player: keep the desktop layout on small screens */
+@media (max-width: 600px) {
+  #music-player-container:has(.new-music-button-grid) {
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 12px 14px !important;
+  }
+
+  #music-player-container .new-music-button-grid {
+    flex: 0 0 196px;
+    width: 196px;
+  }
+
+  #music-player-container .new-music-button-grid button {
+    white-space: nowrap !important;
+  }
+
+  #music-player-container .new-music-button-grid ~ .now-playing {
+    flex: 0 1 auto;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 160px;
+    overflow-wrap: anywhere;
+  }
+}

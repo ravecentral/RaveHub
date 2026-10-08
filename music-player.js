@@ -13,6 +13,10 @@
       title: 'DJ Deluxe - Into The Zone (Lazarus Recordings)'
     },
     {
+      path: 'music/Fibzy - Doot doot - oosh.bandcamp.com_doot-doot.mp3',
+      title: 'Fibzy - Doot Doot (OOSH Records)'
+    },
+    {
       path: 'music/Zero B - Lock Up (2019 Remaster).wav',
       title: 'Zero B - Lock Up (2019 Remaster)'
     }
