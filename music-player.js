@@ -13,7 +13,7 @@
       title: 'DJ Deluxe - Into The Zone (Lazarus Recordings)'
     },
     {
-      path: 'music/Fibzy - Doot doot - oosh.bandcamp.com_doot-doot.mp3',
+      path: 'music/Fibzy - Doot Doot - Oosh Records - Bandcamp.mp3',
       title: 'Fibzy - Doot Doot (OOSH Records)'
     },
     {
