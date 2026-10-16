@@ -74,35 +74,22 @@
     {
       url: 'https://www.dropbox.com/scl/fi/t010pv3u2mmydsl4kv17o/K-Klass-DJ-Set-CLOSING-MAIN-ROOM-1am-2am-live-UpYerRonson-Day-Night-Terrace-Party-26.5.2018-1586306712.mp3?rlkey=dzmug9k4upzi0ii56fi5ddtji&st=hpv64wk6&dl=0&raw=1',
       title: 'K-Klass · Closing Main Room · UpYerRonson Terrace Party · 26.5.2018'
+    },
+    {
+      url: 'https://www.dropbox.com/scl/fi/o5m2qt3g55c5xut8qufe5/DJ-Rap-Helter-Skelter-on-3-December-1993-feat.-MC-GQ-790409822.mp3?rlkey=2dkimeoon35ah934975anccte&st=3t4fkg3f&dl=0&raw=1',
+      title: 'DJ Rap feat. MC GQ · Helter Skelter · 3 December 1993'
     }
   ];
   const classicRaveStateKey = 'atr-classic-rave-state';
   const classicTrackOrderKey = 'atr-classic-rave-order';
-  const pickRandomClassicTrack = () => {
+  const pickRandomClassicTrack = (currentUrl) => {
     if (!classicRaveTracks.length) {
       return null;
     }
 
-    return classicRaveTracks[Math.floor(Math.random() * classicRaveTracks.length)];
-  };
-
-  const getClassicTrackOrder = () => {
-    try {
-      const savedOrder = localStorage.getItem(classicTrackOrderKey);
-      if (!savedOrder) {
-        return null;
-      }
-      const parsedOrder = JSON.parse(savedOrder);
-      return Array.isArray(parsedOrder) && parsedOrder.length === classicRaveTracks.length ? parsedOrder : null;
-    } catch (error) {
-      return null;
-    }
-  };
-
-  const saveClassicTrackOrder = (order) => {
-    try {
-      localStorage.setItem(classicTrackOrderKey, JSON.stringify(order));
-    } catch (error) {}
+    const alternatives = classicRaveTracks.filter((item) => item.url !== currentUrl);
+    const candidates = alternatives.length ? alternatives : classicRaveTracks;
+    return candidates[Math.floor(Math.random() * candidates.length)];
   };
 
   const clearClassicTrackOrder = () => {
@@ -111,42 +98,6 @@
     } catch (error) {}
   };
 
-  const shuffleClassicTrackOrder = () => {
-    const order = classicRaveTracks.map((_, index) => index);
-
-    for (let index = order.length - 1; index > 0; index -= 1) {
-      const randomIndex = Math.floor(Math.random() * (index + 1));
-      [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
-    }
-
-    saveClassicTrackOrder(order);
-    return order;
-  };
-
-  const getNextClassicTrack = () => {
-    if (!classicRaveTracks.length) {
-      return null;
-    }
-
-    let order = getClassicTrackOrder();
-    if (!order) {
-      order = shuffleClassicTrackOrder();
-    }
-
-    const activeTrackIndex = order.shift();
-    if (typeof activeTrackIndex !== 'number' || activeTrackIndex < 0 || activeTrackIndex >= classicRaveTracks.length) {
-      const freshOrder = shuffleClassicTrackOrder();
-      const fallbackIndex = freshOrder.shift();
-      if (typeof fallbackIndex !== 'number') {
-        return null;
-      }
-      saveClassicTrackOrder(freshOrder);
-      return classicRaveTracks[fallbackIndex];
-    }
-
-    saveClassicTrackOrder(order);
-    return classicRaveTracks[activeTrackIndex];
-  };
   const isMobileDevice = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -583,18 +534,13 @@
 
         if (miniPrevButton) {
           miniPrevButton.addEventListener('click', () => {
-            const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
-            const previousIndex = (currentIndex >= 0 ? currentIndex : 0) - 1;
-            const targetIndex = (previousIndex + classicRaveTracks.length) % classicRaveTracks.length;
-            updateMiniTrack(classicRaveTracks[targetIndex], true);
+            updateMiniTrack(pickRandomClassicTrack(track.url), true);
           });
         }
 
         if (miniNextButton) {
           miniNextButton.addEventListener('click', () => {
-            const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
-            const nextIndex = (currentIndex >= 0 ? currentIndex : 0) + 1;
-            updateMiniTrack(classicRaveTracks[nextIndex % classicRaveTracks.length], true);
+            updateMiniTrack(pickRandomClassicTrack(track.url), true);
           });
         }
 
@@ -915,23 +861,20 @@
         const popupNextButton = popup.document.querySelector('.player-control.next');
         const popupStopButton = popup.document.querySelector('.player-control.stop');
 
-        const jumpPopupTrack = (direction) => {
+        const jumpPopupTrack = () => {
           if (!classicRaveTracks.length) {
             return;
           }
 
-          const currentIndex = classicRaveTracks.findIndex((item) => item.url === track.url);
-          const safeIndex = currentIndex >= 0 ? currentIndex : 0;
-          const nextIndex = (safeIndex + direction + classicRaveTracks.length) % classicRaveTracks.length;
-          updatePopupTrack(classicRaveTracks[nextIndex], true);
+          updatePopupTrack(pickRandomClassicTrack(track.url), true);
         };
 
         if (popupPrevButton) {
-          popupPrevButton.addEventListener('click', () => jumpPopupTrack(-1));
+          popupPrevButton.addEventListener('click', jumpPopupTrack);
         }
 
         if (popupNextButton) {
-          popupNextButton.addEventListener('click', () => jumpPopupTrack(1));
+          popupNextButton.addEventListener('click', jumpPopupTrack);
         }
 
         if (popupStopButton && popupAudio) {
@@ -1021,7 +964,7 @@
         event.preventDefault();
         event.stopPropagation();
 
-        const track = getNextClassicTrack();
+        const track = pickRandomClassicTrack();
         if (!track) {
           return;
         }
